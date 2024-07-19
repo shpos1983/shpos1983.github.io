@@ -188,18 +188,6 @@ em { font-style: normal; }
     padding: 60px;
 }
 
-#intro .intro-wrap .bg-layer {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
 #intro .intro-wrap .txt-layer span {
     color: #FF4800;
     font-size: 12px;
@@ -225,4 +213,45 @@ em { font-style: normal; }
 
 #intro .intro-wrap .txt-layer .btn-item {
     margin-top: 60px;
+}
+
+
+
+#intro .intro-wrap .bg-layer {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#intro .intro-wrap .bg-layer .screens {
+    width: auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 40px;
+}
+
+#intro .intro-wrap .bg-layer .screens .row {
+    width: 190px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+}
+
+#intro .intro-wrap .bg-layer .screens .row img {
+    flex: none;
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: drop-shadow(12px 12px 12px rgba(0,0,0,0.2)), drop-shadow(12px 12px 32px rgba(255,0,0,0.1));
 }
