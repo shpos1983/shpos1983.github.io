@@ -1,6 +1,6 @@
 *,
 *:before,
-*:after { font-family: 'Pretendard'; box-sizing: border-box; }
+*:after { font-family: 'Pretendard'; box-sizing: border-box; user-select: none; }
 html, body {
     width: 100%;
     height: 100%;
@@ -17,7 +17,14 @@ body { overflow: auto; }
 button {
     appearance: none;
     cursor: pointer;
+    outline: none;
+    padding: 0;
+    user-select: none;
 }
+
+p { margin: 0; }
+
+em { font-style: normal; }
 
 .guardrail {
     flex: none;;
@@ -25,6 +32,42 @@ button {
     height: auto;
     position: relative;
 }
+
+
+.btn-item {
+    --btn-size: 48px;
+    --txt-color: #fff;
+    height: var(--btn-size);
+    color: var(--txt-color);
+    background: linear-gradient(120deg, #000, #414A53);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 32px;
+    font-size: 14px;
+    gap: 4px;
+}
+
+.btn-item * { user-select: none; }
+
+.btn-item.round {
+    border-radius: calc(var(--btn-size) / 2);
+}
+
+.btn-item .icon {
+    display: block;
+    width: 20px;
+    height: 20px;
+    margin-right: -8px;
+}
+
+.btn-item .icon path { fill: var(--txt-color); }
+
+
+
+
+
 
 
 #header {
@@ -38,6 +81,7 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 1000;
 }
 
 #header .header-wrap {
@@ -97,6 +141,11 @@ button {
 }
 
 
+
+
+
+
+
 #intro {
     width: 100%;
     height: 100%;
@@ -121,8 +170,9 @@ button {
     height: 100%;
     position: relative;
     display: flex;
-    align-items: center;
-    justify-content: flex-start;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
     position: absolute;
     top: 0;
     left: 0;
@@ -141,7 +191,20 @@ button {
     left: 0;
 }
 
+#intro .intro-wrap .txt-layer span {
+    color: #FF4800;
+    font-size: 12px;
+    font-weight: 500;
+}
 
+#intro .intro-wrap .txt-layer .big-typo {
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 16px;
+}
 
 #intro .intro-wrap .txt-layer .big {
     font-size: 28px;
@@ -149,4 +212,8 @@ button {
     line-height: 38px;
 }
 
-#intro .intro-wrap .txt-layer .big em { font-weight: 400; }
+#intro .intro-wrap .txt-layer .big em { font-weight: 500; }
+
+#intro .intro-wrap .txt-layer .btn-item {
+    margin-top: 60px;
+}
