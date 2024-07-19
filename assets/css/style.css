@@ -47,6 +47,12 @@ em { font-style: normal; }
     padding: 0 32px;
     font-size: 14px;
     gap: 4px;
+    transition: all 0.3s;
+}
+
+.btn-item:hover {
+    filter: brightness(1.2);
+    -webkit-filter: brightness(1.2);
 }
 
 .btn-item * { user-select: none; }
@@ -60,9 +66,12 @@ em { font-style: normal; }
     width: 20px;
     height: 20px;
     margin-right: -8px;
+    transition: all 0.2s;
 }
 
 .btn-item .icon path { fill: var(--txt-color); }
+
+.btn-item:hover .icon { transform: translateX(8px) translateZ(0); }
 
 
 
