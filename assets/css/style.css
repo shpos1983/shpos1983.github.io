@@ -196,7 +196,7 @@ em { font-style: normal; }
 }
 
 #intro .intro-wrap .txt-layer .big-typo {
-    margin-top: 8px;
+    margin-top: 16px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -206,11 +206,11 @@ em { font-style: normal; }
 
 #intro .intro-wrap .txt-layer .big {
     font-size: 28px;
-    font-weight: 300;
+    font-weight: 200;
     line-height: 38px;
 }
 
-#intro .intro-wrap .txt-layer .big em { font-weight: 500; }
+#intro .intro-wrap .txt-layer .big em { font-weight: 600; }
 
 #intro .intro-wrap .txt-layer .btn-item {
     margin-top: 60px;
