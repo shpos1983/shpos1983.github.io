@@ -115,6 +115,7 @@ em { font-style: normal; }
     align-items: center;
     justify-content: flex-end;
     gap: 72px;
+    margin-right: 80px;
 }
 
 #header nav button {
@@ -124,7 +125,7 @@ em { font-style: normal; }
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 12px 16px;
+    padding: 12px 24px;
     background: transparent;
     position: relative;
     line-height: 20px;
