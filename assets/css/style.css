@@ -12,7 +12,7 @@ html, body {
     justify-content: center;
     align-items: center;
 }
-body { overflow: auto; background: #fff; }
+body { overflow: auto; background: #202225; }
 
 button {
     appearance: none;

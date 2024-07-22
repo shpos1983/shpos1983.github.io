@@ -294,8 +294,8 @@
                 progressMultiplier: 1,
                 prev: {
                     shadow: true,
-                    translate: [0, 0, -200],
-                    opacity: 0,
+                    translate: [0, 0, -240],
+                    opacity: 1,
                 },
                 next: {
                     translate: [0, "100%", 0],
@@ -305,7 +305,6 @@
             on: {
                 slideChangeTransitionEnd: function(){
                     let act = this.activeIndex;
-                    console.log(act);
                     if(act == 0){
                         timelineSwiper.enabled = true;
                     }else{
@@ -328,7 +327,6 @@
             on: {
                 slideChangeTransitionEnd: function(){
                     let act = this.activeIndex;
-                    console.log(act);
                     if(act == 5){
                         sectionSwiper.enabled = true;
                     }else{
