@@ -12,7 +12,7 @@ html, body {
     justify-content: center;
     align-items: center;
 }
-body { overflow: auto; }
+body { overflow: auto; background: #fff; }
 
 button {
     appearance: none;
@@ -312,6 +312,21 @@ em { font-style: normal; }
     height: 100%;
 }
 
+.section-swiper .works-detail {
+    flex: none;
+    width: 100%;
+    height: 100%;
+    padding-top: 140px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    overflow: hidden;
+    background: #fff;
+    /* box-shadow: 0 0 240px rgba(0,0,0,0.2); */
+}
+
 
 #timeline {
     flex: none;
@@ -324,6 +339,7 @@ em { font-style: normal; }
     align-items: stretch;
     justify-content: flex-start;
     overflow: hidden;
+    background: #fff;
 }
 
 #timeline .timeline-area {
@@ -352,14 +368,15 @@ em { font-style: normal; }
     position: absolute;
     top: 0;
     z-index: 10;
+    pointer-events: none;
 }
 
 .timeline-swiper:before {
-    left: 0;
+    left: -2px;
     background: linear-gradient(90deg, rgba(255,255,255,1) 50%, rgba(255,255,255,0));
-}
+} 
 .timeline-swiper:after {
-    right: 0;
+    right: -2px;
     background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,1) 50%);
 }
 
@@ -379,6 +396,8 @@ em { font-style: normal; }
     align-items: stretch;
     justify-content: flex-start;
     border-left: 1px solid #C0C6CE;
+    transform: translateZ(0);
+    overflow: visible;
 }
 
 .timeline-swiper .swiper-slide:first-of-type {
@@ -408,6 +427,7 @@ em { font-style: normal; }
     border-top: 1px solid #C0C6CE;
     margin-top: 16px;
     padding-bottom: 8px;
+    
 }
 
 .timeline-swiper .swiper-slide .months-wrap .month {
@@ -418,6 +438,7 @@ em { font-style: normal; }
     align-items: flex-start;
     justify-content: flex-start;
     position: relative;
+    
 }
 
 .timeline-swiper .swiper-slide .months-wrap .month:before {
@@ -449,6 +470,7 @@ em { font-style: normal; }
     background: #008BEC;
     margin: 8px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.16), 0 8px 16px rgba(0,0,0,0.24);
+    
 }
 
 .timeline-swiper .swiper-slide .months-wrap .month .project-tag.start { background: #2A3138; }
@@ -478,16 +500,3 @@ em { font-style: normal; }
 .timeline-swiper .swiper-slide:nth-of-type(6) .description { background: linear-gradient(90deg, #2A3138, #202225); }
 
 
-.works-detail {
-    flex: none;
-    width: 100%;
-    height: 100%;
-    padding-top: 140px;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: flex-start;
-    overflow: hidden;
-    background: #f00;
-}

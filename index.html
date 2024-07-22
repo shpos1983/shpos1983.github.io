@@ -266,14 +266,22 @@
             </section>
 
             <section class="works-detail works-2021 swiper-slide"></section>
+
+            <section class="works-detail works-2022 swiper-slide"></section>
+
+            <section class="works-detail works-2023 swiper-slide"></section>
+
+            <section class="works-detail works-2024 swiper-slide"></section>
         </div>
     </div>
 
     <script>
-        var sectionSwiper = new Swiper(".section-swiper", {
+        var sectionSwiper;
+        var timelineSwiper;
+
+        sectionSwiper = new Swiper(".section-swiper", {
             speed: 800,
             slidesPerView: 1,
-            centeredSlides: true,
             nested: true,
             direction: "vertical",
             mousewheel: {
@@ -281,33 +289,34 @@
                 eventsTarget: '.section-swiper',
             },
             enabled: false,
-            /*effect: "creative",
+            effect: "creative",
             creativeEffect: {
+                progressMultiplier: 1,
                 prev: {
                     shadow: true,
-                    translate: [0, 0, -400],
+                    translate: [0, 0, -200],
+                    opacity: 0,
                 },
                 next: {
                     translate: [0, "100%", 0],
+                    opacity: 1,
                 },
-            },*/
+            },
             on: {
-                slideChange: function(){
+                slideChangeTransitionEnd: function(){
                     let act = this.activeIndex;
                     console.log(act);
                     if(act == 0){
-                        // if(timelineSwiper.activeIndex == 5) {
-                        //     this.enabled = true;
-                        // }else{
-                        //     this.enabled = false;
-                        // }
+                        timelineSwiper.enabled = true;
+                    }else{
+                        timelineSwiper.enabled = false;
                     }
                 }
             }
         });
 
-        var timelineSwiper = new Swiper(".timeline-swiper", {
-            speed: 800,
+        timelineSwiper = new Swiper(".timeline-swiper", {
+            speed: 600,
             slidesPerView: "auto",
             centeredSlides: true,
             initialSlide: 2,
