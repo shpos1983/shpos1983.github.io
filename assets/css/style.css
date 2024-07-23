@@ -87,7 +87,7 @@ em { font-style: normal; }
     top: 0;
     left: 0;
     background: rgba(255,255,255,0.7);
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(24px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -101,13 +101,14 @@ em { font-style: normal; }
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 36px 60px 16px;
+    padding: 20px 60px 16px;
 }
 
 #header .bi {
     flex: none;
     width: 220px;
     height: 48px;
+    cursor: pointer;
 }
 
 #header nav {
@@ -132,7 +133,10 @@ em { font-style: normal; }
     font-size: 16px;
     font-weight: 500;
     cursor: pointer;
+    transition: all 0.2s;
 }
+
+#header nav button.act { color: #FF4800; }
 
 #header nav button:after {
     content: '';
@@ -147,11 +151,29 @@ em { font-style: normal; }
     transform: translateZ(0) scaleX(0);
 }
 
+#header nav button.act:after,
 #header nav button:hover:after {
     transform: translateZ(0) scaleX(1);
 }
 
+.section-swiper {
+    width: 100%;
+    height: 100%;
+}
 
+.section-swiper .works-section {
+    flex: none;
+    width: 100%;
+    height: 100%;
+    padding-top: 84px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    overflow: hidden;
+    background: #fff;
+}
 
 
 
@@ -165,7 +187,7 @@ em { font-style: normal; }
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    display: none;
+    background: #fff;
 }
 
 #intro .guardrail {
@@ -307,32 +329,13 @@ em { font-style: normal; }
 #intro .intro-wrap .bg-layer .screens .row .space { visibility: hidden; }
 
 
-.section-swiper {
-    width: 100%;
-    height: 100%;
-}
-
-.section-swiper .works-detail {
-    flex: none;
-    width: 100%;
-    height: 100%;
-    padding-top: 140px;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: flex-start;
-    overflow: hidden;
-    background: #fff;
-    /* box-shadow: 0 0 240px rgba(0,0,0,0.2); */
-}
 
 
 #timeline {
     flex: none;
     width: 100%;
     height: 100%;
-    padding-top: 140px;
+    padding-top: 124px;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -386,6 +389,7 @@ em { font-style: normal; }
 .timeline-swiper .swiper-slide:nth-of-type(4) { z-index: 4; }
 .timeline-swiper .swiper-slide:nth-of-type(5) { z-index: 3; }
 .timeline-swiper .swiper-slide:nth-of-type(6) { z-index: 2; }
+.timeline-swiper .swiper-slide:nth-of-type(7) { z-index: 1; }
 
 .timeline-swiper .swiper-slide {
     align-self: stretch;
@@ -498,5 +502,78 @@ em { font-style: normal; }
 .timeline-swiper .swiper-slide:nth-of-type(4) .description { background: linear-gradient(90deg, #5B6068, #494E55); }
 .timeline-swiper .swiper-slide:nth-of-type(5) .description { background: linear-gradient(90deg, #494E55, #2A3138); }
 .timeline-swiper .swiper-slide:nth-of-type(6) .description { background: linear-gradient(90deg, #2A3138, #202225); }
+.timeline-swiper .swiper-slide:nth-of-type(7) .description { background: linear-gradient(90deg, #202225, #101111); }
 
 
+.works-section .nav-area {
+    width: 1160px;
+    margin: 0 auto;
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 24px 0 16px;
+    border-bottom: 1px solid #D9DBDC;
+}
+
+.works-section .nav-area .btn-item { background: linear-gradient(120deg, rgba(0,0,0,0.3), rgba(65,74,83,0.3)); }
+.works-section .nav-area .btn-item.act {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.24);
+    background: linear-gradient(120deg, #000, #414A53);
+}
+
+.works-section .cont-area {
+    flex: 1 0 0;
+    min-height: 0;
+}
+
+.works-section .cont-area > .swiper-container {
+    width: 1160px;
+    height: 100%;
+    position: relative;
+}
+
+.each-project-slide {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+}
+
+.each-project-slide .scene-area {
+    flex: none;
+    width: 430px;
+}
+
+.each-project-slide .description-area {
+    flex: 1 0 0;
+    min-width: 0;
+}
+
+.each-project-slide .scene-area .scene-swiper {
+    flex: none;
+    width: 230px;
+    height: 525px;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 0 0 6px #000;
+}
+
+.each-project-slide .scene-area .scene-swiper .swiper-pagination {
+    right: -32px;
+}
+
+.each-project-slide .scroll-swiper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    padding: 60px 0;
+}
+
+.each-project-slide .scroll-swiper .swiper-slide {
+    height: auto;
+}
