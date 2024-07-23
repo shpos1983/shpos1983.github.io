@@ -291,19 +291,22 @@
                         <div class="swiper-wrapper">
                             <div class="swiper-slide each-project-slide project2021-1">
                                 <div class="scene-area">
-                                    <div class="swiper-container scene-swiper">
-                                        <div class="swiper-wrapper">
-                                            <div class="swiper-slide">
-                                                <p>scene#1</p>
-                                            </div>
-                                            <div class="swiper-slide">
-                                                <p>scene#2</p>
-                                            </div>
-                                            <div class="swiper-slide">
-                                                <p>scene#3</p>
+                                    <div class="mockup-wrap">
+                                        <div class="swiper-container scene-swiper">
+                                            <div class="swiper-wrapper">
+                                                <div class="swiper-slide">
+                                                    <p>scene#1</p>
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <p>scene#2</p>
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <p>scene#3</p>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="swiper-pagination"></div>
+                                        
+                                        <div class="swiper-pagination scene-swiper-pagination"></div>
                                     </div>
                                 </div>
 
@@ -482,7 +485,7 @@
                 eventsTarget: '.project2021-1',
             },
             pagination: {
-                el: ".swiper-pagination",
+                el: ".works-2021 .scene-swiper + .swiper-pagination",
             },
             on: {
                 slideChange: function(){
