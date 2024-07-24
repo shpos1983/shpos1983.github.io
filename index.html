@@ -357,6 +357,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="swiper-pagination"></div>
                                 </div>
                             </div>
                         </div>
@@ -471,9 +472,7 @@
             direction: "vertical",
             allowTouchMove: true,
             enabled: false,
-            mousewheel: {
-                invert: false,
-            },
+            mousewheel:true,
             on: {
                 init: function(){
                     let act = this.activeIndex + 1;
@@ -551,14 +550,20 @@
             slidesPerView: "auto",
             freeMode: true,
             mousewheel: true,
+            pagination: {
+                el: ".swiper-pagination",
+                paginationUpdate: function(){
+                    let act = $(".works-2021 .scroll-swiper .swiper-pagination-bullet-active").index() + 1;
+                    $(".works-2021 .scroll-swiper .swiper-slide:nth-of-type("+ act +") .cont-wrap").addClass('act');
+                }
+            },
             on: {
                 init: function(){
                     let act = this.activeIndex + 1;
                     $(".works-2021 .scroll-swiper .swiper-slide:nth-of-type("+ act +") .cont-wrap").addClass('act');
                 },
                 slideChange: function(){
-                    let act = this.activeIndex + 1;
-                    $(".works-2021 .scroll-swiper .swiper-slide:nth-of-type("+ act +") .cont-wrap").addClass('act');
+                    
                 },
                 setTranslate: function(){
                     if(this.progress == 0){

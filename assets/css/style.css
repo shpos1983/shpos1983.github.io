@@ -646,6 +646,8 @@ h1,h2,h3,h4,h5,h6 { margin: 0;}
     height: auto;
 }
 
+.each-project-slide .scroll-swiper .swiper-pagination { opacity: 1; pointer-events: none; }
+
 
 .each-project-slide .description-area {
     flex: 1 0 0;
