@@ -241,8 +241,16 @@ h1,h2,h3,h4,h5,h6 { margin: 0;}
 
 #intro .intro-wrap .txt-layer .big em { font-weight: 600; }
 
+#intro .intro-wrap .txt-layer .dur {
+    color: #5B6068;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    margin-top: 60px;
+}
+
 #intro .intro-wrap .txt-layer .btn-item {
-    margin-top: 100px;
+    margin-top: 16px;
 }
 
 
@@ -351,11 +359,6 @@ h1,h2,h3,h4,h5,h6 { margin: 0;}
 
 #timeline .timeline-area {
     flex: none;
-}
-
-#timeline .cont-area {
-    flex: 1 0 0;
-    min-height: 0;
 }
 
 .timeline-swiper {
@@ -506,7 +509,72 @@ h1,h2,h3,h4,h5,h6 { margin: 0;}
 .timeline-swiper .swiper-slide:nth-of-type(4) .description { background: linear-gradient(90deg, #5B6068, #494E55); }
 .timeline-swiper .swiper-slide:nth-of-type(5) .description { background: linear-gradient(90deg, #494E55, #2A3138); }
 .timeline-swiper .swiper-slide:nth-of-type(6) .description { background: linear-gradient(90deg, #2A3138, #202225); }
-.timeline-swiper .swiper-slide:nth-of-type(7) .description { background: linear-gradient(90deg, #202225, #101111); }
+.timeline-swiper .swiper-slide:nth-of-type(7) .description { background: linear-gradient(90deg, #202225, #FFFFFF); }
+
+
+#timeline .cont-area {
+    flex: 1 0 0;
+    min-height: 0;
+    width: 1160px;
+    margin: 0 auto;
+    position: relative;
+}
+
+#timeline .cont-area .cont-wrap {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 80px;
+    padding: 60px 120px;
+    pointer-events: none;
+    opacity: 0;
+    transition: all 0.4s;
+}
+
+#timeline .cont-area .cont-wrap.act {
+    pointer-events: all;
+    transition: all 1s;
+    opacity: 1;
+}
+
+#timeline .cont-area .cont-wrap .desc-side {
+    flex: 1 0 0;
+    min-width: 0;
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-start;
+    padding: 16px;
+    gap: 40px;
+}
+
+#timeline .cont-area .cont-wrap .desc-side img {
+    display: block;
+    width: 381px;
+    height: auto;
+}
+
+#timeline .cont-area .cont-wrap .desc-side .btn-item { flex: none; }
+
+#timeline .cont-area .cont-wrap .screen-side {
+    flex: none;
+    width: 392px;
+}
+
+#timeline .cont-area .cont-wrap .screen-side img {
+    display: block;
+    width: auto;
+    height: 400px;
+    filter: drop-shadow(12px 12px 16px rgba(0, 0, 0, 0.16)) drop-shadow(4px 4px 12px rgba(0, 0, 0, 0.4));
+    -webkit-filter: drop-shadow(12px 12px 16px rgba(0, 0, 0, 0.16)) drop-shadow(4px 4px 12px rgba(0, 0, 0, 0.4));
+}
+
 
 
 .works-section .nav-area {
@@ -537,23 +605,28 @@ h1,h2,h3,h4,h5,h6 { margin: 0;}
 }
 
 .works-section .cont-area > .swiper-container {
-    width: 1160px;
+    width: 100%;
     height: 100%;
     position: relative;
 }
 
 .each-project-slide {
-    width: 100%;
+    width: 1160px;
     height: 100%;
+    margin-left: auto;
+    margin-right: auto;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     gap: 40px;
 }
 
+.each-project-slide:has(.scroll-container) { width: 100%; }
+
 .each-project-slide .scene-area {
     flex: none;
     width: 430px;
+    padding-top: 80px;
 }
 
 .each-project-slide .description-area {
@@ -634,6 +707,31 @@ h1,h2,h3,h4,h5,h6 { margin: 0;}
     right: -32px;
 }
 
+.each-project-slide .scroll-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: auto;
+    padding: 60px 0;
+}
+
+.each-project-slide .scroll-container .cont-wrap {
+    width: 1160px;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 100px;
+}
+
+.each-project-slide .scroll-container .cont-wrap > img {
+    display: block;
+    width: 100%;
+}
+
 .each-project-slide .scroll-swiper {
     width: 100%;
     height: 100%;
@@ -653,6 +751,7 @@ h1,h2,h3,h4,h5,h6 { margin: 0;}
     flex: 1 0 0;
     min-width: 0;
     position: relative;
+    align-self: stretch;
 }
 
 .each-project-slide .description-area .description-wrap {
@@ -664,27 +763,41 @@ h1,h2,h3,h4,h5,h6 { margin: 0;}
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: center;
-    visibility: hidden;
+    justify-content: flex-start;
+    padding-top: 80px;
+    pointer-events: none;
+    transition: all 0.4s;
+    opacity: 0;
 }
 
-.each-project-slide .description-area .description-wrap.act { visibility: visible; }
+.each-project-slide .description-area .description-wrap.act {
+    pointer-events: all;
+    transition: all 1s;
+    opacity: 1;
+}
+
+.each-project-slide .description-area .description-wrap > img {
+    display: block;
+    width: 695px;
+    margin-left: -8px;
+}
+
 
 [class*="parallax-"] { opacity: 0; }
 .act [class*="parallax-"] { opacity: 1; }
 
-.parallax-1 { transition: all 0s; }
-.parallax-2 { transition: all 0s; }
-.parallax-3 { transition: all 0s; }
-.parallax-4 { transition: all 0s; }
-.parallax-5 { transition: all 0s; }
+.parallax-1 { transition: all 0.4s; }
+.parallax-2 { transition: all 0.4s; }
+.parallax-3 { transition: all 0.4s; }
+.parallax-4 { transition: all 0.4s; }
+.parallax-5 { transition: all 0.4s; }
 
-.act .parallax-1 { transition: all 0.6s 0.1s; }
-.act .parallax-2 { transition: all 0.6s 0.2s; }
-.act .parallax-3 { transition: all 0.6s 0.3s; }
-.act .parallax-4 { transition: all 0.6s 0.4s; }
-.act .parallax-5 { transition: all 0.6s 0.5s; }
-.act .parallax-6 { transition: all 0.6s 0.6s; }
+.act .parallax-1 { transition: all 1s 0.1s; }
+.act .parallax-2 { transition: all 1s 0.2s; }
+.act .parallax-3 { transition: all 1s 0.3s; }
+.act .parallax-4 { transition: all 1s 0.4s; }
+.act .parallax-5 { transition: all 1s 0.5s; }
+.act .parallax-6 { transition: all 1s 0.6s; }
 
 .each-project-slide .description-area .description-wrap h3 {
     flex: none;
@@ -710,3 +823,9 @@ h1,h2,h3,h4,h5,h6 { margin: 0;}
 
 .scroll-swiper .swiper-slide .cont-wrap { visibility: hidden; }
 .scroll-swiper .swiper-slide .cont-wrap.act { visibility: visible; }
+
+.scroll-swiper .swiper-slide .cont-wrap > img {
+    display: block;
+    width: 1160px;
+    height: auto;
+}
