@@ -153,15 +153,27 @@ var project2021Swiper = new Swiper(".project2021-swiper", {
     }
 });
 
-$('.project2021-swiper').find('.scroll-container').on('scroll', function(){
+$('.project2021-swiper').find('.scroll-container').on('scroll', function(event){
     if( $(this).scrollTop() == 0 ){
         project2021Swiper.enabled = true;
-        project2021Swiper.mousewheel = true;
+        // project2021Swiper.mousewheel = true;
         project2021Swiper.allowSlidePrev = true;
         project2021Swiper.allowSlideNext = false;
+
+        
+
     }else{
         project2021Swiper.enabled = false;
-        project2021Swiper.mousewheel = false;
+        // project2021Swiper.mousewheel = false;
+    }
+
+
+
+    if (event.originalEvent.wheelDelta >= 0) {
+        console.log('Scroll up');
+    }
+    else {
+        console.log('Scroll down');
     }
 })
 
