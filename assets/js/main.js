@@ -55,10 +55,12 @@ var sectionSwiper = new Swiper(".section-swiper", {
                 project2021Swiper.slideTo(0);
                 $('.project2021-swiper .scroll-container').scrollTop(0);
                 $('.project2021-swiper .scroll-container .fade').removeClass('in');
+                $('.project2021-swiper .scroll-container .cont-wrap > .fade:first-of-type').addClass('in');
             }else if(act == 3){
                 project2022Swiper.slideTo(0);
                 $('.project2022-swiper .scroll-container').scrollTop(0);
                 $('.project2022-swiper .scroll-container .fade').removeClass('in');
+                $('.project2022-swiper .scroll-container .cont-wrap > .fade:first-of-type').addClass('in');
             }else if(act == 4){
                 project2023Swiper.slideTo(0);
                 $('.project2023-swiper .scroll-container').scrollTop(0);
