@@ -359,6 +359,7 @@ h1,h2,h3,h4,h5,h6 { margin: 0;}
     position: absolute;
     top: 0;
     left: 0;
+    padding-right: 60px;
 }
 
 #intro .intro-wrap .bg-layer .screens {
@@ -375,7 +376,7 @@ h1,h2,h3,h4,h5,h6 { margin: 0;}
 }
 
 #intro .intro-wrap .bg-layer .screens .row {
-    width: 190px;
+    width: 176px;
     height: 100%;
     display: flex;
     flex-direction: column;
