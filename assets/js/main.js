@@ -1,3 +1,27 @@
+jQuery.event.special.touchstart = {
+    setup: function( _, ns, handle ) {
+        this.addEventListener("touchstart", handle, { passive: !ns.includes("noPreventDefault") });
+    }
+};
+jQuery.event.special.touchmove = {
+    setup: function( _, ns, handle ) {
+        this.addEventListener("touchmove", handle, { passive: !ns.includes("noPreventDefault") });
+    }
+};
+jQuery.event.special.wheel = {
+    setup: function( _, ns, handle ){
+        this.addEventListener("wheel", handle, { passive: true });
+    }
+};
+jQuery.event.special.mousewheel = {
+    setup: function( _, ns, handle ){
+        this.addEventListener("mousewheel", handle, { passive: true });
+    }
+};
+
+
+
+
 
 
 var sectionSwiper = new Swiper(".section-swiper", {
@@ -24,6 +48,29 @@ var sectionSwiper = new Swiper(".section-swiper", {
             let act = this.activeIndex;
             $('#header nav button').removeClass('act');
             $('#header nav button:nth-of-type('+ act +')').addClass('act');
+
+            if(act == 1){
+                timelineSwiper.slideTo(2);
+            }else if(act == 2){
+                project2021Swiper.slideTo(0);
+                $('.project2021-swiper .scroll-container').scrollTop(0);
+                $('.project2021-swiper .scroll-container .fade').removeClass('in');
+            }else if(act == 3){
+                project2022Swiper.slideTo(0);
+                $('.project2022-swiper .scroll-container').scrollTop(0);
+                $('.project2022-swiper .scroll-container .fade').removeClass('in');
+            }else if(act == 4){
+                project2023Swiper.slideTo(0);
+                $('.project2023-swiper .scroll-container').scrollTop(0);
+                $('.project2023-swiper .scroll-container .fade').removeClass('in');
+                project2023P1MockupSwiper.slideTo(0);
+                project2023P2MockupSwiper.slideTo(0);
+            }else if(act == 5){
+                project2024Swiper.slideTo(0);
+                $('.project2024-swiper .scroll-container').scrollTop(0);
+                $('.project2024-swiper .scroll-container .fade').removeClass('in');
+                project2024P1MockupSwiper.slideTo(0);
+            }
         },
     }
 });
@@ -106,10 +153,7 @@ var project2021Swiper = new Swiper(".project2021-swiper", {
             $('.works-2021 .nav-area .btn-item:nth-of-type('+ act +')').addClass('act');
         },
         slideChangeTransitionEnd: function(){
-            let act = this.activeIndex;
-            if(act == 2){
-                $('.project2021-swiper .scroll-container .cont-wrap > .fade:first-of-type').addClass('in');
-            }
+
         },
     }
 });
@@ -151,10 +195,7 @@ var project2022Swiper = new Swiper(".project2022-swiper", {
             $('.works-2022 .nav-area .btn-item:nth-of-type('+ act +')').addClass('act');
         },
         slideChangeTransitionEnd: function(){
-            let act = this.activeIndex;
-            if(act == 2){
-                $('.project2022-swiper .scroll-container .cont-wrap > .fade:first-of-type').addClass('in');
-            }
+
         },
     }
 });
@@ -229,12 +270,7 @@ var project2023P1MockupSwiper = new Swiper(".project2023-1 .mockup-swiper", {
             $(".project2023-1 .description-area .description-wrap:nth-of-type("+ act +")").addClass('act');
         },
         slideChangeTransitionEnd: function(){
-            let act = this.activeIndex;
-            if(act == 2){
-                this.mousewheel.disable();
-            }else{
-                this.mousewheel.enable();
-            }
+            this.mousewheel.disable();
         },
     }
 });
@@ -292,10 +328,16 @@ $('.project2023-swiper .scroll-container').on("mousewheel DOMMouseScroll", funct
 });
 
 $('.project2023-1').on("mousewheel DOMMouseScroll", function (event){
-    if (event.originalEvent.wheelDelta >= 0) {
+    if(project2023P1MockupSwiper.activeIndex == 0){
+
         project2023P1MockupSwiper.mousewheel.enable();
-    } else {
-        project2023Swiper.slideTo(1);
+    }else if(project2023P1MockupSwiper.activeIndex == 1){
+        if (event.originalEvent.wheelDelta >= 0) {
+            project2023P1MockupSwiper.mousewheel.enable();
+        } else {
+            project2023P1MockupSwiper.mousewheel.disable();
+            project2023Swiper.slideTo(1);
+        }
     }
 });
 
