@@ -132,6 +132,11 @@ $('#header nav button:nth-of-type(5)').on('click', function(){
 });
 
 
+$('#header nav button:nth-of-type(6)').on('click', function(){
+    sectionSwiper.slideTo(6);
+});
+
+
 /* ----------------------------------------------------------------------------------------------------- */
 /* ----------------------------------------------------------------------------------------------------- */
 /* 2021 ------------------------------------------------------------------------------------------------ */
@@ -482,3 +487,125 @@ $('.works-2024 .nav-area .btn-item:nth-of-type(1)').on('click', function(){
 $('.works-2024 .nav-area .btn-item:nth-of-type(2)').on('click', function(){
     project2024Swiper.slideTo(1);
 });
+
+
+
+
+
+
+/* ----------------------------------------------------------------------------------------------------- */
+/* ----------------------------------------------------------------------------------------------------- */
+/* 2025 ------------------------------------------------------------------------------------------------ */
+/* ----------------------------------------------------------------------------------------------------- */
+/* ----------------------------------------------------------------------------------------------------- */
+/*var project2025Swiper = new Swiper(".project2025-swiper", {
+    speed: 800,
+    slidesPerView: 1,
+    nested: true,
+    direction: "vertical",
+    allowTouchMove: false,
+    mousewheel: {
+        eventsTarget: '.project2025-1',
+    },
+    on: {
+        init: function(){
+            let act = this.activeIndex + 1;
+            $('.works-2025 .nav-area .btn-item').removeClass('act');
+            $('.works-2025 .nav-area .btn-item:nth-of-type('+ act +')').addClass('act');
+        },
+        slideChange: function(){
+            let act = this.activeIndex + 1;
+            $('.works-2025 .nav-area .btn-item').removeClass('act');
+            $('.works-2025 .nav-area .btn-item:nth-of-type('+ act +')').addClass('act');
+        },
+        slideChangeTransitionEnd: function(){
+            let act = this.activeIndex;
+            if(act == 1){
+                $('.project2025-swiper .scroll-container .cont-wrap > .fade:first-of-type').addClass('in');
+            }
+        },
+    }
+});
+
+var project2025P1MockupSwiper = new Swiper(".project2025-1 .mockup-swiper", {
+    speed: 400,
+    slidesPerView: "auto",
+    spaceBetween: 0,
+    resistanceRatio: 0,
+    direction: "vertical",
+    allowTouchMove: true,
+    mousewheel: {
+        eventsTarget: '.project2025-1 .mockup-wrap',
+    },
+    pagination: {
+        el: ".project2025-1 .mockup-swiper + .swiper-pagination",
+    },
+    on: {
+        init: function(){
+            let act = this.activeIndex + 1;
+            $(".project2025-1 .description-area .description-wrap").removeClass('act');
+            $(".project2025-1 .description-area .description-wrap:nth-of-type("+ act +")").addClass('act');
+        },
+        slideChange: function(){
+            let act = this.activeIndex + 1;
+            $(".project2025-1 .description-area .description-wrap").removeClass('act');
+            $(".project2025-1 .description-area .description-wrap:nth-of-type("+ act +")").addClass('act');
+        },
+        slideChangeTransitionEnd: function(){
+            let act = this.activeIndex;
+            if(act == 2){
+                this.mousewheel.disable();
+            }else{
+                this.mousewheel.enable();
+            }
+        },
+    }
+});
+
+
+$('.project2025-swiper .scroll-container').on('scroll', function(event){
+    let middlePoint = $(this).outerHeight() / 2;
+    let scrollT = $(this).scrollTop();
+    $(this).find('.cont-wrap > .fade').each(function(index){
+        let thisPosT = $(this).position().top;
+        
+        if(thisPosT < middlePoint + scrollT){
+            $(this).addClass('in');
+        }
+    });
+});
+
+
+$('.project2025-swiper .scroll-container').on("mousewheel DOMMouseScroll", function (event){
+    if( $(this).scrollTop() == 0 ){
+        if (event.originalEvent.wheelDelta >= 0) {
+            project2025Swiper.slideTo(0);
+        }
+    }
+});
+
+$('.project2025-1 .mockup-wrap').on('mouseenter',function(){
+    project2025Swiper.mousewheel.disable();
+});
+
+$('.project2025-1 .mockup-wrap').on('mouseleave',function(){
+    project2025Swiper.mousewheel.enable();
+});
+
+$('.project2025-1 .mockup-wrap').on("mousewheel DOMMouseScroll", function (event){
+    event.stopPropagation();
+    if (event.originalEvent.wheelDelta >= 0) {
+        project2025P1MockupSwiper.mousewheel.enable();
+    } else {
+        project2025Swiper.slideTo(1);
+    }
+});
+
+
+$('.works-2025 .nav-area .btn-item:nth-of-type(1)').on('click', function(){
+    project2025Swiper.slideTo(0);
+});
+
+$('.works-2025 .nav-area .btn-item:nth-of-type(2)').on('click', function(){
+    project2025Swiper.slideTo(1);
+});*/
