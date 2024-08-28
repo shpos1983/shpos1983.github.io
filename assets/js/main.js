@@ -25,7 +25,7 @@ jQuery.event.special.mousewheel = {
 
 
 var sectionSwiper = new Swiper(".section-swiper", {
-    speed: 800,
+    speed: 500,
     slidesPerView: 1,
     nested: true,
     direction: "vertical",
@@ -505,7 +505,7 @@ $('.works-2024 .nav-area .btn-item:nth-of-type(2)').on('click', function(){
     direction: "vertical",
     allowTouchMove: false,
     mousewheel: {
-        eventsTarget: '.project2025-1',
+        //eventsTarget: '.project2025-1',
     },
     on: {
         init: function(){
@@ -520,14 +520,14 @@ $('.works-2024 .nav-area .btn-item:nth-of-type(2)').on('click', function(){
         },
         slideChangeTransitionEnd: function(){
             let act = this.activeIndex;
-            if(act == 1){
-                $('.project2025-swiper .scroll-container .cont-wrap > .fade:first-of-type').addClass('in');
+            if(act == 0){
+                $('.project2025 .scroll-container .cont-wrap > .fade:first-of-type').addClass('in');
             }
         },
     }
-});
+});*/
 
-var project2025P1MockupSwiper = new Swiper(".project2025-1 .mockup-swiper", {
+/*var project2025P1MockupSwiper = new Swiper(".project2025-1 .mockup-swiper", {
     speed: 400,
     slidesPerView: "auto",
     spaceBetween: 0,
@@ -560,10 +560,34 @@ var project2025P1MockupSwiper = new Swiper(".project2025-1 .mockup-swiper", {
             }
         },
     }
+});*/
+
+var project2025P1BeforeMockupSwiper = new Swiper(".project2025-1 .before .mockup-swiper", {
+    freeMode: true,
+    slidesPerView: "auto",
+    spaceBetween: 0,
+    resistanceRatio: 0,
+    direction: "vertical",
+    allowTouchMove: true,
+    mousewheel: {
+        eventsTarget: '.project2025-1 .mockup-wrap.before',
+    },
+});
+
+var project2025P1AfterMockupSwiper = new Swiper(".project2025-1 .after .mockup-swiper", {
+    freeMode: true,
+    slidesPerView: "auto",
+    spaceBetween: 0,
+    resistanceRatio: 0,
+    direction: "vertical",
+    allowTouchMove: true,
+    mousewheel: {
+        eventsTarget: '.project2025-1 .mockup-wrap.after',
+    },
 });
 
 
-$('.project2025-swiper .scroll-container').on('scroll', function(event){
+$('.project2025 .scroll-container').on('scroll', function(event){
     let middlePoint = $(this).outerHeight() / 2;
     let scrollT = $(this).scrollTop();
     $(this).find('.cont-wrap > .fade').each(function(index){
@@ -576,7 +600,7 @@ $('.project2025-swiper .scroll-container').on('scroll', function(event){
 });
 
 
-$('.project2025-swiper .scroll-container').on("mousewheel DOMMouseScroll", function (event){
+$('.project2025 .scroll-container').on("mousewheel DOMMouseScroll", function (event){
     if( $(this).scrollTop() == 0 ){
         if (event.originalEvent.wheelDelta >= 0) {
             project2025Swiper.slideTo(0);
@@ -585,11 +609,11 @@ $('.project2025-swiper .scroll-container').on("mousewheel DOMMouseScroll", funct
 });
 
 $('.project2025-1 .mockup-wrap').on('mouseenter',function(){
-    project2025Swiper.mousewheel.disable();
+    //project2025Swiper.mousewheel.disable();
 });
 
 $('.project2025-1 .mockup-wrap').on('mouseleave',function(){
-    project2025Swiper.mousewheel.enable();
+    //project2025Swiper.mousewheel.enable();
 });
 
 $('.project2025-1 .mockup-wrap').on("mousewheel DOMMouseScroll", function (event){
@@ -597,7 +621,7 @@ $('.project2025-1 .mockup-wrap').on("mousewheel DOMMouseScroll", function (event
     if (event.originalEvent.wheelDelta >= 0) {
         project2025P1MockupSwiper.mousewheel.enable();
     } else {
-        project2025Swiper.slideTo(1);
+        //project2025Swiper.slideTo(1);
     }
 });
 
@@ -608,4 +632,4 @@ $('.works-2025 .nav-area .btn-item:nth-of-type(1)').on('click', function(){
 
 $('.works-2025 .nav-area .btn-item:nth-of-type(2)').on('click', function(){
     project2025Swiper.slideTo(1);
-});*/
+});

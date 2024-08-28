@@ -830,6 +830,159 @@ h1,h2,h3,h4,h5,h6 { margin: 0;}
     left: -32px;
 }
 
+
+.before-after {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.before-after .tobe-icon {
+    width: 48px;
+    height: 48px;
+    margin-top: -40px;
+}
+
+.before-after .mockup-area {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+
+.each-project-slide .before-after .mockup-area .mockup-wrap {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.each-project-slide .before-after .mockup-area .mockup-wrap .project-label {
+    border-color: transparent;
+}
+
+.each-project-slide .before-after .mockup-area .mockup-wrap.after .project-label {
+    color: #fe6a2b;
+}
+
+.before-after .mockup-area .mockup-wrap .scroll-hint {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+    pointer-events: none;
+    opacity: 1;
+    transition: all 0.6s;
+}
+
+.before-after .mockup-area .mockup-wrap:hover .scroll-hint { opacity: 0; transition: all 0.3s; }
+
+.before-after .mockup-area .mockup-wrap.before:hover .scroll-hint { transform: translateX(calc(-100% - 20px)) translateY(-50%) translateZ(0); }
+.before-after .mockup-area .mockup-wrap.after:hover .scroll-hint { transform: translateX(calc(100% + 20px)) translateY(-50%) translateZ(0); }
+
+.before-after .mockup-area .mockup-wrap.before .scroll-hint {
+    flex-direction: row;
+    position: absolute;
+    top: 50%;
+    left: -40px;
+    transform: translateX(-100%) translateY(-50%) translateZ(0);
+}
+
+.before-after .mockup-area .mockup-wrap.after .scroll-hint {
+    flex-direction: row-reverse;
+    position: absolute;
+    top: 50%;
+    right: -40px;
+    transform: translateX(100%) translateY(-50%) translateZ(0);
+}
+
+.before-after .mockup-area .mockup-wrap .scroll-hint p {
+    font-size: 12px;
+    white-space: nowrap;
+    color: #000;
+}
+
+.before-after .mockup-area .mockup-wrap .scroll-hint .arrow {
+    width: 0;
+    height: 42px;
+    position: relative;
+    will-change: auto;
+    animation: arrow-anim 1.2s ease infinite;
+}
+
+@keyframes arrow-anim {
+    0% { transform: translateX(-50%) translateY(-5px) translateZ(0); }
+    50% { transform: translateX(-50%) translateY(5px) translateZ(0); }
+    100% { transform: translateX(-50%) translateY(-5px) translateZ(0); }
+}
+
+.before-after .mockup-area .mockup-wrap .scroll-hint .arrow:before {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    border-top: none;
+    border-left: 3px solid transparent;
+    border-right: 3px solid transparent;
+    border-bottom: 5px solid #A0A6AF;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+.before-after .mockup-area .mockup-wrap .scroll-hint .arrow:after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    border-bottom: none;
+    border-left: 3px solid transparent;
+    border-right: 3px solid transparent;
+    border-top: 5px solid #A0A6AF;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.before-after .mockup-area .mockup-wrap .scroll-hint .arrow div {
+    width: 1px;
+    overflow: hidden;
+    position: absolute;
+    top: 4px;
+    left: 50%;
+    bottom: 4px;
+    transform: translateX(-50%);
+}
+
+.before-after .mockup-area .mockup-wrap .scroll-hint .arrow div:before {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 100px;
+    background-image: url('../img/ico/dash.svg');
+    background-size: 100% auto;
+    background-position: center;
+    background-repeat: repeat-y;
+    /* border-left: 1px dashed #A0A6AF; */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: scroll-hint-anim 1.2s ease infinite;
+}
+
+@keyframes scroll-hint-anim {
+    0% { transform: translateX(-50%) translateY(calc(-50% - 12px)) translateZ(0); }
+    50% { transform: translateX(-50%) translateY(calc(-50% + 12px)) translateZ(0); }
+    100% { transform: translateX(-50%) translateY(calc(-50% - 12px)) translateZ(0); }
+}
+
+
+
 .each-project-slide .scroll-container {
     width: 100%;
     height: 100%;
