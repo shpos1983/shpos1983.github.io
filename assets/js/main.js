@@ -68,10 +68,18 @@ var sectionSwiper = new Swiper(".section-swiper", {
                 project2023P1MockupSwiper.slideTo(0);
                 project2023P2MockupSwiper.slideTo(0);
             }else if(act == 5){
-                project2024Swiper.slideTo(0);
+                /*project2024Swiper.slideTo(0);
                 $('.project2024-swiper .scroll-container').scrollTop(0);
                 $('.project2024-swiper .scroll-container .fade').removeClass('in');
-                project2024P1MockupSwiper.slideTo(0);
+                project2024P1MockupSwiper.slideTo(0);*/
+
+
+                $('.project2024 .scroll-container').scrollTop(0);
+                $('.project2024 .scroll-container .fade').removeClass('in');
+                $('.works-2024 .nav-area .btn-item').removeClass('act');
+                $('.works-2024 .nav-area .btn-item:nth-of-type(1)').addClass('act');
+                project2024P1BeforeMockupSwiper.slideTo(0);
+                project2024P1AfterMockupSwiper.slideTo(0);
             }
         },
     }
@@ -388,7 +396,7 @@ $('.works-2023 .nav-area .btn-item:nth-of-type(3)').on('click', function(){
 /* 2024 ------------------------------------------------------------------------------------------------ */
 /* ----------------------------------------------------------------------------------------------------- */
 /* ----------------------------------------------------------------------------------------------------- */
-var project2024Swiper = new Swiper(".project2024-swiper", {
+/*var project2024Swiper = new Swiper(".project2024-swiper", {
     speed: 800,
     slidesPerView: 1,
     nested: true,
@@ -486,83 +494,20 @@ $('.works-2024 .nav-area .btn-item:nth-of-type(1)').on('click', function(){
 
 $('.works-2024 .nav-area .btn-item:nth-of-type(2)').on('click', function(){
     project2024Swiper.slideTo(1);
-});
-
-
-
-
-
-
-/* ----------------------------------------------------------------------------------------------------- */
-/* ----------------------------------------------------------------------------------------------------- */
-/* 2025 ------------------------------------------------------------------------------------------------ */
-/* ----------------------------------------------------------------------------------------------------- */
-/* ----------------------------------------------------------------------------------------------------- */
-/*var project2025Swiper = new Swiper(".project2025-swiper", {
-    speed: 800,
-    slidesPerView: 1,
-    nested: true,
-    direction: "vertical",
-    allowTouchMove: false,
-    mousewheel: {
-        //eventsTarget: '.project2025-1',
-    },
-    on: {
-        init: function(){
-            let act = this.activeIndex + 1;
-            $('.works-2025 .nav-area .btn-item').removeClass('act');
-            $('.works-2025 .nav-area .btn-item:nth-of-type('+ act +')').addClass('act');
-        },
-        slideChange: function(){
-            let act = this.activeIndex + 1;
-            $('.works-2025 .nav-area .btn-item').removeClass('act');
-            $('.works-2025 .nav-area .btn-item:nth-of-type('+ act +')').addClass('act');
-        },
-        slideChangeTransitionEnd: function(){
-            let act = this.activeIndex;
-            if(act == 0){
-                $('.project2025 .scroll-container .cont-wrap > .fade:first-of-type').addClass('in');
-            }
-        },
-    }
 });*/
 
-/*var project2025P1MockupSwiper = new Swiper(".project2025-1 .mockup-swiper", {
-    speed: 400,
-    slidesPerView: "auto",
-    spaceBetween: 0,
-    resistanceRatio: 0,
-    direction: "vertical",
-    allowTouchMove: true,
-    mousewheel: {
-        eventsTarget: '.project2025-1 .mockup-wrap',
-    },
-    pagination: {
-        el: ".project2025-1 .mockup-swiper + .swiper-pagination",
-    },
-    on: {
-        init: function(){
-            let act = this.activeIndex + 1;
-            $(".project2025-1 .description-area .description-wrap").removeClass('act');
-            $(".project2025-1 .description-area .description-wrap:nth-of-type("+ act +")").addClass('act');
-        },
-        slideChange: function(){
-            let act = this.activeIndex + 1;
-            $(".project2025-1 .description-area .description-wrap").removeClass('act');
-            $(".project2025-1 .description-area .description-wrap:nth-of-type("+ act +")").addClass('act');
-        },
-        slideChangeTransitionEnd: function(){
-            let act = this.activeIndex;
-            if(act == 2){
-                this.mousewheel.disable();
-            }else{
-                this.mousewheel.enable();
-            }
-        },
-    }
-});*/
 
-var project2025P1BeforeMockupSwiper = new Swiper(".project2025-1 .before .mockup-swiper", {
+
+
+
+
+/* ----------------------------------------------------------------------------------------------------- */
+/* ----------------------------------------------------------------------------------------------------- */
+/* 2024 ------------------------------------------------------------------------------------------------ */
+/* ----------------------------------------------------------------------------------------------------- */
+/* ----------------------------------------------------------------------------------------------------- */
+
+var project2024P1BeforeMockupSwiper = new Swiper(".project2024-1 .before .mockup-swiper", {
     freeMode: true,
     slidesPerView: "auto",
     spaceBetween: 0,
@@ -570,11 +515,11 @@ var project2025P1BeforeMockupSwiper = new Swiper(".project2025-1 .before .mockup
     direction: "vertical",
     allowTouchMove: true,
     mousewheel: {
-        eventsTarget: '.project2025-1 .mockup-wrap.before',
+        eventsTarget: '.project2024-1 .mockup-wrap.before',
     },
 });
 
-var project2025P1AfterMockupSwiper = new Swiper(".project2025-1 .after .mockup-swiper", {
+var project2024P1AfterMockupSwiper = new Swiper(".project2024-1 .after .mockup-swiper", {
     freeMode: true,
     slidesPerView: "auto",
     spaceBetween: 0,
@@ -582,14 +527,26 @@ var project2025P1AfterMockupSwiper = new Swiper(".project2025-1 .after .mockup-s
     direction: "vertical",
     allowTouchMove: true,
     mousewheel: {
-        eventsTarget: '.project2025-1 .mockup-wrap.after',
+        eventsTarget: '.project2024-1 .mockup-wrap.after',
     },
 });
 
 
-$('.project2025 .scroll-container').on('scroll', function(event){
+$('.project2024 .scroll-container').on('scroll', function(event){
     let middlePoint = $(this).outerHeight() / 2;
     let scrollT = $(this).scrollTop();
+    let p1PosY = $('#anchor-project2024-1').position().top;
+    let p2PosY = $('#anchor-project2024-2').position().top;
+    console.log(scrollT, p1PosY, p2PosY);
+
+    if(scrollT + 60 > p2PosY){
+        $('.works-2024 .nav-area .btn-item').removeClass('act');
+        $('.works-2024 .nav-area .btn-item:nth-of-type(2)').addClass('act');
+    }else{
+        $('.works-2024 .nav-area .btn-item').removeClass('act');
+        $('.works-2024 .nav-area .btn-item:nth-of-type(1)').addClass('act');
+    }
+    
     $(this).find('.cont-wrap > .fade').each(function(index){
         let thisPosT = $(this).position().top;
         
@@ -600,36 +557,12 @@ $('.project2025 .scroll-container').on('scroll', function(event){
 });
 
 
-$('.project2025 .scroll-container').on("mousewheel DOMMouseScroll", function (event){
-    if( $(this).scrollTop() == 0 ){
-        if (event.originalEvent.wheelDelta >= 0) {
-            project2025Swiper.slideTo(0);
-        }
-    }
+$('.works-2024 .nav-area .btn-item:nth-of-type(1)').on('click', function(){
+    let p1PosY = $('#anchor-project2024-1').position().top;
+    $('.project2024 .scroll-container').scrollTop(p1PosY);
 });
 
-$('.project2025-1 .mockup-wrap').on('mouseenter',function(){
-    //project2025Swiper.mousewheel.disable();
-});
-
-$('.project2025-1 .mockup-wrap').on('mouseleave',function(){
-    //project2025Swiper.mousewheel.enable();
-});
-
-$('.project2025-1 .mockup-wrap').on("mousewheel DOMMouseScroll", function (event){
-    event.stopPropagation();
-    if (event.originalEvent.wheelDelta >= 0) {
-        project2025P1MockupSwiper.mousewheel.enable();
-    } else {
-        //project2025Swiper.slideTo(1);
-    }
-});
-
-
-$('.works-2025 .nav-area .btn-item:nth-of-type(1)').on('click', function(){
-    project2025Swiper.slideTo(0);
-});
-
-$('.works-2025 .nav-area .btn-item:nth-of-type(2)').on('click', function(){
-    project2025Swiper.slideTo(1);
+$('.works-2024 .nav-area .btn-item:nth-of-type(2)').on('click', function(){
+    let p2PosY = $('#anchor-project2024-2').position().top;
+    $('.project2024 .scroll-container').scrollTop(p2PosY);
 });
