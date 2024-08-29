@@ -537,7 +537,6 @@ $('.project2024 .scroll-container').on('scroll', function(event){
     let scrollT = $(this).scrollTop();
     let p1PosY = $('#anchor-project2024-1').position().top;
     let p2PosY = $('#anchor-project2024-2').position().top;
-    console.log(scrollT, p1PosY, p2PosY);
 
     if(scrollT + 60 > p2PosY){
         $('.works-2024 .nav-area .btn-item').removeClass('act');

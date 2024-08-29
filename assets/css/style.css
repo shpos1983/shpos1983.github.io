@@ -1016,6 +1016,13 @@ h1,h2,h3,h4,h5,h6 { margin: 0;}
     overflow: auto;
     padding: 60px 0 0;
     scroll-behavior: smooth;
+    overflow: overlay;
+}
+
+.each-project-slide .scroll-container::-webkit-scrollbar {
+
+    /* width: 1vw; */
+
 }
 
 .each-project-slide .scroll-container .cont-wrap {
@@ -1119,4 +1126,16 @@ h1,h2,h3,h4,h5,h6 { margin: 0;}
     flex: 1 0 auto;
     height: 200px;
     background: #eee;
+}
+
+
+.divider {
+    display: block;
+    height: 0;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    outline: none;
+    border: none;
+    border-top: 1px solid #D9DBDC;
 }
