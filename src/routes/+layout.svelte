@@ -31,7 +31,7 @@
 	<header class="border-b border-border bg-background/95 backdrop-blur-md sticky top-0 z-50">
 		<div class="container mx-auto px-4 h-16 flex items-center justify-between max-w-5xl">
 			<Button href="{base}/" variant="ghost" class="p-0 hover:bg-transparent h-auto">
-				<img src={logo} alt="SangSquare" class="h-14 w-auto" />
+				<img src={logo} alt="SangSquare" class="size-8 sm:size-10 md:size-12 lg:size-14" />
 			</Button>
 			<nav class="flex items-center space-x-2 text-sm font-medium">
 				<Button href="{base}/" variant="ghost" class="transition-colors font-semibold hover:text-primary {$page.url.pathname === base + '/' || $page.url.pathname === '/' || $page.url.pathname.startsWith(base + '/detail') || $page.url.pathname.startsWith('/detail') ? 'text-accent-foreground' : 'text-muted-foreground'}">WORK</Button>
