@@ -1,6 +1,11 @@
 @import "tw-animate-css";
 @import "shadcn-svelte/tailwind.css";
+@import "../static/fonts/Pretendard/pretendardvariable.css";
 @import "@fontsource-variable/inter";
+
+@theme {
+	--font-sans: "Pretendard", "Inter Variable", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
 
 @layer base {
 	* {
