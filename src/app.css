@@ -122,6 +122,10 @@
 	}
 }
 
+header {
+	view-transition-name: main-header;
+}
+
 @keyframes fade-in-slide {
 	from {
 		opacity: 0;
