@@ -41,7 +41,7 @@
 		</div>
 	</header>
 
-	<main class="flex-1 overflow-x-hidden">
+	<main class="flex-1 overflow-x-hidden pt-16">
 		{@render children()}
 	</main>
 </div>
