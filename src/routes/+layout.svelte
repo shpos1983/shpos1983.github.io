@@ -28,7 +28,7 @@
 </svelte:head>
 
 <div class="min-h-screen flex flex-col">
-	<header class="border-b border-border bg-background/95 backdrop-blur-md sticky top-0 z-50">
+	<header class="border-b border-border bg-background/95 backdrop-blur-md fixed top-0 z-50">
 		<div class="container mx-auto px-4 h-16 flex items-center justify-between max-w-5xl">
 			<Button href={resolve('/')} variant="ghost" class="p-0 hover:bg-transparent h-auto">
 				<img src={logo} alt="SangSquare" class="size-8 sm:size-10 md:size-12 lg:size-14" />
