@@ -143,11 +143,11 @@ header {
 	}
 	to {
 		opacity: 0;
-		transform: translateY(0) translateZ(0);
+		transform: translateY(40px) translateZ(0);
 	}
 }
 ::view-transition-old(root) {
-	animation: 300ms linear both fade-out-slide;
+	animation: 300ms ease-out both fade-out-slide;
 }
 ::view-transition-new(root) {
 	animation: 300ms ease-out 300ms both fade-in-slide;
