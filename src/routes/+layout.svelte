@@ -3,10 +3,22 @@
 	import favicon from '$lib/assets/favicon.svg';
 	import { page } from '$app/stores';
 	import { base } from '$app/paths';
-	import { fade } from 'svelte/transition';
 	import { Button } from '$lib/components/ui/button/index.js';
+	import { onNavigate } from '$app/navigation';
 
 	let { children } = $props();
+
+	// Enable browser native View Transitions on SvelteKit navigation
+	onNavigate((navigation) => {
+		if (!document.startViewTransition) return;
+
+		return new Promise((resolve) => {
+			document.startViewTransition(async () => {
+				resolve();
+				await navigation.complete;
+			});
+		});
+	});
 </script>
 
 <svelte:head>
@@ -26,15 +38,7 @@
 		</div>
 	</header>
 
-	<main class="flex-1 grid grid-cols-1 grid-rows-1 overflow-x-hidden">
-		{#key $page.url.pathname}
-			<div 
-				class="col-start-1 row-start-1 w-full h-full"
-				in:fade={{ duration: 250, delay: 150 }}
-				out:fade={{ duration: 150 }}
-			>
-				{@render children()}
-			</div>
-		{/key}
+	<main class="flex-1 overflow-x-hidden">
+		{@render children()}
 	</main>
 </div>
