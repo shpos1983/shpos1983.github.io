@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { Button } from "$lib/components/ui/button/index.js";
-	import { base } from "$app/paths";
 </script>
 
 <svelte:head>
@@ -18,7 +17,7 @@
 		</p>
 		
 		<div class="border-t border-border pt-6 flex justify-between items-center">
-			<Button href="{base}/" variant="outline">← Back to Projects</Button>
+			<Button variant="outline" onclick={() => history.back()}>← Back to Projects</Button>
 			<span class="text-sm text-muted-foreground">Dedicated Route</span>
 		</div>
 	</div>
