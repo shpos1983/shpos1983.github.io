@@ -34,9 +34,9 @@
 				<img src={logo} alt="SangSquare" class="h-14 w-auto" />
 			</Button>
 			<nav class="flex items-center space-x-2 text-sm font-medium">
-				<Button href="{base}/" variant="ghost" class="transition-colors hover:text-primary {$page.url.pathname === base + '/' || $page.url.pathname === '/' || $page.url.pathname.startsWith(base + '/detail') || $page.url.pathname.startsWith('/detail') ? 'text-primary font-semibold bg-muted/50' : 'text-muted-foreground'}">WORK</Button>
-				<Button href="{base}/about" variant="ghost" class="transition-colors hover:text-primary {$page.url.pathname === base + '/about' || $page.url.pathname === '/about' ? 'text-primary font-semibold bg-muted/50' : 'text-muted-foreground'}">ABOUT</Button>
-				<Button href="{base}/contact" variant="ghost" class="transition-colors hover:text-primary {$page.url.pathname === base + '/contact' || $page.url.pathname === '/contact' ? 'text-primary font-semibold bg-muted/50' : 'text-muted-foreground'}">CONTACT</Button>
+				<Button href="{base}/" variant="ghost" class="transition-colors font-semibold hover:text-primary {$page.url.pathname === base + '/' || $page.url.pathname === '/' || $page.url.pathname.startsWith(base + '/detail') || $page.url.pathname.startsWith('/detail') ? 'text-accent-foreground' : 'text-muted-foreground'}">WORK</Button>
+				<Button href="{base}/about" variant="ghost" class="transition-colors font-semibold hover:text-primary {$page.url.pathname === base + '/about' || $page.url.pathname === '/about' ? 'text-accent-foreground' : 'text-muted-foreground'}">ABOUT</Button>
+				<Button href="{base}/contact" variant="ghost" class="transition-colors font-semibold hover:text-primary {$page.url.pathname === base + '/contact' || $page.url.pathname === '/contact' ? 'text-accent-foreground' : 'text-muted-foreground'}">CONTACT</Button>
 			</nav>
 		</div>
 	</header>
