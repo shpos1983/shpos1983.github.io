@@ -1,6 +1,7 @@
 <script lang="ts">
 	import '../app.css';
 	import favicon from '$lib/assets/favicon.svg';
+	import logo from '$lib/assets/images/bi.svg';
 	import { page } from '$app/stores';
 	import { base } from '$app/paths';
 	import { Button } from '$lib/components/ui/button/index.js';
@@ -29,11 +30,13 @@
 <div class="min-h-screen flex flex-col">
 	<header class="border-b border-border bg-background/95 backdrop-blur-md sticky top-0 z-50">
 		<div class="container mx-auto px-4 h-16 flex items-center justify-between max-w-5xl">
-			<Button href="{base}/" variant="ghost" class="text-xl font-bold tracking-tight px-2 hover:bg-transparent">SangSquare</Button>
+			<Button href="{base}/" variant="ghost" class="p-0 hover:bg-transparent h-auto">
+				<img src={logo} alt="SangSquare" class="h-14 w-auto" />
+			</Button>
 			<nav class="flex items-center space-x-2 text-sm font-medium">
-				<Button href="{base}/" variant="ghost" class="transition-colors hover:text-primary {$page.url.pathname === base + '/' || $page.url.pathname === '/' || $page.url.pathname.startsWith(base + '/detail') || $page.url.pathname.startsWith('/detail') ? 'text-primary font-semibold bg-muted/50' : 'text-muted-foreground'}">Work</Button>
-				<Button href="{base}/about" variant="ghost" class="transition-colors hover:text-primary {$page.url.pathname === base + '/about' || $page.url.pathname === '/about' ? 'text-primary font-semibold bg-muted/50' : 'text-muted-foreground'}">About</Button>
-				<Button href="{base}/contact" variant="ghost" class="transition-colors hover:text-primary {$page.url.pathname === base + '/contact' || $page.url.pathname === '/contact' ? 'text-primary font-semibold bg-muted/50' : 'text-muted-foreground'}">Contact</Button>
+				<Button href="{base}/" variant="ghost" class="transition-colors hover:text-primary {$page.url.pathname === base + '/' || $page.url.pathname === '/' || $page.url.pathname.startsWith(base + '/detail') || $page.url.pathname.startsWith('/detail') ? 'text-primary font-semibold bg-muted/50' : 'text-muted-foreground'}">WORK</Button>
+				<Button href="{base}/about" variant="ghost" class="transition-colors hover:text-primary {$page.url.pathname === base + '/about' || $page.url.pathname === '/about' ? 'text-primary font-semibold bg-muted/50' : 'text-muted-foreground'}">ABOUT</Button>
+				<Button href="{base}/contact" variant="ghost" class="transition-colors hover:text-primary {$page.url.pathname === base + '/contact' || $page.url.pathname === '/contact' ? 'text-primary font-semibold bg-muted/50' : 'text-muted-foreground'}">CONTACT</Button>
 			</nav>
 		</div>
 	</header>
