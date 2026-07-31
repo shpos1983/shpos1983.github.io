@@ -8,7 +8,7 @@ const config = {
 		adapter: adapter({
 			pages: 'build',
 			assets: 'build',
-			fallback: '404.html', // SPA 라우팅 및 GitHub Pages 새로고침 대응
+			fallback: '404.html',
 			precompress: false,
 			strict: true
 		})
