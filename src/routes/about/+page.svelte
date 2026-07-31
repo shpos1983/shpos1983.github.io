@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Button } from "$lib/components/ui/button/index.js";
-	import { base } from "$app/paths";
+	import { resolve } from "$app/paths";
 </script>
 
 <svelte:head>
@@ -20,6 +20,6 @@
 			It utilizes SvelteKit 2, Svelte 5, Tailwind CSS v4, and `@sveltejs/adapter-static` to generate pure HTML/JS files that can be deployed to any hosting platform (like GitHub Pages, Cloudflare Pages, or Netlify).
 		</p>
 		
-		<Button href="{base}/contact" class="w-full sm:w-auto">Get In Touch</Button>
+		<Button href={resolve('/contact')} class="w-full sm:w-auto">Get In Touch</Button>
 	</div>
 </section>

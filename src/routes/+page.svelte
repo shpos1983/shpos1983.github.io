@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Button } from "$lib/components/ui/button/index.js";
-	import { base } from "$app/paths";
+	import { resolve } from "$app/paths";
 </script>
 
 <svelte:head>
@@ -23,7 +23,7 @@
 				<h2 class="text-2xl font-bold mt-2 mb-4">First Static Project</h2>
 				<p class="text-muted-foreground mb-6">A showcase of static UI development using SvelteKit and Tailwind CSS v4.</p>
 			</div>
-			<Button href="{base}/detail/project-1" variant="outline" size="sm" class="w-full">View Project</Button>
+			<Button href={resolve('/detail/project-1')} variant="outline" size="sm" class="w-full">View Project</Button>
 		</div>
 
 		<!-- Project 2 -->
@@ -33,7 +33,7 @@
 				<h2 class="text-2xl font-bold mt-2 mb-4">Interactive Web App</h2>
 				<p class="text-muted-foreground mb-6">Premium client interfaces with smooth micro-animations and custom theme systems.</p>
 			</div>
-			<Button href="{base}/detail/project-2" variant="outline" size="sm" class="w-full">View Project</Button>
+			<Button href={resolve('/detail/project-2')} variant="outline" size="sm" class="w-full">View Project</Button>
 		</div>
 
 		<!-- Project 3 -->
@@ -43,7 +43,7 @@
 				<h2 class="text-2xl font-bold mt-2 mb-4">Creative Portfolio</h2>
 				<p class="text-muted-foreground mb-6">A minimal and clean design pattern optimized for performance and SEO.</p>
 			</div>
-			<Button href="{base}/detail/project-3" variant="outline" size="sm" class="w-full">View Project</Button>
+			<Button href={resolve('/detail/project-3')} variant="outline" size="sm" class="w-full">View Project</Button>
 		</div>
 	</div>
 </section>
