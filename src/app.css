@@ -147,8 +147,8 @@ header {
 	}
 }
 ::view-transition-old(root) {
-	animation: 200ms ease-in-out both fade-out-slide;
+	animation: 300ms linear both fade-out-slide;
 }
 ::view-transition-new(root) {
-	animation: 400ms ease-out 200ms both fade-in-slide;
+	animation: 300ms ease-out 300ms both fade-in-slide;
 }
