@@ -6,6 +6,7 @@
 	import { resolve } from '$app/paths';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { onNavigate } from '$app/navigation';
+	import { Menu } from '@lucide/svelte';
 
 	let { children } = $props();
 	let y = $state(0);
@@ -46,6 +47,10 @@
 				<Button href={resolve('/about')} variant="ghost" size="xs" class="transition-colors text-sm font-semibold hover:text-accent-foreground hover:bg-transparent! {page.url.pathname === resolve('/about') ? 'text-accent-foreground' : 'text-primary'}">ABOUT</Button>
 				<Button href={resolve('/contact')} variant="ghost" size="xs" class="transition-colors text-sm font-semibold hover:text-accent-foreground hover:bg-transparent! {page.url.pathname === resolve('/contact') ? 'text-accent-foreground' : 'text-primary'}">CONTACT</Button>
 			</nav>
+
+			<Button variant="ghost" size="icon-lg" class="md:hidden active:bg-foreground/20!">
+				<Menu class="size-5" />
+			</Button>
 		</div>
 	</header>
 
