@@ -8,6 +8,7 @@
 	import { onNavigate } from '$app/navigation';
 
 	let { children } = $props();
+	let y = $state(0);
 
 	// Enable browser native View Transitions on SvelteKit navigation
 	onNavigate((navigation) => {
@@ -27,21 +28,32 @@
 	<title>SangSquare</title>
 </svelte:head>
 
-<div class="min-h-screen flex flex-col">
-	<header class="border-b border-border bg-background/95 backdrop-blur-md sticky top-0 z-50">
-		<div class="container mx-auto px-4 h-16 flex items-center justify-between max-w-5xl">
-			<Button href={resolve('/')} variant="ghost" class="p-0 hover:bg-transparent h-auto">
-				<img src={logo} alt="SangSquare" class="size-7 sm:size-9 md:size-12 lg:size-14" />
+<svelte:window bind:scrollY={y} />
+
+<div class="min-h-screen flex flex-col item-stretch">
+	<header class="sticky top-0 z-50 global-header">
+		<div class="container max-w-full mx-auto px-body-x h-header flex items-center justify-between">
+			<Button href={resolve('/')} variant="ghost" class="p-0  hover:bg-transparent! h-auto flex items-center justify-start relative">
+				<div class="flex items-center transition-opacity ease-linear duration-400 {y <= 8 ? 'opacity-100' : 'opacity-0 absolute pointer-events-none'}">
+					<img src={logo} alt="SangSquare" class="size-7 md:size-10 xl:size-14 transition-all" />
+				</div>
+				<div class="flex items-center transition-opacity ease-linear duration-400 {y > 8 ? 'opacity-100' : 'opacity-0 absolute pointer-events-none'}">
+					<p class="font-extrabold text-lg whitespace-nowrap">SENSE & STRATEGY</p>
+				</div>
 			</Button>
-			<nav class="flex items-center space-x-2 text-sm font-medium">
-				<Button href={resolve('/')} variant="ghost" class="transition-colors font-semibold hover:text-primary {page.url.pathname === resolve('/') || page.url.pathname.startsWith(resolve('/detail')) ? 'text-accent-foreground' : 'text-muted-foreground'}">WORK</Button>
-				<Button href={resolve('/about')} variant="ghost" class="transition-colors font-semibold hover:text-primary {page.url.pathname === resolve('/about') ? 'text-accent-foreground' : 'text-muted-foreground'}">ABOUT</Button>
-				<Button href={resolve('/contact')} variant="ghost" class="transition-colors font-semibold hover:text-primary {page.url.pathname === resolve('/contact') ? 'text-accent-foreground' : 'text-muted-foreground'}">CONTACT</Button>
+			<nav class="flex items-center gap-2 xl:flex-col xl:items-end xl:gap-0 text-sm font-medium ">
+				<Button href={resolve('/')} variant="ghost" size="xs" class="transition-colors text-sm font-semibold hover:text-accent-foreground hover:bg-transparent! {page.url.pathname === resolve('/') || page.url.pathname.startsWith(resolve('/work')) ? 'text-accent-foreground' : 'text-primary'}">WORK</Button>
+				<Button href={resolve('/about')} variant="ghost" size="xs" class="transition-colors text-sm font-semibold hover:text-accent-foreground hover:bg-transparent! {page.url.pathname === resolve('/about') ? 'text-accent-foreground' : 'text-primary'}">ABOUT</Button>
+				<Button href={resolve('/contact')} variant="ghost" size="xs" class="transition-colors text-sm font-semibold hover:text-accent-foreground hover:bg-transparent! {page.url.pathname === resolve('/contact') ? 'text-accent-foreground' : 'text-primary'}">CONTACT</Button>
 			</nav>
 		</div>
 	</header>
 
-	<main class="flex-1 overflow-x-hidden">
+	<main class="flex-1">
 		{@render children()}
 	</main>
+
+	<footer class="py-6">
+		<p class="text-base font-extralight text-center">2026 Sanghun.Lee © all right reserved</p>
+	</footer>
 </div>

@@ -28,6 +28,9 @@
 	--color-accent: var(--accent);
 	--color-accent-foreground: var(--accent-foreground);
 
+	--color-accent-blue: var(--accent-blue);
+	--color-accent-blue-foreground: var(--accent-blue-foreground);
+
 	--color-destructive: var(--destructive);
 	--color-destructive-foreground: var(--destructive-foreground);
 
@@ -44,6 +47,12 @@
 	--radius-lg: var(--radius);
 	--radius-md: calc(var(--radius) - 2px);
 	--radius-sm: calc(var(--radius) - 4px);
+
+	--spacing-body-x: var(--body-x-padding);
+	--spacing-case-gap: var(--case-body-gap);
+	--width-sidebar: var(--case-sidebar-width);
+	--spacing-header: var(--header-height);
+	--spacing-hero: var(--case-hero-height);
 }
 
 @layer base {
@@ -69,6 +78,9 @@
 		--accent: oklch(0.97 0 0);
 		--accent-foreground: oklch(0.6629 0.2272 35.97);
 
+		--accent-blue: oklch(0.97 0 0);
+		--accent-blue-foreground: oklch(0.626031 0.175497 249.6299);
+
 		--destructive: oklch(0.577 0.245 27.325);
 		--destructive-foreground: oklch(0.985 0 0);
 
@@ -77,6 +89,12 @@
 		--ring: oklch(0.87 0 0);
 
 		--radius: 0.5rem;
+
+		--body-x-padding: 16px;
+		--case-sidebar-width: 100%;
+		--case-body-gap: 16px;
+		--header-height: 56px;
+		--case-hero-height: calc(var(--header-height) * 5);
 	}
 
 	.dark {
@@ -101,12 +119,32 @@
 		--accent: oklch(0.6629 0.2272 35.97);
 		--accent-foreground: oklch(0.985 0 0);
 
+		--accent-blue: oklch(0.626031 0.175497 249.6299);
+		--accent-blue-foreground: oklch(0.985 0 0);
+
 		--destructive: oklch(0.396 0.141 25.723);
 		--destructive-foreground: oklch(0.985 0 0);
 
 		--border: oklch(0.269 0 0);
 		--input: oklch(0.269 0 0);
 		--ring: oklch(0.439 0 0);
+	}
+
+	@media (min-width: 768px) {
+		:root {
+			--body-x-padding: 40px;
+			--case-body-gap: 40px;
+			--header-height: 80px;
+		}
+	}
+	@media (min-width: 1280px) {
+		:root {
+			--body-x-padding: 56px;
+			--case-sidebar-width: 344px;
+			--case-body-gap: 56px;
+			--header-height: 144px;
+			--case-hero-height: 588px;
+		}
 	}
 }
 
@@ -122,8 +160,9 @@
 	}
 }
 
-header {
+.global-header {
 	view-transition-name: main-header;
+	background-image: linear-gradient(to bottom, var(--background), transparent);
 }
 
 @keyframes fade-in-slide {
@@ -151,4 +190,206 @@ header {
 }
 ::view-transition-new(root) {
 	animation: 300ms cubic-bezier(0.165, 0.840, 0.440, 1.000) 300ms both fade-in-slide;
+}
+
+/* Case Study Layout Styles */
+.case-hero {
+	width: 100%;
+	height: var(--case-hero-height);
+	overflow: hidden;
+	position: sticky;
+	left: 0;
+	top: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #000;
+	color: #fff;
+	margin-top: calc(var(--header-height) * -1);
+}
+
+.case-hero .bg-image {
+	width: 100%;
+	height: 120%;
+	display: block;
+	position: absolute;
+	left: 0;
+	top: 0;
+	opacity: 0.5;
+	object-fit: cover;
+	will-change: transform;
+}
+
+.case-hero .text-container {
+	position: relative;
+	z-index: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	gap: 16px;
+}
+
+.case-hero .text-container h1 {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	height: 32px;
+	padding: 0 40px;
+	font-size: 14px;
+	font-weight: 500;
+	background: rgba(0,0,0,0.7);
+	border-radius: 999px;
+}
+
+.case-hero .text-container p {
+	font-size: 40px;
+	font-weight: 700;
+}
+
+.case-body {
+	width: 100%;
+	min-height: 100vh;
+	background: #fff;
+	position: relative;
+	z-index: 2;
+	gap: var(--case-body-gap);
+}
+
+.case-sidebar {
+	width: var(--case-sidebar-width);
+	height: auto;
+	position: relative;
+}
+
+.summary-wrapper {
+	width: 100%;
+	height: auto;
+	position: relative;
+	padding-bottom: 96px;
+}
+
+.case-summary {
+	width: 100%;
+	height: auto;
+	position: sticky;
+	top: var(--header-height);
+}
+
+.case-lnb {
+	width: 100%;
+	height: auto;
+	position: sticky;
+	top: var(--header-height);
+	display: flex;
+	align-items: flex-start;
+	justify-content: flex-start;
+	gap: 16px;
+}
+
+.case-lnb .progress {
+	width: 80px;
+	line-height: 1;
+	display: flex;
+	align-items: flex-start;
+	justify-content: flex-end;
+	text-align: right;
+	padding-right: 16px;
+}
+
+.case-lnb .indicator {
+	list-style: none;
+	width: 100%;
+	height: auto;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: flex-start;
+}
+
+.case-lnb .indicator button {
+	appearance: none;
+	background: none;
+	border: none;
+	padding: 0;
+	margin: 0;
+	font-family: inherit;
+	text-align: left;
+	height: auto;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	gap: 8px;
+	cursor: pointer;
+	outline: none;
+}
+
+.case-lnb .indicator button .bar {
+	background: var(--foreground);
+	width: 40px;
+	transform-origin: 0 50%;
+	transform: scaleX(0.6);
+	transition: all 0.3s;
+}
+
+.case-lnb .indicator button.active .bar {
+	background: var(--accent-foreground);
+	transform: scaleX(1);
+}
+
+.case-lnb .indicator button:not(.active):hover .bar {
+	transform: scaleX(1);
+}
+
+.case-lnb .indicator button span {
+	user-select: none;
+	opacity: 0;
+	transition: all 0.3s;
+	color: var(--muted-foreground);
+	line-height: 12px;
+	transform: translateX(-16px) translateZ(0);
+}
+
+.case-lnb .indicator button.active span {
+	opacity: 1;
+	transform: translateX(0) translateZ(0);
+	color: var(--accent-foreground);
+}
+
+.case-lnb .indicator button:not(.active):hover span {
+	opacity: 1;
+	transform: translateX(0) translateZ(0);
+}
+
+.case-lnb .indicator button:hover ~ button span {
+	opacity: 0 !important;
+	color: var(--muted-foreground) !important;
+	transform: translateX(-16px) translateZ(0) !important;
+}
+
+.case-lnb .indicator button:has(~ button:hover) span {
+	opacity: 0 !important;
+	color: var(--muted-foreground) !important;
+	transform: translateX(-16px) translateZ(0) !important;
+}
+
+.case-section {
+	scroll-margin-top: var(--header-height);
+}
+
+.case-body .full-width {
+	width: auto;
+	margin-left: calc(var(--body-x-padding) * -1);
+	margin-right: calc(var(--body-x-padding) * -1);
+	height: 200px;
+	background-color: var(--border);
+}
+
+@media (min-width: 1280px) {
+	.case-body .full-width {
+		width: calc(100% + var(--case-sidebar-width) + var(--case-body-gap) + (var(--body-x-padding) * 2));
+		margin-left: calc((var(--case-sidebar-width) + var(--case-body-gap) + (var(--body-x-padding))) * -1);
+	}
 }

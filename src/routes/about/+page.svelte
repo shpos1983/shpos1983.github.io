@@ -7,7 +7,7 @@
 	<title>About | SangSquare</title>
 </svelte:head>
 
-<section class="container mx-auto px-4 py-12 max-w-3xl flex flex-col justify-center min-h-[calc(100vh-4rem)]">
+<section class="container max-w-full mx-auto px-4 py-12 flex flex-col justify-center min-h-[calc(100vh-4rem)]">
 	<div class="border border-border rounded-2xl p-8 bg-card shadow-sm">
 		<h1 class="text-4xl font-extrabold tracking-tight mb-6">About Me</h1>
 		
