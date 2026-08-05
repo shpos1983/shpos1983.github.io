@@ -148,7 +148,7 @@
 				<li class="flex items-start gap-4 text-muted-foreground">
 					<div class="text-sm font-extrabold w-20">Team</div>
 					<div class="text-sm text-primary flex-1 inline-flex flex-wrap gap-x-3">
-						<span>PO <em class="not-italic">1</em></span>
+						<span>PO <em class="not-italic text-accent-blue-foreground">1</em></span>
 						<span>Service Planner <em class="not-italic text-accent-blue-foreground">1</em></span>
 						<span>Designer <em class="not-italic text-accent-blue-foreground">1</em></span>
 						<span>Publisher <em class="not-italic text-accent-blue-foreground">1</em></span>
