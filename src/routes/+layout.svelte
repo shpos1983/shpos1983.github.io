@@ -41,7 +41,7 @@
 					<p class="font-extrabold text-lg whitespace-nowrap">SENSE & STRATEGY</p>
 				</div>
 			</Button>
-			<nav class="flex items-center gap-2 xl:flex-col xl:items-end xl:gap-0 text-sm font-medium ">
+			<nav class="hidden md:flex items-center gap-2 xl:flex-col xl:items-end xl:gap-0 text-sm font-medium ">
 				<Button href={resolve('/')} variant="ghost" size="xs" class="transition-colors text-sm font-semibold hover:text-accent-foreground hover:bg-transparent! {page.url.pathname === resolve('/') || page.url.pathname.startsWith(resolve('/work')) ? 'text-accent-foreground' : 'text-primary'}">WORK</Button>
 				<Button href={resolve('/about')} variant="ghost" size="xs" class="transition-colors text-sm font-semibold hover:text-accent-foreground hover:bg-transparent! {page.url.pathname === resolve('/about') ? 'text-accent-foreground' : 'text-primary'}">ABOUT</Button>
 				<Button href={resolve('/contact')} variant="ghost" size="xs" class="transition-colors text-sm font-semibold hover:text-accent-foreground hover:bg-transparent! {page.url.pathname === resolve('/contact') ? 'text-accent-foreground' : 'text-primary'}">CONTACT</Button>
