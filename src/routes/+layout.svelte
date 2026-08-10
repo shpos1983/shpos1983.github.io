@@ -82,7 +82,7 @@
 					<Menu class="size-5" />
 					<span class="sr-only">Menu Open</span>
 				</Button>
-				<SheetContent side="right" class="w-full! p-6 flex flex-col justify-start">
+				<SheetContent side="right" class="w-full! p-6 flex flex-col justify-start data-[side=right]:data-closed:slide-out-to-right-0!">
 					<SheetHeader>
 						<SheetTitle class="text-left font-extrabold text-lg">SENSE & STRATEGY</SheetTitle>
 					</SheetHeader>
