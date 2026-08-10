@@ -39,17 +39,15 @@
 	onNavigate((navigation) => {
 		if (!document.startViewTransition) return;
 
-		return new Promise((resolve) => {
-			if (isOpen) {
-				isOpen = false;
-				const sheetElements = document.querySelectorAll<HTMLElement>(
-					'[data-slot="sheet-content"], [data-slot="sheet-overlay"], [data-slot="sheet-portal"]'
-				);
-				sheetElements.forEach((el) => {
-					el.style.setProperty('display', 'none', 'important');
-				});
-			}
+		isOpen = false;
+		const sheetElements = document.querySelectorAll<HTMLElement>(
+			'[data-slot="sheet-content"], [data-slot="sheet-overlay"], [data-slot="sheet-portal"], [data-bits-dialog-content], [data-bits-dialog-overlay], [data-bits-dialog-portal], [data-portal]'
+		);
+		sheetElements.forEach((el) => {
+			el.remove();
+		});
 
+		return new Promise((resolve) => {
 			document.startViewTransition(async () => {
 				resolve();
 				await navigation.complete;
