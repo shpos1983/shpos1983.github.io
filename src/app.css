@@ -207,6 +207,7 @@
 	animation: none !important;
 	opacity: 0 !important;
 	transition: none !important;
+	backdrop-filter: none !important;
 }
 
 /* Case Study Layout Styles */
