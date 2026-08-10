@@ -67,10 +67,10 @@
 	<header class="sticky top-0 z-50 global-header">
 		<div class="container max-w-full mx-auto px-body-x h-header flex items-center justify-between">
 			<Button href={resolve('/')} variant="ghost" class="p-0  hover:bg-transparent! h-auto flex items-center justify-start relative">
-				<div class="flex items-center transition-opacity ease-linear duration-400 {y <= 8 ? 'opacity-100' : 'opacity-0 absolute pointer-events-none'}">
+				<div class="flex items-center transition-opacity ease-linear duration-400 {y <= 0 ? 'opacity-100' : 'opacity-0 absolute pointer-events-none'}">
 					<img src={logo} alt="SangSquare" class="size-7 md:size-10 xl:size-14 transition-all" />
 				</div>
-				<div class="flex items-center transition-opacity ease-linear duration-400 {y > 8 ? 'opacity-100' : 'opacity-0 absolute pointer-events-none'}">
+				<div class="flex items-center transition-opacity ease-linear duration-400 {y > 0 ? 'opacity-100' : 'opacity-0 absolute pointer-events-none'}">
 					<p class="font-extrabold text-sm md:text-base xl:text-lg whitespace-nowrap">SENSE & STRATEGY</p>
 				</div>
 			</Button>

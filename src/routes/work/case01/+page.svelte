@@ -268,11 +268,17 @@
 				</h3>
 				<h4 class="sys-text-sm">어떻게 하면 정비사의 전문적인 판단과 다양한 현장 상황을 유지하면서도,<br/>모든 매장에서 동일한 상담 기준과 정보가 실시간으로 이어지게 할 수 있을까?</h4>
 			</div>
-
 			<div class="flex flex-col gap-3 mt-10 py-5 px-6 bg-attention rounded-sm">
 				<p class="sys-text-lg">새롭게 정의한 표준화. Standardization ≠ Same Screen</p>
 				<p class="sys-text-sm">표준화는 모든 직원이 같은 화면을 보는 것이 아니라, 같은 고객 정보와 업무 맥락, 상담 근거가 끊기지 않고 이어지는 것</p>
 			</div>
+			<div class="flex flex-col gap-6 mt-15">
+				<h3 class="sys-title-sm leading-tight tracking-[-0.02em]">
+					세 가지 단절을, 3개의 연결 원칙으로
+				</h3>
+			</div>
+
+			
 
 			{#each items as item (item)}
 				test {item}<br/>
