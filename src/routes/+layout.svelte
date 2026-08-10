@@ -99,7 +99,8 @@
 							href={resolve('/')}
 							onclick={() => isOpen = false}
 							variant="ghost"
-							class="justify-start text-lg font-light hover:bg-muted! px-4 py-2 rounded-md {page.url.pathname === resolve('/') || page.url.pathname.startsWith(resolve('/work')) ? 'text-accent-foreground bg-muted' : 'text-primary'}"
+							size="lg"
+							class="justify-start text-xl font-light hover:bg-muted! px-4 py-2 rounded-md {page.url.pathname === resolve('/') || page.url.pathname.startsWith(resolve('/work')) ? 'text-accent-foreground bg-muted' : 'text-primary'}"
 						>
 							WORK
 						</Button>
@@ -107,7 +108,8 @@
 							href={resolve('/about')}
 							onclick={() => isOpen = false}
 							variant="ghost"
-							class="justify-start text-lg font-light hover:bg-muted! px-4 py-2 rounded-md {page.url.pathname === resolve('/about') ? 'text-accent-foreground bg-muted' : 'text-primary'}"
+							size="lg"
+							class="justify-start text-xl font-light hover:bg-muted! px-4 py-2 rounded-md {page.url.pathname === resolve('/about') ? 'text-accent-foreground bg-muted' : 'text-primary'}"
 						>
 							ABOUT
 						</Button>
@@ -115,7 +117,8 @@
 							href={resolve('/contact')}
 							onclick={() => isOpen = false}
 							variant="ghost"
-							class="justify-start text-lg font-light hover:bg-muted! px-4 py-2 rounded-md {page.url.pathname === resolve('/contact') ? 'text-accent-foreground bg-muted' : 'text-primary'}"
+							size="lg"
+							class="justify-start text-xl font-light hover:bg-muted! px-4 py-2 rounded-md {page.url.pathname === resolve('/contact') ? 'text-accent-foreground bg-muted' : 'text-primary'}"
 						>
 							CONTACT
 						</Button>
