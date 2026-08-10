@@ -80,6 +80,7 @@
 					onclick={() => isOpen = true}
 				>
 					<Menu class="size-5" />
+					<span class="sr-only">Menu Open</span>
 				</Button>
 				<SheetContent side="right" class="w-full! p-6 flex flex-col justify-start">
 					<SheetHeader>
