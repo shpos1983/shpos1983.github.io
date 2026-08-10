@@ -206,6 +206,7 @@
 ::view-transition-new(mobile-sheet-overlay) {
 	animation: none !important;
 	opacity: 0 !important;
+	transition: none !important;
 }
 
 /* Case Study Layout Styles */
