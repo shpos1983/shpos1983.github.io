@@ -133,6 +133,6 @@
 	</main>
 
 	<footer class="py-6">
-		<p class="text-base font-extralight text-center">2026 Sanghun.Lee © all right reserved</p>
+		<p class="text-base font-extralight text-center"><em class="font-medium">2026 Sanghun.Lee</em> © all right reserved</p>
 	</footer>
 </div>

@@ -38,11 +38,10 @@
 	<div class="mb-40">
 		<h1 class="sys-text-sm text-accent-foreground font-extrabold tracking-tight">WHO I AM</h1>
 		<div class="flex flex-col gap-8 mt-10">
-			<h2 class="sys-title-lg leading-tight tracking-[-0.02em]">
-				I bring teams, user needs, and business goals together to build products people value.<br/>
-				I turn complex problems into simple experiences.
+			<h2 class="sys-title-lg tracking-[-0.02em]">
+				복잡한 정보와 경험은 명료하게.<br/>고객이 상품을 쉽게 이해하고, 선택의 순간에 확신을 가질 수 있도록.
 			</h2>
-			<h3 class="sys-text-sm font-light">복잡한 정보와 경험은 명료하게. 고객이 상품을 쉽게 이해하고, 선택의 순간에 확신을 가질 수 있도록.</h3>
+			<h3 class="sys-text-md">I bring teams, user needs, and business goals together to build products people value.<br/>I turn complex problems into simple experiences.</h3>
 		</div>
 	</div>
 	<div class="mb-40">
@@ -54,7 +53,7 @@
 				<div class="self-stretch flex-1 flex flex-col justify-between gap-10">
 					<div class="flex flex-col gap-8">
 						<h2 class="sys-title-lg leading-tight tracking-[-0.02em]">T’Station.com UX Renewal & growth</h2>
-						<h3 class="sys-text-sm font-light">타이어는 중요하지만, 대부분의 고객은 타이어를 잘 모른다.<br/>그 간극을 이해하고, 데이터로 검증하며 더 나은 구매 경험을 만들어간 과정.</h3>
+						<h3 class="sys-text-sm">타이어는 중요하지만, 대부분의 고객은 타이어를 잘 모른다.<br/>그 간극을 이해하고, 데이터로 검증하며 더 나은 구매 경험을 만들어간 과정.</h3>
 					</div>
 					<ul class="list-none flex flex-col gap-5 w-full">
 						<li class="flex items-start gap-4 text-muted-foreground">
@@ -63,11 +62,11 @@
 						</li>
 						<li class="flex items-start gap-4 text-muted-foreground">
 							<div class="sys-caption font-extrabold w-12">Impact</div>
-							<div class="sys-caption flex-1"><em class="not-italic font-bold text-primary">208% 판매성장, 2배의 구매전환율 성장</em></div>
+							<div class="sys-caption flex-1"><em class="font-bold text-primary">208% 판매성장, 2배의 구매전환율 성장</em></div>
 						</li>
 						<li class="flex items-start gap-4 text-muted-foreground">
 							<div class="sys-caption font-extrabold w-12">Role</div>
-							<div class="sys-caption flex-1"><em class="not-italic text-primary">UX Lead</em> / PO / UI / QA</div>
+							<div class="sys-caption flex-1"><em class="text-primary">UX Lead</em> / PO / UI / QA</div>
 						</li>
 						<li class="flex items-start gap-4 text-muted-foreground">
 							<div class="sys-caption font-extrabold w-12">Period</div>
@@ -87,8 +86,8 @@
 				<div class="self-start w-10 text-[20px]/12 font-bold">02</div>
 				<div class="self-stretch flex-1 flex flex-col justify-between gap-10">
 					<div class="flex flex-col gap-8">
-						<h2 class="sys-title-lg leading-tight tracking-[-0.02em]">T’Station.com AI Product Launch</h2>
-						<h3 class="sys-text-sm font-light">더 이상 타이어 쇼핑이 막막하지 않게.<br/>고객이 확신을 가지고 구매할 수 있도록 AI 경험을 설계한 과정</h3>
+						<h2 class="sys-title-lg leading-tight tracking-[-0.02em]">T’Station.com AI Commerce Launch</h2>
+						<h3 class="sys-text-sm">더 이상 타이어 쇼핑이 막막하지 않게.<br/>고객이 확신을 가지고 구매할 수 있도록 AI 경험을 설계한 과정</h3>
 					</div>
 					<ul class="list-none flex flex-col gap-5 w-full">
 						<li class="flex items-start gap-4 text-muted-foreground">
@@ -97,11 +96,11 @@
 						</li>
 						<li class="flex items-start gap-4 text-muted-foreground">
 							<div class="sys-caption font-extrabold w-12">Impact</div>
-							<div class="sys-caption flex-1"><em class="not-italic font-bold text-primary">고객센터 FAQ 40% 감소, 30% 구매전환 증가</em></div>
+							<div class="sys-caption flex-1"><em class="font-bold text-primary">고객센터 FAQ 40% 감소, 30% 구매전환 증가</em></div>
 						</li>
 						<li class="flex items-start gap-4 text-muted-foreground">
 							<div class="sys-caption font-extrabold w-12">Role</div>
-							<div class="sys-caption flex-1"><em class="not-italic text-primary">UX Lead</em> / PO / UI / QA</div>
+							<div class="sys-caption flex-1"><em class="text-primary">UX Lead</em> / PO / UI / QA</div>
 						</li>
 						<li class="flex items-start gap-4 text-muted-foreground">
 							<div class="sys-caption font-extrabold w-12">Period</div>
@@ -122,7 +121,7 @@
 				<div class="self-stretch flex-1 flex flex-col justify-between gap-10">
 					<div class="flex flex-col gap-8">
 						<h2 class="sys-title-lg leading-tight tracking-[-0.02em]">T’Station Smart Guide</h2>
-						<h3 class="sys-text-sm font-light">좋은 상담은 무엇에서 시작되는지 고민하고, 매장의 실제 업무 흐름 속에서<br/>더 나은 서비스 경험을 만들어온 과정</h3>
+						<h3 class="sys-text-sm">좋은 상담은 무엇에서 시작되는지 고민하고, 매장의 실제 업무 흐름 속에서<br/>더 나은 서비스 경험을 만들어온 과정</h3>
 					</div>
 					<ul class="list-none flex flex-col gap-5 w-full">
 						<li class="flex items-start gap-4 text-muted-foreground">
@@ -131,11 +130,11 @@
 						</li>
 						<li class="flex items-start gap-4 text-muted-foreground">
 							<div class="sys-caption font-extrabold w-12">Impact</div>
-							<div class="sys-caption flex-1"><em class="not-italic font-bold text-primary">AI, 상담 패러다임의 변화</em></div>
+							<div class="sys-caption flex-1"><em class="font-bold text-primary">AI, 상담 패러다임의 변화</em></div>
 						</li>
 						<li class="flex items-start gap-4 text-muted-foreground">
 							<div class="sys-caption font-extrabold w-12">Role</div>
-							<div class="sys-caption flex-1"><em class="not-italic text-primary">UX Lead</em> / PO / UI / QA</div>
+							<div class="sys-caption flex-1"><em class="text-primary">UX Lead</em> / PO / UI / QA</div>
 						</li>
 						<li class="flex items-start gap-4 text-muted-foreground">
 							<div class="sys-caption font-extrabold w-12">Period</div>
@@ -153,7 +152,7 @@
 		<h1 class="sys-text-sm text-accent-foreground font-extrabold tracking-tight mb-16">FOUNDATIONS</h1>
 		<div class="flex flex-col gap-8">
 			<h2 class="sys-title-lg leading-tight tracking-[-0.02em]">COMPLEX EXPERIENCES, MADE SIMPLE</h2>
-			<h3 class="sys-text-sm font-light">사람들은 제품(Product)보다 먼저 브랜드를 경험한다.<br/>다양한 산업의 복잡한 정보를 쉽고 직관적인 경험으로 바꾸며 다져온 디자인의 출발점.</h3>
+			<h3 class="sys-text-sm">사람들은 제품(Product)보다 먼저 브랜드를 경험한다.<br/>다양한 산업의 복잡한 정보를 쉽고 직관적인 경험으로 바꾸며 다져온 디자인의 출발점.</h3>
 		</div>
 		<div class="-ml-body-x mt-14 overflow-hidden">
 			<div class="swiper" bind:this={swiperContainer}>
@@ -200,7 +199,7 @@
 </section>
 
 <style>
-	:global(.swiper-wrapper) {
+	.swiper :global(.swiper-wrapper) {
 		transition-timing-function: linear !important;
 	}
 </style>
