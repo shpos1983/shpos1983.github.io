@@ -845,20 +845,6 @@
 		right: 12px !important;
 	}
 
-	.iphone-frame :global(.swiper-slide),
-	.ipad-frame :global(.swiper-slide) {
-		width: 100% !important;
-		height: 100% !important;
-	}
-
-	.iphone-frame :global(.swiper-slide img),
-	.ipad-frame :global(.swiper-slide img) {
-		width: 100% !important;
-		height: 100% !important;
-		object-fit: cover;
-		display: block;
-	}
-
 	.screenshot-focusing-detail .detail-item {
 		animation: detail-fade-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 	}
@@ -868,35 +854,6 @@
 		flex-direction: column;
 	}
 
-	/* :global(.question-swiper) {
-		width: 100%;
-		height: 74px;
-		overflow: visible !important;
-	}
-
-	:global(.question-swiper .swiper-slide) {
-		width: 100% !important;
-		height: 74px !important;
-		overflow: visible !important;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-
-	:global(.answer-swiper) {
-		width: 100%;
-		overflow: visible !important;
-	}
-
-	:global(.answer-swiper .swiper-slide) {
-		width: 100% !important;
-	}
-
-	:global(.answer-swiper .swiper-slide img) {
-		width: 100%;
-		display: block;
-		opacity: 0 !important;
-	} */
 
 	@keyframes detail-fade-in {
 		from {

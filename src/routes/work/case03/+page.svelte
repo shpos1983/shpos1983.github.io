@@ -736,95 +736,97 @@
 						<div class="screenshot-marker-container w-[205px] flex-none" data-focusing={activeFocusing}>
 							<img src="/images/case03/05_2_screenshot.png" alt="" class="w-full rounded-sm" />
 
-							<button class="marker-btn" onclick={() => activeFocusing = 1} style="top:29.5%; left:76%;">
+							<button class="marker-btn {activeFocusing === 1 ? 'is-active' : ''}" onclick={() => activeFocusing = 1} style="top:29.5%; left:76%;">
 								<span class="sys-caption font-semibold">1</span>
 							</button>
-							<button class="marker-btn" onclick={() => activeFocusing = 2} style="top:44.5%; left:76%;">
+							<button class="marker-btn {activeFocusing === 2 ? 'is-active' : ''}" onclick={() => activeFocusing = 2} style="top:44.5%; left:76%;">
 								<span class="sys-caption font-semibold">2</span>
 							</button>
-							<button class="marker-btn" onclick={() => activeFocusing = 3} style="top:70%; left:55%;">
+							<button class="marker-btn {activeFocusing === 3 ? 'is-active' : ''}" onclick={() => activeFocusing = 3} style="top:70%; left:55%;">
 								<span class="sys-caption font-semibold">3</span>
 							</button>
-							<button class="marker-btn" onclick={() => activeFocusing = 4} style="top:79%; left:76%;">
+							<button class="marker-btn {activeFocusing === 4 ? 'is-active' : ''}" onclick={() => activeFocusing = 4} style="top:79%; left:76%;">
 								<span class="sys-caption font-semibold">4</span>
 							</button>
 
-							<div class="focusing-area w-full h-[14%] top-[23.8%]"></div>
-							<div class="focusing-area w-full h-[14.92%] top-[38.72%]"></div>
-							<div class="focusing-area w-[74.63%] h-[19.7%] top-[55.23%]"></div>
-							<div class="focusing-area w-full h-[20.38%] top-[78%]"></div>
+							<div class="focusing-area w-full h-[14%] top-[23.8%] {activeFocusing === 1 ? 'is-active' : ''}"></div>
+							<div class="focusing-area w-full h-[14.92%] top-[38.72%] {activeFocusing === 2 ? 'is-active' : ''}"></div>
+							<div class="focusing-area w-[74.63%] h-[19.7%] top-[55.23%] {activeFocusing === 3 ? 'is-active' : ''}"></div>
+							<div class="focusing-area w-full h-[20.38%] top-[78%] {activeFocusing === 4 ? 'is-active' : ''}"></div>
 						</div>
 
 						<div class="screenshot-focusing-detail">
-							<div class="py-8">
-								<p class="sys-text-sm text-accent-foreground font-medium">1/4 현재 상태를 인지합니다</p>
-								<p class="sys-text-lg mt-4">종합 점수와 등급을 통한 타이어 상태 파악</p>
-								<p class="description-paragraph sys-text-sm mt-6">네 개 타이어의 분석 결과를 종합 안전점수와 상태 등급으로 요약했습니다.<br/>고객은 세부 수치를 읽기 전에 현재 상태가 얼마나 위험한지, 무엇이 점수를 낮췄는지 먼저 이해합니다.</p>
+							{#if activeFocusing === 1}
+								<div class="detail-item py-8">
+									<p class="sys-text-sm text-accent-foreground font-medium">1/4 현재 상태를 인지합니다</p>
+									<p class="sys-text-lg mt-4">종합 점수와 등급을 통한 타이어 상태 파악</p>
+									<p class="description-paragraph sys-text-sm mt-6">네 개 타이어의 분석 결과를 종합 안전점수와 상태 등급으로 요약했습니다.<br/>고객은 세부 수치를 읽기 전에 현재 상태가 얼마나 위험한지, 무엇이 점수를 낮췄는지 먼저 이해합니다.</p>
 
-								<img src="/images/case03/05_2_screenshot_focusing1.png" alt="" class="w-[452px] my-8" />
+									<img src="/images/case03/05_2_screenshot_focusing1.png" alt="" class="w-[452px] my-8" />
 
-								<div class="inline-flex items-center p-4 gap-8 bg-background rounded-sm">
-									<div class="flex flex-col items-start">
-										<span class="inline-flex items-center bg-muted-foreground text-background sys-caption rounded-full px-3">Before</span>
-										<p class="sys-text-sm mt-1">“타이어 상태가 좋지 않습니다.”</p>
-									</div>
-									<ArrowRight class="size-5" />
-									<div class="flex flex-col items-start">
-										<span class="inline-flex items-center bg-accent-foreground text-background sys-caption rounded-full px-3">After</span>
-										<p class="sys-text-sm mt-1">“안전점수 32점이며, 좌측 타이어에 문제가 있습니다.”</p>
-									</div>
-								</div>
-							</div>
-
-							<div class="py-8">
-								<p class="sys-text-sm text-accent-foreground font-medium">2/4 문제 위치를 확인합니다</p>
-								<p class="sys-text-lg mt-4">차량 위치별 마모 상태와 점검 대상 확인</p>
-								<p class="description-paragraph sys-text-sm mt-6">타이어별 잔여 트레드와 상태를 차량의 실제 위치에 맞춰 보여줍니다. 고객은 ‘전륜 좌측’과 같은 정비 용어를 해석하지 않아도 어느 타이어에 문제가 있는지 직접 확인할 수 있습니다.</p>
-
-								<img src="/images/case03/05_2_screenshot_focusing2.png" alt="" class="w-[631px] my-8" />
-
-								<div class="inline-flex items-center p-4 gap-8 bg-background rounded-sm">
-									<div class="flex flex-col items-start">
-										<span class="inline-flex items-center bg-primary text-primary-foreground sys-caption rounded-full px-3">Effects</span>
-										<p class="sys-text-sm mt-1">직원과 고객이 같은 위치와 같은 상태를 보며 상담합니다.</p>
+									<div class="inline-flex items-center p-4 gap-8 bg-background rounded-sm">
+										<div class="flex flex-col items-start">
+											<span class="inline-flex items-center bg-muted-foreground text-background sys-caption rounded-full px-3">Before</span>
+											<p class="sys-text-sm mt-1">“타이어 상태가 좋지 않습니다.”</p>
+										</div>
+										<ArrowRight class="size-5" />
+										<div class="flex flex-col items-start">
+											<span class="inline-flex items-center bg-accent-foreground text-background sys-caption rounded-full px-3">After</span>
+											<p class="sys-text-sm mt-1">“안전점수 32점이며, 좌측 타이어에 문제가 있습니다.”</p>
+										</div>
 									</div>
 								</div>
-							</div>
+							{:else if activeFocusing === 2}
+								<div class="detail-item py-8">
+									<p class="sys-text-sm text-accent-foreground font-medium">2/4 문제 위치를 확인합니다</p>
+									<p class="sys-text-lg mt-4">차량 위치별 마모 상태와 점검 대상 확인</p>
+									<p class="description-paragraph sys-text-sm mt-6">타이어별 잔여 트레드와 상태를 차량의 실제 위치에 맞춰 보여줍니다. 고객은 ‘전륜 좌측’과 같은 정비 용어를 해석하지 않아도 어느 타이어에 문제가 있는지 직접 확인할 수 있습니다.</p>
 
-							<div class="py-8">
-								<p class="sys-text-sm text-accent-foreground font-medium">3/4 시각적 근거를 제공합니다</p>
-								<p class="sys-text-lg mt-4">실제 타이어 사진에 표시된 측정 근거</p>
-								<p class="description-paragraph sys-text-sm mt-6">고객 차량의 실제 타이어 사진 위에 측정 지점과 잔여 트레드, 마모율을 함께 표시했습니다.<br/>추상적인 숫자를 자신의 타이어 상태와 연결해 교체 권고의 근거를 눈으로 확인합니다.</p>
+									<img src="/images/case03/05_2_screenshot_focusing2.png" alt="" class="w-[631px] my-8" />
 
-								<img src="/images/case03/05_2_screenshot_focusing3.png" alt="" class="w-[272px] my-8" />
-
-								<div class="inline-flex items-center p-4 gap-8 bg-background rounded-sm">
-									<div class="flex flex-col items-start">
-										<span class="inline-flex items-center bg-muted-foreground text-background sys-caption rounded-full px-3">Before</span>
-										<p class="sys-text-sm mt-1">정비사의 경험과 구두 설명</p>
-									</div>
-									<ArrowRight class="size-5" />
-									<div class="flex flex-col items-start">
-										<span class="inline-flex items-center bg-accent-foreground text-background sys-caption rounded-full px-3">After</span>
-										<p class="sys-text-sm mt-1">고객 차량의 사진과 사진 위 맵핑된 측정 데이터</p>
+									<div class="inline-flex items-center p-4 gap-8 bg-background rounded-sm">
+										<div class="flex flex-col items-start">
+											<span class="inline-flex items-center bg-primary text-primary-foreground sys-caption rounded-full px-3">Effects</span>
+											<p class="sys-text-sm mt-1">직원과 고객이 같은 위치와 같은 상태를 보며 상담합니다.</p>
+										</div>
 									</div>
 								</div>
-							</div>
+							{:else if activeFocusing === 3}
+								<div class="detail-item py-8">
+									<p class="sys-text-sm text-accent-foreground font-medium">3/4 시각적 근거를 제공합니다</p>
+									<p class="sys-text-lg mt-4">실제 타이어 사진에 표시된 측정 근거</p>
+									<p class="description-paragraph sys-text-sm mt-6">고객 차량의 실제 타이어 사진 위에 측정 지점과 잔여 트레드, 마모율을 함께 표시했습니다.<br/>추상적인 숫자를 자신의 타이어 상태와 연결해 교체 권고의 근거를 눈으로 확인합니다.</p>
 
-							<div class="py-8">
-								<p class="sys-text-sm text-accent-foreground font-medium">4/4 원인과 조치방법을 제시합니다</p>
-								<p class="sys-text-lg mt-4">이상 상태의 예상 원인과 후속 점검 안내</p>
-								<p class="description-paragraph sys-text-sm mt-6">AI 진단소견은 편마모와 같은 이상 상태를 설명하고 예상 원인을 함께 제시합니다.<br/>고객은 단순히 교체 권유를 받는 것이 아니라 왜 문제가 발생했고 어떤 점검이 필요한지 이해할 수 있습니다.</p>
+									<img src="/images/case03/05_2_screenshot_focusing3.png" alt="" class="w-[272px] my-8" />
 
-								<img src="/images/case03/05_2_screenshot_focusing4.png" alt="" class="w-[438px] my-8" />
-
-								<div class="inline-flex items-center p-4 gap-8 bg-background rounded-sm">
-									<div class="flex flex-col items-start">
-										<span class="inline-flex items-center bg-primary text-primary-foreground sys-caption rounded-full px-3">Effects</span>
-										<p class="sys-text-sm mt-1">타이어 판매 중심의 상담을 얼라인먼트와 하체 점검까지 연결되는 차량 정비 상담으로 확장합니다.</p>
+									<div class="inline-flex items-center p-4 gap-8 bg-background rounded-sm">
+										<div class="flex flex-col items-start">
+											<span class="inline-flex items-center bg-muted-foreground text-background sys-caption rounded-full px-3">Before</span>
+											<p class="sys-text-sm mt-1">정비사의 경험과 구두 설명</p>
+										</div>
+										<ArrowRight class="size-5" />
+										<div class="flex flex-col items-start">
+											<span class="inline-flex items-center bg-accent-foreground text-background sys-caption rounded-full px-3">After</span>
+											<p class="sys-text-sm mt-1">고객 차량의 사진과 사진 위 맵핑된 측정 데이터</p>
+										</div>
 									</div>
 								</div>
-							</div>
+							{:else if activeFocusing === 4}
+								<div class="detail-item py-8">
+									<p class="sys-text-sm text-accent-foreground font-medium">4/4 원인과 조치방법을 제시합니다</p>
+									<p class="sys-text-lg mt-4">이상 상태의 예상 원인과 후속 점검 안내</p>
+									<p class="description-paragraph sys-text-sm mt-6">AI 진단소견은 편마모와 같은 이상 상태를 설명하고 예상 원인을 함께 제시합니다.<br/>고객은 단순히 교체 권유를 받는 것이 아니라 왜 문제가 발생했고 어떤 점검이 필요한지 이해할 수 있습니다.</p>
+
+									<img src="/images/case03/05_2_screenshot_focusing4.png" alt="" class="w-[438px] my-8" />
+
+									<div class="inline-flex items-center p-4 gap-8 bg-background rounded-sm">
+										<div class="flex flex-col items-start">
+											<span class="inline-flex items-center bg-primary text-primary-foreground sys-caption rounded-full px-3">Effects</span>
+											<p class="sys-text-sm mt-1">타이어 판매 중심의 상담을 얼라인먼트와 하체 점검까지 연결되는 차량 정비 상담으로 확장합니다.</p>
+										</div>
+									</div>
+								</div>
+							{/if}
 						</div>
 					</div>
 				</div>
@@ -1050,20 +1052,6 @@
 		flex-shrink: 0;
 	}
 
-	.iphone-frame :global(.swiper-slide),
-	.ipad-frame :global(.swiper-slide) {
-		width: 100% !important;
-		height: 100% !important;
-	}
-
-	.iphone-frame :global(.swiper-slide img),
-	.ipad-frame :global(.swiper-slide img) {
-		width: 100% !important;
-		height: 100% !important;
-		object-fit: cover;
-		display: block;
-	}
-
 	.overflow-visible-swiper {
 		overflow: visible !important;
 	}
@@ -1080,11 +1068,6 @@
 	}
 
 	.overflow-visible-swiper :global(.swiper-slide-next) {
-		opacity: 0.5;
-		pointer-events: auto;
-	}
-
-	.overflow-visible-swiper :global(.swiper-slide-next + .swiper-slide) {
 		opacity: 0.5;
 		pointer-events: auto;
 	}
@@ -1131,38 +1114,18 @@
 		border-radius: 4px;
 	}
 
-	.screenshot-marker-container .marker-btn:nth-of-type(1):hover ~ .focusing-area:nth-of-type(1),
-	.screenshot-marker-container .marker-btn:nth-of-type(2):hover ~ .focusing-area:nth-of-type(2),
-	.screenshot-marker-container .marker-btn:nth-of-type(3):hover ~ .focusing-area:nth-of-type(3),
-	.screenshot-marker-container .marker-btn:nth-of-type(4):hover ~ .focusing-area:nth-of-type(4) {
-		border-color: var(--color-ts-n3);
+	.screenshot-marker-container .marker-btn:hover ~ .focusing-area,
+	.screenshot-marker-container .focusing-area.is-active {
+		border-color: var(--color-accent-foreground);
 	}
 
-	.screenshot-marker-container[data-focusing="1"] :global(.marker-btn:nth-of-type(1)),
-	.screenshot-marker-container[data-focusing="2"] :global(.marker-btn:nth-of-type(2)),
-	.screenshot-marker-container[data-focusing="3"] :global(.marker-btn:nth-of-type(3)),
-	.screenshot-marker-container[data-focusing="4"] :global(.marker-btn:nth-of-type(4)) {
+	.screenshot-marker-container .marker-btn.is-active {
 		background: var(--color-accent-foreground);
 		animation: none;
 		pointer-events: none;
 	}
 
-	.screenshot-marker-container[data-focusing="1"] :global(.focusing-area:nth-of-type(1)),
-	.screenshot-marker-container[data-focusing="2"] :global(.focusing-area:nth-of-type(2)),
-	.screenshot-marker-container[data-focusing="3"] :global(.focusing-area:nth-of-type(3)),
-	.screenshot-marker-container[data-focusing="4"] :global(.focusing-area:nth-of-type(4)) {
-		border-color: var(--color-accent-foreground);
-	}
-
-	.screenshot-focusing-detail > div {
-		display: none;
-	}
-
-	.screenshot-marker-container[data-focusing="1"] ~ .screenshot-focusing-detail > div:nth-of-type(1),
-	.screenshot-marker-container[data-focusing="2"] ~ .screenshot-focusing-detail > div:nth-of-type(2),
-	.screenshot-marker-container[data-focusing="3"] ~ .screenshot-focusing-detail > div:nth-of-type(3),
-	.screenshot-marker-container[data-focusing="4"] ~ .screenshot-focusing-detail > div:nth-of-type(4) {
-		display: block;
+	.screenshot-focusing-detail .detail-item {
 		animation: detail-fade-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 	}
 
