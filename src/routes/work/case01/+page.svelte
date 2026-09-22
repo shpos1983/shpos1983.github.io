@@ -3,14 +3,13 @@
 	import { Separator } from "$lib/components/ui/separator/index.js";
 	import Swiper from "swiper";
 	import type { SwiperOptions } from "swiper/types";
-	import { Autoplay, EffectFade, Pagination } from "swiper/modules";
+	import { Pagination } from "swiper/modules";
 	import "swiper/css";
 	import "swiper/css/autoplay";
-	import "swiper/css/effect-fade";
 	import "swiper/css/pagination";
 	import { Button } from "$lib/components/ui/button/index.js";
 	import { ImageComparison } from "$lib/components/ui/image-comparison/index.js";
-	import { CirclePause, CirclePlay, CircleX, ArrowRight } from '@lucide/svelte';
+	import { CirclePause, CirclePlay, CircleX } from '@lucide/svelte';
 
 	const DEFAULT_HEADER_HEIGHT = 144;
 	const DEFAULT_HERO_HEIGHT = 588;
@@ -20,8 +19,6 @@
 	let activeSectionId = $state("01");
 	let isScrollingTo = false;
 	let activeFocusing = $state(1);
-	let markerActiveFocusing = $state(1);
-	let mockupSwiper = $state<Swiper | null>(null);
 	let headerHeight = $state(DEFAULT_HEADER_HEIGHT);
 	let heroHeight = $state(DEFAULT_HERO_HEIGHT);
 	let comparisonPosition = $state(62);
@@ -466,9 +463,6 @@
 								clickable: true
 							},
 							on: {
-								init: (swiper) => {
-									mockupSwiper = swiper;
-								},
 								slideChange: (swiper) => {
 									activeFocusing = swiper.activeIndex + 1;
 								}
