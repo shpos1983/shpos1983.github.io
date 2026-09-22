@@ -54,17 +54,25 @@
 			});
 		});
 	});
-	// Keep document zoom in sync with window width
+	// Keep document zoom in sync with client width (min 1280, max 1920)
 	$effect(() => {
 		const updateZoom = () => {
-			const w = window.innerWidth;
-			const scale = w < 1920 ? (w / 1920) : 1;
+			const w = document.documentElement.clientWidth || window.innerWidth;
+			const clampedW = Math.max(1280, Math.min(1920, w));
+			const scale = clampedW / 1920;
 			document.documentElement.style.setProperty('--doc-zoom', String(scale));
 		};
 		updateZoom();
 		window.addEventListener('resize', updateZoom, { passive: true });
+
+		const ro = new ResizeObserver(() => {
+			updateZoom();
+		});
+		ro.observe(document.documentElement);
+
 		return () => {
 			window.removeEventListener('resize', updateZoom);
+			ro.disconnect();
 		};
 	});
 </script>
@@ -81,13 +89,13 @@
 		<div class="container max-w-full mx-auto px-body-x h-header flex items-center justify-between">
 			<Button href={resolve('/')} variant="ghost" class="p-0  hover:bg-transparent! h-auto flex items-center justify-start relative">
 				<div class="flex items-center transition-opacity ease-linear duration-400 {y <= 0 ? 'opacity-100' : 'opacity-0 absolute pointer-events-none'}">
-					<img src={logo} alt="SangSquare" class="size-7 md:size-10 xl:size-14 transition-all" />
+					<img src={logo} alt="SangSquare" class="size-14 transition-all" />
 				</div>
 				<div class="flex items-center transition-opacity ease-linear duration-400 {y > 0 ? 'opacity-100' : 'opacity-0 absolute pointer-events-none'}">
-					<p class="font-extrabold text-sm md:text-base xl:text-lg whitespace-nowrap">SENSE & STRATEGY</p>
+					<p class="font-extrabold text-lg whitespace-nowrap">SENSE & STRATEGY</p>
 				</div>
 			</Button>
-			<nav class="hidden md:flex items-center gap-2 xl:flex-col xl:items-end xl:gap-0 text-sm font-medium ">
+			<nav class="flex flex-col items-end gap-0 text-sm font-medium ">
 				<Button href={resolve('/')} variant="ghost" size="xs" class="transition-colors text-sm font-semibold hover:text-accent-foreground hover:bg-transparent! {page.url.pathname === resolve('/') || page.url.pathname.startsWith(resolve('/work')) ? 'text-accent-foreground' : 'text-primary'}">WORK</Button>
 				<Button href={resolve('/about')} variant="ghost" size="xs" class="transition-colors text-sm font-semibold hover:text-accent-foreground hover:bg-transparent! {page.url.pathname === resolve('/about') ? 'text-accent-foreground' : 'text-primary'}">ABOUT</Button>
 				<Button href={resolve('/contact')} variant="ghost" size="xs" class="transition-colors text-sm font-semibold hover:text-accent-foreground hover:bg-transparent! {page.url.pathname === resolve('/contact') ? 'text-accent-foreground' : 'text-primary'}">CONTACT</Button>

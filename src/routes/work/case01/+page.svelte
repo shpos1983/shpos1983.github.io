@@ -278,7 +278,7 @@
 		<p class="sys-title-lg">타이어는 잘 몰라도, 내 차에 필요한 타이어는 딱 맞게.<br/>구매 전환을 높이기 위해, 탐색부터 관리까지 고객 여정을 개선한 5년.	</p>
 	</div>
 </section>
-<section bind:this={caseBodyEl} class="case-body flex flex-col xl:flex-row items-start justify-start mx-auto px-body-x pt-30 pb-15">
+<section bind:this={caseBodyEl} class="case-body flex flex-row items-start justify-start mx-auto px-body-x pt-30 pb-15">
 	<aside class="case-sidebar self-stretch flex-none">
 		<div class="summary-wrapper">
 			<ul class="case-summary list-none flex flex-col gap-4 w-full">
@@ -486,7 +486,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="swiper-pagination mockup1-pagination"></div>
+						<div class="swiper-pagination mockup1-pagination -left-5!"></div>
 					</div>
 				</div>
 
@@ -537,7 +537,7 @@
 				<p class="description-paragraph sys-text-sm mt-6">PLP에서 좁힌 상품을 가격과 혜택, 워런티, 리뷰와 성능 정보로 검증하도록 PDP의 정보 위계를 정리했습니다.<br/><em class="font-semibold">핵심 구매 정보는 먼저 확인하고, 깊은 검토가 필요한 내용은 필요한 만큼 탐색하도록 구성했습니다.</em></p>
 			</div>
 
-			<div class="swiper pdp-swiper full-width mt-20 py-10! bg-pale pl-body-x xl:pl-[calc(var(--spacing-sidebar)+var(--spacing-body-x)+var(--spacing-case-gap)-333px)]! pr-body-x select-none [&_img]:select-none" use:swiper={{
+			<div class="swiper pdp-swiper full-width mt-20 py-10! bg-pale pl-[calc(var(--spacing-sidebar)+var(--spacing-body-x)+var(--spacing-case-gap)-333px)]! pr-body-x select-none [&_img]:select-none" use:swiper={{
 				slidesPerView: "auto",
 				spaceBetween: 96,
 				grabCursor: true,

@@ -34,7 +34,7 @@
 	<title>Work | SangSquare</title>
 </svelte:head>
 
-<section class="container max-w-full mx-auto pl-4 xl:pl-14 pt-22 pb-12">
+<section class="container max-w-full mx-auto pl-14 pt-22 pb-12">
 	<div class="mb-40">
 		<h1 class="sys-text-sm text-accent-foreground font-extrabold tracking-tight">WHO I AM</h1>
 		<div class="flex flex-col gap-8 mt-10">
@@ -48,7 +48,7 @@
 		<h1 class="sys-text-sm text-accent-foreground font-extrabold tracking-tight mb-16">CASE STUDIES</h1>
 		<div class="flex flex-col gap-12">
 			<!-- case01 -->
-			<div class="scale-104 bg-card flex justify-between gap-10 last:border-b-0">
+			<div class="bg-card flex justify-between gap-10 last:border-b-0">
 				<div class="self-start w-10 text-[20px]/12 font-bold">01</div>
 				<div class="self-stretch flex-1 flex flex-col justify-between gap-10">
 					<div class="flex flex-col gap-8">
@@ -82,7 +82,7 @@
 			<Separator />
 
 			<!-- case02 -->
-			<div class="scale-104 bg-card flex justify-between gap-10 last:border-b-0">
+			<div class="bg-card flex justify-between gap-10 last:border-b-0">
 				<div class="self-start w-10 text-[20px]/12 font-bold">02</div>
 				<div class="self-stretch flex-1 flex flex-col justify-between gap-10">
 					<div class="flex flex-col gap-8">
@@ -116,7 +116,7 @@
 			<Separator />
 
 			<!-- case03 -->
-			<div class="scale-104 bg-card flex justify-between gap-10 last:border-b-0">
+			<div class="bg-card flex justify-between gap-10 last:border-b-0">
 				<div class="self-start w-10 text-[20px]/12 font-bold">03</div>
 				<div class="self-stretch flex-1 flex flex-col justify-between gap-10">
 					<div class="flex flex-col gap-8">

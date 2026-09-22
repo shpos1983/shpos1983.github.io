@@ -104,11 +104,17 @@
 
 		--radius: 0.5rem;
 
-		--body-x-padding: 16px;
+		/* --body-x-padding: 16px;
 		--case-sidebar-width: 100%;
 		--case-body-gap: 16px;
 		--header-height: 56px;
-		--case-hero-height: calc(var(--header-height) * 5);
+		--case-hero-height: calc(var(--header-height) * 5); */
+
+		--body-x-padding: 56px;
+		--case-sidebar-width: 344px;
+		--case-body-gap: 56px;
+		--header-height: 144px;
+		--case-hero-height: 588px;
 	}
 
 	.dark {
@@ -145,7 +151,7 @@
 		--attention: oklch(0.9626 0.0066 286.27);
 	}
 
-	@media (min-width: 768px) {
+	/* @media (min-width: 768px) {
 		:root {
 			--body-x-padding: 40px;
 			--case-body-gap: 40px;
@@ -160,7 +166,7 @@
 			--header-height: 144px;
 			--case-hero-height: 588px;
 		}
-	}
+	} */
 }
 
 @layer base {
@@ -169,11 +175,11 @@
 	}
 	body {
 		@apply bg-background text-foreground;
-		overflow-x: hidden;
+		/* overflow-x: auto; */
 	}
 	html {
 		@apply font-sans;
-		overflow-x: hidden;
+		/* overflow-x: auto; */
 	}
 
 	.doc-zoom-wrapper {
@@ -452,8 +458,8 @@
 }
 
 .case-body .full-width {
-	width: auto;
-	margin-left: calc(var(--body-x-padding) * -1);
+	width: calc(100% + var(--case-sidebar-width) + var(--case-body-gap) + (var(--body-x-padding) * 2));
+	margin-left: calc((var(--case-sidebar-width) + var(--case-body-gap) + (var(--body-x-padding))) * -1);
 	margin-right: calc(var(--body-x-padding) * -1);
 }
 
@@ -467,7 +473,6 @@
 	height: auto;
 	aspect-ratio: 375/763;
 	position: relative;
-	
 }
 
 .iphone-frame .screen {
@@ -609,12 +614,12 @@
 
 
 
-@media (min-width: 1280px) {
+/* @media (min-width: 1280px) {
 	.case-body .full-width {
 		width: calc(100% + var(--case-sidebar-width) + var(--case-body-gap) + (var(--body-x-padding) * 2));
 		margin-left: calc((var(--case-sidebar-width) + var(--case-body-gap) + (var(--body-x-padding))) * -1);
 	}
-}
+} */
 
 @counter-style filled-circles {
   system: alphabetic;

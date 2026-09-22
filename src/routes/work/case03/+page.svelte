@@ -19,6 +19,7 @@
 	let activeSectionId = $state("01");
 	let isScrollingTo = false;
 	let activeFocusing = $state(1);
+	let hoveredFocusing = $state<number | null>(null);
 	let headerHeight = $state(DEFAULT_HEADER_HEIGHT);
 	let heroHeight = $state(DEFAULT_HERO_HEIGHT);
 	let playCardIndex = $state<number | null>(null);
@@ -168,7 +169,7 @@
 		<p class="sys-title-lg">매장 서비스는 같아야 하지만, 고객의 방문 상황은 모두 다르다.<br/>그렇다면 어디까지 표준화하고 어디까지 정비사의 판단에 맡겨야 할까?</p>
 	</div>
 </section>
-<section bind:this={caseBodyEl} class="case-body flex flex-col xl:flex-row items-start justify-start mx-auto px-body-x pt-30 pb-15">
+<section bind:this={caseBodyEl} class="case-body flex flex-row items-start justify-start mx-auto px-body-x pt-30 pb-15">
 	<aside class="case-sidebar self-stretch flex-none">
 		<div class="summary-wrapper">
 			<ul class="case-summary list-none flex flex-col gap-4 w-full">
@@ -736,23 +737,47 @@
 						<div class="screenshot-marker-container w-[205px] flex-none" data-focusing={activeFocusing}>
 							<img src="/images/case03/05_2_screenshot.png" alt="" class="w-full rounded-sm" />
 
-							<button class="marker-btn {activeFocusing === 1 ? 'is-active' : ''}" onclick={() => activeFocusing = 1} style="top:29.5%; left:76%;">
+							<button
+								class="marker-btn {activeFocusing === 1 ? 'is-active' : ''}"
+								onmouseenter={() => hoveredFocusing = 1}
+								onmouseleave={() => hoveredFocusing = null}
+								onclick={() => activeFocusing = 1}
+								style="top:29.5%; left:76%;"
+							>
 								<span class="sys-caption font-semibold">1</span>
 							</button>
-							<button class="marker-btn {activeFocusing === 2 ? 'is-active' : ''}" onclick={() => activeFocusing = 2} style="top:44.5%; left:76%;">
+							<button
+								class="marker-btn {activeFocusing === 2 ? 'is-active' : ''}"
+								onmouseenter={() => hoveredFocusing = 2}
+								onmouseleave={() => hoveredFocusing = null}
+								onclick={() => activeFocusing = 2}
+								style="top:44.5%; left:76%;"
+							>
 								<span class="sys-caption font-semibold">2</span>
 							</button>
-							<button class="marker-btn {activeFocusing === 3 ? 'is-active' : ''}" onclick={() => activeFocusing = 3} style="top:70%; left:55%;">
+							<button
+								class="marker-btn {activeFocusing === 3 ? 'is-active' : ''}"
+								onmouseenter={() => hoveredFocusing = 3}
+								onmouseleave={() => hoveredFocusing = null}
+								onclick={() => activeFocusing = 3}
+								style="top:70%; left:55%;"
+							>
 								<span class="sys-caption font-semibold">3</span>
 							</button>
-							<button class="marker-btn {activeFocusing === 4 ? 'is-active' : ''}" onclick={() => activeFocusing = 4} style="top:79%; left:76%;">
+							<button
+								class="marker-btn {activeFocusing === 4 ? 'is-active' : ''}"
+								onmouseenter={() => hoveredFocusing = 4}
+								onmouseleave={() => hoveredFocusing = null}
+								onclick={() => activeFocusing = 4}
+								style="top:79%; left:76%;"
+							>
 								<span class="sys-caption font-semibold">4</span>
 							</button>
 
-							<div class="focusing-area w-full h-[14%] top-[23.8%] {activeFocusing === 1 ? 'is-active' : ''}"></div>
-							<div class="focusing-area w-full h-[14.92%] top-[38.72%] {activeFocusing === 2 ? 'is-active' : ''}"></div>
-							<div class="focusing-area w-[74.63%] h-[19.7%] top-[55.23%] {activeFocusing === 3 ? 'is-active' : ''}"></div>
-							<div class="focusing-area w-full h-[20.38%] top-[78%] {activeFocusing === 4 ? 'is-active' : ''}"></div>
+							<div class="focusing-area w-full h-[14%] top-[23.8%] {activeFocusing === 1 || hoveredFocusing === 1 ? 'is-active' : ''}"></div>
+							<div class="focusing-area w-full h-[14.92%] top-[38.72%] {activeFocusing === 2 || hoveredFocusing === 2 ? 'is-active' : ''}"></div>
+							<div class="focusing-area w-[74.63%] h-[19.7%] top-[55.23%] {activeFocusing === 3 || hoveredFocusing === 3 ? 'is-active' : ''}"></div>
+							<div class="focusing-area w-full h-[20.38%] top-[78%] {activeFocusing === 4 || hoveredFocusing === 4 ? 'is-active' : ''}"></div>
 						</div>
 
 						<div class="screenshot-focusing-detail">
@@ -856,20 +881,20 @@
 						</div>
 					</div>
 					<div class="flex items-stretch gap-4 mt-10">
-						<div class="flex flex-col items-start bg-border rounded-sm py-7 px-6 w-150">
+						<div class="flex flex-col items-start bg-border rounded-sm py-7 px-6 w-152">
 							<span class="inline-flex items-center h-8 px-4 bg-background rounded-full sys-caption">유효하게 작용한 사용 이유</span>
 							<ul class="list-disc list-outside pl-5 mt-4 space-y-2 sys-text-sm tracking-[-3%]">
 								<li>기존 무상점검 안에서 촬영해 별도의 입력과 교육 부담이 적었습니다.</li>
 								<li>사진·수치·색상 등급을 함께 보여주면서 교체 필요성을 설명하기 쉬워졌습니다.</li>
-								<li>확인된 마모와 편마모 결과를 타이어 교체와 얼라인먼트 상담으로 연결할 수 있었습니다.</li>
+								<li>확인된 마모와 편마모 결과를 타이어 교체와 얼라인먼트 상담으로<br/>연결할 수 있었습니다.</li>
 							</ul>
 						</div>
-						<div class="flex flex-col items-start bg-border rounded-sm pt-8 pb-10 pl-6 w-150">
+						<div class="flex flex-col items-start bg-border rounded-sm py-7 px-6 w-152">
 							<span class="inline-flex items-center h-8 px-4 bg-background rounded-full sys-caption">반복 사용을 막은 요인</span>
 							<ul class="list-disc list-outside pl-5 mt-4 space-y-2 sys-text-sm tracking-[-5%]">
 								<li>같은 타이어도 촬영 환경에 따라 결과가 달라지면 분석값을 신뢰하기 어려웠습니다.</li>
-								<li>야외의 강한 햇빛아래 촬영과 타이어 표면의 빗물, 패턴형태는 실패와 재촬영을 만들었습니다.</li>
-								<li>AI 결과가 육안 판단과 다르면 직원이 다시 판정해야 했고, 결국 기존 구두 설명으로 돌아갔습니다.</li>
+								<li>야외의 강한 햇빛아래 촬영과 타이어 표면의 빗물, 패턴형태는 실패와 재촬영을 <br/>만들었습니다.</li>
+								<li>AI 결과가 육안 판단과 다르면 직원이 다시 판정해야 했고, <br/>결국 기존 구두 설명으로 돌아갔습니다.</li>
 							</ul>
 						</div>
 					</div>
@@ -1057,8 +1082,8 @@
 	}
 
 	.overflow-visible-swiper :global(.swiper-slide) {
-		opacity: 0;
-		pointer-events: none;
+		opacity: 0.5;
+		pointer-events: auto;
 		transition: opacity 0.3s ease;
 	}
 
@@ -1067,9 +1092,10 @@
 		pointer-events: auto;
 	}
 
-	.overflow-visible-swiper :global(.swiper-slide-next) {
-		opacity: 0.5;
-		pointer-events: auto;
+	.overflow-visible-swiper :global(.swiper-slide-prev),
+	.overflow-visible-swiper :global(.swiper-slide:has(~ .swiper-slide-active)) {
+		opacity: 0;
+		pointer-events: none;
 	}
 
 	.screenshot-marker-container {
@@ -1114,7 +1140,6 @@
 		border-radius: 4px;
 	}
 
-	.screenshot-marker-container .marker-btn:hover ~ .focusing-area,
 	.screenshot-marker-container .focusing-area.is-active {
 		border-color: var(--color-accent-foreground);
 	}

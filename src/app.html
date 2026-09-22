@@ -7,8 +7,9 @@
 		<script>
 			(function() {
 				function updateZoom() {
-					var w = window.innerWidth;
-					var scale = w < 1920 ? (w / 1920) : 1;
+					var w = document.documentElement.clientWidth || window.innerWidth;
+					var clampedW = Math.max(1280, Math.min(1920, w));
+					var scale = clampedW / 1920;
 					document.documentElement.style.setProperty('--doc-zoom', scale);
 				}
 				updateZoom();

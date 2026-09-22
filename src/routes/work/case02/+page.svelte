@@ -243,7 +243,7 @@
 		<p class="sys-title-lg">대화는 자유롭게, 구매에 필요한 조건과 정보는 정확하게.<br/>AI는 고객의 질문으로 시작해 어디까지 구매를 이어갈 수 있을까?</p>
 	</div>
 </section>
-<section bind:this={caseBodyEl} class="case-body flex flex-col xl:flex-row items-start justify-start mx-auto px-body-x pt-30 pb-15">
+<section bind:this={caseBodyEl} class="case-body flex flex-row items-start justify-start mx-auto px-body-x pt-30 pb-15">
 	<aside class="case-sidebar self-stretch flex-none">
 		<div class="summary-wrapper">
 			<ul class="case-summary list-none flex flex-col gap-4 w-full">
@@ -824,7 +824,7 @@
 				<h4 class="sys-text-sm">초기 운영 데이터를 기준으로 <em class="font-semibold">응답 속도, 재고 안내 정합성, 구매 단계 추적을 후속 개선</em> 과제로 정의했습니다.</h4>
 			</div>
 
-			<div class="full-width flex items-center justify-center gap-6 mt-10 px-body-x py-8 relative">
+			<div class="full-width flex items-center justify-center gap-6 mt-10 px-body-x py-8 relative bg-background border-t-1 border-t-attention">
 				<img src="/images/case02/08_infographic1.png" alt="" class="w-full min-w-0 max-w-[552px] aspect-552/342" />
 				<img src="/images/case02/08_infographic2.png" alt="" class="w-full min-w-0 max-w-[552px] aspect-552/342" />
 				<img src="/images/case02/08_infographic3.png" alt="" class="w-full min-w-0 max-w-[552px] aspect-552/342" />
@@ -841,10 +841,6 @@
 </section>
 
 <style>
-	.iphone-frame :global(.swiper-pagination-vertical) {
-		right: 12px !important;
-	}
-
 	.screenshot-focusing-detail .detail-item {
 		animation: detail-fade-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 	}
