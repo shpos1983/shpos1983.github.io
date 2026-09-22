@@ -54,6 +54,19 @@
 			});
 		});
 	});
+	// Keep document zoom in sync with window width
+	$effect(() => {
+		const updateZoom = () => {
+			const w = window.innerWidth;
+			const scale = w < 1920 ? (w / 1920) : 1;
+			document.documentElement.style.setProperty('--doc-zoom', String(scale));
+		};
+		updateZoom();
+		window.addEventListener('resize', updateZoom, { passive: true });
+		return () => {
+			window.removeEventListener('resize', updateZoom);
+		};
+	});
 </script>
 
 <svelte:head>
@@ -63,7 +76,7 @@
 
 <svelte:window bind:scrollY={y} />
 
-<div class="min-h-screen flex flex-col item-stretch">
+<div class="doc-zoom-wrapper min-h-screen flex flex-col item-stretch">
 	<header class="sticky top-0 z-50 global-header">
 		<div class="container max-w-full mx-auto px-body-x h-header flex items-center justify-between">
 			<Button href={resolve('/')} variant="ghost" class="p-0  hover:bg-transparent! h-auto flex items-center justify-start relative">
