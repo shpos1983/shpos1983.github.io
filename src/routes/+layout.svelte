@@ -5,55 +5,55 @@
 	import { page } from '$app/state';
 	import { resolve } from '$app/paths';
 	import { Button } from '$lib/components/ui/button/index.js';
-	import { onNavigate } from '$app/navigation';
-	import { Menu } from '@lucide/svelte';
-	import {
-		Sheet,
-		SheetContent,
-		SheetHeader,
-		SheetTitle
-	} from '$lib/components/ui/sheet/index.js';
+	// import { onNavigate } from '$app/navigation';
+	// import { Menu } from '@lucide/svelte';
+	// import {
+	// 	Sheet,
+	// 	SheetContent,
+	// 	SheetHeader,
+	// 	SheetTitle
+	// } from '$lib/components/ui/sheet/index.js';
 
 	let { children } = $props();
 	let y = $state(0);
-	let isOpen = $state(false);
+	// let isOpen = $state(false);
 
 	// Automatically close the sheet when switching to medium (desktop) screen size
-	$effect(() => {
-		const mediaQuery = window.matchMedia('(min-width: 768px)');
-		const handler = (e: MediaQueryListEvent) => {
-			if (e.matches) {
-				isOpen = false;
-			}
-		};
-		if (mediaQuery.matches) {
-			isOpen = false;
-		}
-		mediaQuery.addEventListener('change', handler);
-		return () => {
-			mediaQuery.removeEventListener('change', handler);
-		};
-	});
+	// $effect(() => {
+	// 	const mediaQuery = window.matchMedia('(min-width: 768px)');
+	// 	const handler = (e: MediaQueryListEvent) => {
+	// 		if (e.matches) {
+	// 			isOpen = false;
+	// 		}
+	// 	};
+	// 	if (mediaQuery.matches) {
+	// 		isOpen = false;
+	// 	}
+	// 	mediaQuery.addEventListener('change', handler);
+	// 	return () => {
+	// 		mediaQuery.removeEventListener('change', handler);
+	// 	};
+	// });
 
 	// Enable browser native View Transitions on SvelteKit navigation
-	onNavigate((navigation) => {
-		if (!document.startViewTransition) return;
+	// onNavigate((navigation) => {
+	// 	if (!document.startViewTransition) return;
 
-		isOpen = false;
-		const sheetElements = document.querySelectorAll<HTMLElement>(
-			'[data-slot="sheet-content"], [data-slot="sheet-overlay"], [data-slot="sheet-portal"], [data-bits-dialog-content], [data-bits-dialog-overlay], [data-bits-dialog-portal], [data-portal]'
-		);
-		sheetElements.forEach((el) => {
-			el.remove();
-		});
+	// 	isOpen = false;
+	// 	const sheetElements = document.querySelectorAll<HTMLElement>(
+	// 		'[data-slot="sheet-content"], [data-slot="sheet-overlay"], [data-slot="sheet-portal"], [data-bits-dialog-content], [data-bits-dialog-overlay], [data-bits-dialog-portal], [data-portal]'
+	// 	);
+	// 	sheetElements.forEach((el) => {
+	// 		el.remove();
+	// 	});
 
-		return new Promise((resolve) => {
-			document.startViewTransition(async () => {
-				resolve();
-				await navigation.complete;
-			});
-		});
-	});
+	// 	return new Promise((resolve) => {
+	// 		document.startViewTransition(async () => {
+	// 			resolve();
+	// 			await navigation.complete;
+	// 		});
+	// 	});
+	// });
 	// Keep document zoom in sync with client width (min 1280, max 1920)
 	$effect(() => {
 		const updateZoom = () => {
@@ -101,7 +101,7 @@
 				<Button href={resolve('/contact')} variant="ghost" size="xs" class="transition-colors text-sm font-semibold hover:text-accent-foreground hover:bg-transparent! {page.url.pathname === resolve('/contact') ? 'text-accent-foreground' : 'text-primary'}">CONTACT</Button>
 			</nav>
 
-			<Sheet bind:open={isOpen}>
+			<!-- <Sheet bind:open={isOpen}>
 				<Button
 					variant="ghost"
 					size="icon-lg"
@@ -145,7 +145,7 @@
 						</Button>
 					</nav>
 				</SheetContent>
-			</Sheet>
+			</Sheet> -->
 		</div>
 	</header>
 
