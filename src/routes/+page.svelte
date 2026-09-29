@@ -52,7 +52,7 @@
 				<div class="self-start w-10 text-[20px]/12 font-bold">01</div>
 				<div class="self-stretch flex-1 flex flex-col justify-between gap-10">
 					<div class="flex flex-col gap-8">
-						<h2 class="sys-title-lg leading-tight tracking-[-0.02em]">T’Station.com UX Renewal & growth</h2>
+						<h2 class="sys-title-lg leading-tight tracking-[-0.02em]"><a href={resolve('/work/case01')} class="case-title-link">T’Station.com UX Renewal & growth</a></h2>
 						<h3 class="sys-text-sm">타이어는 중요하지만, 대부분의 고객은 타이어를 잘 모른다.<br/>그 간극을 이해하고, 데이터로 검증하며 더 나은 구매 경험을 만들어간 과정.</h3>
 					</div>
 					<ul class="list-none flex flex-col gap-5 w-full">
@@ -86,7 +86,7 @@
 				<div class="self-start w-10 text-[20px]/12 font-bold">02</div>
 				<div class="self-stretch flex-1 flex flex-col justify-between gap-10">
 					<div class="flex flex-col gap-8">
-						<h2 class="sys-title-lg leading-tight tracking-[-0.02em]">T’Station.com AI Commerce Launch</h2>
+						<h2 class="sys-title-lg leading-tight tracking-[-0.02em]"><a href={resolve('/work/case02')} class="case-title-link">T’Station.com AI Commerce Launch</a></h2>
 						<h3 class="sys-text-sm">더 이상 타이어 쇼핑이 막막하지 않게.<br/>고객이 확신을 가지고 구매할 수 있도록 AI 경험을 설계한 과정</h3>
 					</div>
 					<ul class="list-none flex flex-col gap-5 w-full">
@@ -120,7 +120,7 @@
 				<div class="self-start w-10 text-[20px]/12 font-bold">03</div>
 				<div class="self-stretch flex-1 flex flex-col justify-between gap-10">
 					<div class="flex flex-col gap-8">
-						<h2 class="sys-title-lg leading-tight tracking-[-0.02em]">T’Station Smart Guide</h2>
+						<h2 class="sys-title-lg leading-tight tracking-[-0.02em]"><a href={resolve('/work/case03')} class="case-title-link">T’Station Smart Guide</a></h2>
 						<h3 class="sys-text-sm">좋은 상담은 무엇에서 시작되는지 고민하고, 매장의 실제 업무 흐름 속에서<br/>더 나은 서비스 경험을 만들어온 과정</h3>
 					</div>
 					<ul class="list-none flex flex-col gap-5 w-full">

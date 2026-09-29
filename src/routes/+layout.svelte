@@ -5,7 +5,7 @@
 	import { page } from '$app/state';
 	import { resolve } from '$app/paths';
 	import { Button } from '$lib/components/ui/button/index.js';
-	// import { onNavigate } from '$app/navigation';
+	import { onNavigate } from '$app/navigation';
 	// import { Menu } from '@lucide/svelte';
 	// import {
 	// 	Sheet,
@@ -18,61 +18,38 @@
 	let y = $state(0);
 	// let isOpen = $state(false);
 
-	// Automatically close the sheet when switching to medium (desktop) screen size
-	// $effect(() => {
-	// 	const mediaQuery = window.matchMedia('(min-width: 768px)');
-	// 	const handler = (e: MediaQueryListEvent) => {
-	// 		if (e.matches) {
-	// 			isOpen = false;
-	// 		}
-	// 	};
-	// 	if (mediaQuery.matches) {
-	// 		isOpen = false;
-	// 	}
-	// 	mediaQuery.addEventListener('change', handler);
-	// 	return () => {
-	// 		mediaQuery.removeEventListener('change', handler);
-	// 	};
-	// });
-
 	// Enable browser native View Transitions on SvelteKit navigation
-	// onNavigate((navigation) => {
-	// 	if (!document.startViewTransition) return;
+	onNavigate((navigation) => {
+		if (!document.startViewTransition) return;
 
-	// 	isOpen = false;
-	// 	const sheetElements = document.querySelectorAll<HTMLElement>(
-	// 		'[data-slot="sheet-content"], [data-slot="sheet-overlay"], [data-slot="sheet-portal"], [data-bits-dialog-content], [data-bits-dialog-overlay], [data-bits-dialog-portal], [data-portal]'
-	// 	);
-	// 	sheetElements.forEach((el) => {
-	// 		el.remove();
-	// 	});
-
-	// 	return new Promise((resolve) => {
-	// 		document.startViewTransition(async () => {
-	// 			resolve();
-	// 			await navigation.complete;
-	// 		});
-	// 	});
-	// });
+		return new Promise((resolve) => {
+			document.startViewTransition(async () => {
+				resolve();
+				await navigation.complete;
+			});
+		});
+	});
 	// Keep document zoom in sync with client width (min 1280, max 1920)
 	$effect(() => {
 		const updateZoom = () => {
 			const w = document.documentElement.clientWidth || window.innerWidth;
-			const clampedW = Math.max(1280, Math.min(1920, w));
-			const scale = clampedW / 1920;
-			document.documentElement.style.setProperty('--doc-zoom', String(scale));
+			if (w >= 1920) {
+				document.documentElement.style.setProperty('--doc-zoom', '1');
+			} else if (w >= 1280) {
+				// 1280px ~ 1920px: 서브픽셀 반올림 넘침 방지(-1px)로 가로스크롤 방지 (overflow-x 잠금 금지)
+				const scale = (w - 1) / 1920;
+				document.documentElement.style.setProperty('--doc-zoom', String(scale));
+			} else {
+				// 1280px 미만: 최소 1280px 고정 스케일 (가로 스크롤 허용)
+				const scale = 1280 / 1920;
+				document.documentElement.style.setProperty('--doc-zoom', String(scale));
+			}
 		};
 		updateZoom();
 		window.addEventListener('resize', updateZoom, { passive: true });
 
-		const ro = new ResizeObserver(() => {
-			updateZoom();
-		});
-		ro.observe(document.documentElement);
-
 		return () => {
 			window.removeEventListener('resize', updateZoom);
-			ro.disconnect();
 		};
 	});
 </script>
@@ -92,12 +69,12 @@
 					<img src={logo} alt="SangSquare" class="size-14 transition-all" />
 				</div>
 				<div class="flex items-center transition-opacity ease-linear duration-400 {y > 0 ? 'opacity-100' : 'opacity-0 absolute pointer-events-none'}">
-					<p class="font-extrabold text-lg whitespace-nowrap">SENSE & STRATEGY</p>
+					<p class="font-extrabold text-lg whitespace-nowrap text-foreground">SENSE & STRATEGY</p>
 				</div>
 			</Button>
 			<nav class="flex flex-col items-end gap-0 text-sm font-medium ">
 				<Button href={resolve('/')} variant="ghost" size="xs" class="transition-colors text-sm font-semibold hover:text-accent-foreground hover:bg-transparent! {page.url.pathname === resolve('/') || page.url.pathname.startsWith(resolve('/work')) ? 'text-accent-foreground' : 'text-primary'}">WORK</Button>
-				<Button href={resolve('/about')} variant="ghost" size="xs" class="transition-colors text-sm font-semibold hover:text-accent-foreground hover:bg-transparent! {page.url.pathname === resolve('/about') ? 'text-accent-foreground' : 'text-primary'}">ABOUT</Button>
+				<Button href={resolve('/my-story')} variant="ghost" size="xs" class="transition-colors text-sm font-semibold hover:text-accent-foreground hover:bg-transparent! {page.url.pathname === resolve('/my-story') ? 'text-accent-foreground' : 'text-primary'}">MY STORY</Button>
 				<Button href={resolve('/contact')} variant="ghost" size="xs" class="transition-colors text-sm font-semibold hover:text-accent-foreground hover:bg-transparent! {page.url.pathname === resolve('/contact') ? 'text-accent-foreground' : 'text-primary'}">CONTACT</Button>
 			</nav>
 

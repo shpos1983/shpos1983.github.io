@@ -78,7 +78,41 @@
 		return Math.min(Math.max(progressVal, 0), 100);
 	});
 
-	function swiper(node: HTMLElement, options: SwiperOptions = {}) {
+	let moSwiper = $state<Swiper | null>(null);
+	let isMoPlaying = $state(false);
+
+	let tabSwiper = $state<Swiper | null>(null);
+	let isTabPlaying = $state(false);
+
+	function toggleMoPlay() {
+		if (!moSwiper) return;
+		if (isMoPlaying) {
+			moSwiper.autoplay.stop();
+			isMoPlaying = false;
+		} else {
+			if (moSwiper.isEnd) {
+				moSwiper.slideTo(0);
+			}
+			moSwiper.autoplay.start();
+			isMoPlaying = true;
+		}
+	}
+
+	function toggleTabPlay() {
+		if (!tabSwiper) return;
+		if (isTabPlaying) {
+			tabSwiper.autoplay.stop();
+			isTabPlaying = false;
+		} else {
+			if (tabSwiper.isEnd) {
+				tabSwiper.slideTo(0);
+			}
+			tabSwiper.autoplay.start();
+			isTabPlaying = true;
+		}
+	}
+
+	function swiper(node: HTMLElement, options: SwiperOptions & { onSwiper?: (swiper: Swiper) => void } = {}) {
 		const isOverflowVisibleSwiper = node.classList.contains('overflow-visible-swiper');
 		const defaultOptions: SwiperOptions = {
 			slidesPerView: isOverflowVisibleSwiper ? "auto" : 1,
@@ -87,7 +121,8 @@
 			allowTouchMove: true,
 			grabCursor: true,
 		};
-		const finalOptions = { ...defaultOptions, ...options };
+		const { onSwiper, ...swiperOptions } = options;
+		const finalOptions = { ...defaultOptions, ...swiperOptions };
 		if (finalOptions.pagination && typeof finalOptions.pagination === 'object' && typeof finalOptions.pagination.el === 'string') {
 			const localEl = node.querySelector(finalOptions.pagination.el);
 			if (localEl) {
@@ -98,6 +133,7 @@
 			}
 		}
 		const s = new Swiper(node, finalOptions);
+		onSwiper?.(s);
 		return {
 			destroy() {
 				s.destroy();
@@ -416,7 +452,22 @@
 
 						<div class="flex items-center gap-15 mt-18 pl-10">
 							<div class="flex-none iphone-frame">
-								<div class="screen swiper" use:swiper>
+								<div
+									class="screen swiper"
+									use:swiper={{
+										modules: [Autoplay],
+										rewind: true,
+										speed: 600,
+										autoplay: {
+											delay: 2000,
+											disableOnInteraction: false
+										},
+										onSwiper: (s) => {
+											moSwiper = s;
+											s.autoplay.stop();
+										}
+									}}
+								>
 									<div class="swiper-wrapper">
 										<div class="swiper-slide">
 											<img src="/images/case03/04_1_screenshot_mo1.png" alt="" class="block w-full" />
@@ -433,6 +484,19 @@
 									</div>
 								</div>
 								<img src="/images/case03/04_1_flow_dash.png" alt="" class="block absolute left-[72px] top-full max-w-none w-[302px]" />
+
+								<Button
+									onclick={toggleMoPlay}
+									variant="ghost"
+									class="absolute -right-8 bottom-0 p-0 rounded-full! cursor-pointer text-foreground bg-transparent!"
+									aria-label={isMoPlaying ? '일시정지' : '재생'}
+								>
+									{#if isMoPlaying}
+										<CirclePause class="size-8 stroke-[1.5]!" />
+									{:else}
+										<CirclePlay class="size-8 stroke-[1.5]!" />
+									{/if}
+								</Button>
 							</div>
 
 							<div class="flex flex-col gap-10">
@@ -480,7 +544,22 @@
 							</div>
 							
 							<div class="flex-none ipad-frame">
-								<div class="screen swiper" use:swiper>
+								<div
+									class="screen swiper"
+									use:swiper={{
+										modules: [Autoplay],
+										rewind: true,
+										speed: 600,
+										autoplay: {
+											delay: 2000,
+											disableOnInteraction: false
+										},
+										onSwiper: (s) => {
+											tabSwiper = s;
+											s.autoplay.stop();
+										}
+									}}
+								>
 									<div class="swiper-wrapper">
 										<div class="swiper-slide">
 											<img src="/images/case03/04_1_screenshot_tab1.png" alt="" class="block w-full" />
@@ -500,6 +579,19 @@
 									</div>
 								</div>
 								<img src="/images/case03/04_2_flow_dash.png" alt="" class="block absolute right-[224px] top-full max-w-none w-[252px]" />
+
+								<Button
+									onclick={toggleTabPlay}
+									variant="ghost"
+									class="absolute -left-9 bottom-0 p-0 rounded-full! cursor-pointer text-foreground bg-transparent!"
+									aria-label={isTabPlaying ? '일시정지' : '재생'}
+								>
+									{#if isTabPlaying}
+										<CirclePause class="size-8 stroke-[1.5]!" />
+									{:else}
+										<CirclePlay class="size-8 stroke-[1.5]!" />
+									{/if}
+								</Button>
 							</div>
 						</div>
 					</div>
