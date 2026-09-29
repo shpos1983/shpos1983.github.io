@@ -747,7 +747,6 @@
 					</video>
 
 					<!-- 하단 미니멀 Seek 바 -->
-					<!-- svelte-ignore a11y_no_static_element_interactions -->
 					<div
 						bind:this={section3SeekBarEl}
 						onpointerdown={handleSection3SeekDown}
@@ -1083,7 +1082,6 @@
 			</button>
 
 			<!-- 하단 미니멀 Seek 바 -->
-			<!-- svelte-ignore a11y_no_static_element_interactions -->
 			<div
 				bind:this={popup5SeekBarEl}
 				onpointerdown={handlePopup5SeekDown}
