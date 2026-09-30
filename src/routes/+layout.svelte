@@ -77,52 +77,6 @@
 				<Button href={resolve('/my-story')} variant="ghost" size="xs" class="transition-colors text-sm font-semibold hover:text-accent-foreground hover:bg-transparent! {page.url.pathname === resolve('/my-story') ? 'text-accent-foreground' : 'text-primary'}">MY STORY</Button>
 				<Button href={resolve('/contact')} variant="ghost" size="xs" class="transition-colors text-sm font-semibold hover:text-accent-foreground hover:bg-transparent! {page.url.pathname === resolve('/contact') ? 'text-accent-foreground' : 'text-primary'}">CONTACT</Button>
 			</nav>
-
-			<!-- <Sheet bind:open={isOpen}>
-				<Button
-					variant="ghost"
-					size="icon-lg"
-					class="md:hidden active:bg-foreground/20!"
-					onclick={() => isOpen = true}
-				>
-					<Menu class="size-5" />
-					<span class="sr-only">Menu Open</span>
-				</Button>
-				<SheetContent side="right" class="w-full! p-6 flex flex-col justify-start data-[side=right]:data-open:slide-in-from-right-0! data-[side=right]:data-closed:slide-out-to-right-0!">
-					<SheetHeader>
-						<SheetTitle class="text-left font-extrabold text-lg">SENSE & STRATEGY</SheetTitle>
-					</SheetHeader>
-					<nav class="flex flex-col mt-8">
-						<Button
-							href={resolve('/')}
-							onclick={() => isOpen = false}
-							variant="ghost"
-							size="lg"
-							class="justify-start text-xl font-light hover:bg-muted! px-4 py-2 rounded-md {page.url.pathname === resolve('/') || page.url.pathname.startsWith(resolve('/work')) ? 'text-accent-foreground bg-muted' : 'text-primary'}"
-						>
-							WORK
-						</Button>
-						<Button
-							href={resolve('/about')}
-							onclick={() => isOpen = false}
-							variant="ghost"
-							size="lg"
-							class="justify-start text-xl font-light hover:bg-muted! px-4 py-2 rounded-md {page.url.pathname === resolve('/about') ? 'text-accent-foreground bg-muted' : 'text-primary'}"
-						>
-							ABOUT
-						</Button>
-						<Button
-							href={resolve('/contact')}
-							onclick={() => isOpen = false}
-							variant="ghost"
-							size="lg"
-							class="justify-start text-xl font-light hover:bg-muted! px-4 py-2 rounded-md {page.url.pathname === resolve('/contact') ? 'text-accent-foreground bg-muted' : 'text-primary'}"
-						>
-							CONTACT
-						</Button>
-					</nav>
-				</SheetContent>
-			</Sheet> -->
 		</div>
 	</header>
 
