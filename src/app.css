@@ -318,6 +318,30 @@
 	z-index: 2;
 }
 
+/* Scroll Reveal Entrance Animation */
+[data-reveal] {
+	opacity: var(--reveal-initial-opacity, 0);
+	transform: translateY(var(--reveal-offset-y, 100px));
+	transition:
+		opacity var(--reveal-duration, 800ms) var(--reveal-easing, ease),
+		transform var(--reveal-duration, 800ms) var(--reveal-easing, ease);
+	transition-delay: var(--reveal-delay, 0ms);
+	will-change: opacity, transform;
+}
+
+[data-reveal].is-revealed {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	[data-reveal] {
+		opacity: 1 !important;
+		transform: none !important;
+		transition: none !important;
+	}
+}
+
 .case-sidebar {
 	width: var(--case-sidebar-width);
 	height: auto;

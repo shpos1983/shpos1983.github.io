@@ -10,6 +10,7 @@
 	import { Button } from "$lib/components/ui/button/index.js";
 	import { ImageComparison } from "$lib/components/ui/image-comparison/index.js";
 	import { CirclePause, CirclePlay, CircleX } from '@lucide/svelte';
+	import { scrollReveal } from "$lib/actions/scrollReveal.js";
 
 	const DEFAULT_HEADER_HEIGHT = 144;
 	const DEFAULT_HERO_HEIGHT = 588;
@@ -171,17 +172,35 @@
 		}
 	}
 
-	// Calculate parallax progress (0 to 1) until case-body reaches the top (scrollY = maxScroll)
-	let progress = $derived(maxScroll > 0 ? Math.min(scrollY / maxScroll, 1) : 0);
+	// Calculate parallax progress (0 to 1) until case-body reaches the top
+	let progress = $derived.by(() => {
+		if (typeof window === "undefined" || !caseBodyEl) return 0;
+		const _ = scrollY;
+		const rect = caseBodyEl.getBoundingClientRect();
+		const headerEl = document.querySelector('.global-header');
+		const headerBottom = headerEl ? headerEl.getBoundingClientRect().bottom : 0;
+		
+		const heroScrollTotal = (heroHeight - headerHeight) * (rect.width / 1920);
+		if (heroScrollTotal <= 0) return 0;
+		const currentScrolled = heroScrollTotal - (rect.top - headerBottom);
+		return Math.min(Math.max(currentScrolled / heroScrollTotal, 0), 1);
+	});
 	// Translate the image upwards by up to 100px as the user scrolls
 	let translateY = $derived(progress * -100);
 
 	let bodyScrollProgress = $derived.by(() => {
 		if (typeof window === "undefined" || !caseBodyEl) return 0;
-		const start = caseBodyEl.offsetTop - headerHeight;
-		const totalHeight = caseBodyEl.offsetHeight - window.innerHeight + headerHeight;
+		const _ = scrollY;
+		
+		const rect = caseBodyEl.getBoundingClientRect();
+		const headerEl = document.querySelector('.global-header');
+		const headerBottom = headerEl ? headerEl.getBoundingClientRect().bottom : (headerHeight * (rect.width / 1920));
+		
+		const scrolled = headerBottom - rect.top;
+		const totalHeight = rect.height - (window.innerHeight - headerBottom);
+		
 		if (totalHeight <= 0) return 0;
-		const progressVal = Math.round(((scrollY - start) / totalHeight) * 100);
+		const progressVal = Math.round((scrolled / totalHeight) * 100);
 		return Math.min(Math.max(progressVal, 0), 100);
 	});
 
@@ -263,7 +282,7 @@
 	<title>CASE 01 | SangSquare</title>
 </svelte:head>
 
-<section class="case-hero">
+<section use:scrollReveal class="case-hero" data-reveal="0">
 	<img 
 		src="/images/case03/hero_bg.png" 
 		alt="" 
@@ -328,26 +347,26 @@
 			</nav>
 		</div>
 	</aside>
-	<div class="case-main self-stretch flex-1 min-w-0 flex flex-col gap-50">
+	<div use:scrollReveal class="case-main self-stretch flex-1 min-w-0 flex flex-col gap-50">
 		<section class="case-section" id="01">
-			<h2 class="sys-text-sm text-accent-foreground">
+			<h2 class="sys-text-sm text-accent-foreground" data-reveal="0">
 				<em class="font-extrabold">01. OVERVIEW</em>
 				/ 서비스의 방향 설정과 성장
 			</h2>
 			<div class="flex flex-col gap-6 mt-10">
-				<h3 class="sys-title-md leading-tight tracking-[-0.02em]">
+				<h3 class="sys-title-md leading-tight tracking-[-0.02em]" data-reveal="0">
 					타이어 유통플랫폼을 향한 단계적 전환
 				</h3>
-				<h4 class="sys-text-sm">T’Station.com이 지향할 역할을 자사 제품 판매를 넘어, 다양한 브랜드의 비교·선택과 장착·사후 관리를 연결하는 유통플랫폼으로 정의했습니다.<br/><em class="font-semibold">이 방향에 맞춰 2022-2025년 주요 구매 접점을 단계적으로 개선했으며, 같은 기간 판매량과 구매 전환율도 함께 성장했습니다.</em></h4>
+				<h4 class="sys-text-sm" data-reveal="0">T’Station.com이 지향할 역할을 자사 제품 판매를 넘어, 다양한 브랜드의 비교·선택과 장착·사후 관리를 연결하는 유통플랫폼으로 정의했습니다.<br/><em class="font-semibold">이 방향에 맞춰 2022-2025년 주요 구매 접점을 단계적으로 개선했으며, 같은 기간 판매량과 구매 전환율도 함께 성장했습니다.</em></h4>
 			</div>
 
-			<img  src="/images/case01/01_infographic.png" alt="" class="flex-none block w-[1104px] aspect-1104/412 mt-20" />
+			<img  src="/images/case01/01_infographic.png" alt="" class="flex-none block w-[1104px] aspect-1104/412 mt-20" data-reveal="0" />
 
 			<div class="full-width flex justify-center gap-20 mt-20 pt-15 border-t border-muted bg-background">
 				<div class="w-92">
-					<p class="sys-text-lg">연간 개선 흐름과 성과</p>
-					<p class="sys-text-md mt-4">주요 구매 접점을 개선해 온 기간 동안<br/>판매량과 구매전환율이 함께 성장했습니다.</p>
-					<div class="w-full flex flex-col gap-10 mt-16">
+					<p class="sys-text-lg" data-reveal="0">연간 개선 흐름과 성과</p>
+					<p class="sys-text-md mt-4" data-reveal="0">주요 구매 접점을 개선해 온 기간 동안<br/>판매량과 구매전환율이 함께 성장했습니다.</p>
+					<div class="w-full flex flex-col gap-10 mt-16" data-reveal="0">
 						<div class="w-full flex flex-col items-center">
 							<p class="font-bold text-[32px] text-center leading-tight bg-linear-to-b from-[#818181] to-[#000000] bg-clip-text text-transparent"><em class="text-[84px]">2.6</em>배</p>
 							<p class="font-semibold text-accent-foreground">연간 판매량</p>
@@ -361,24 +380,24 @@
 					</div>
 				</div>
 				<div class="w-246.5 flex flex-col gap-6">
-					<img  src="/images/case01/01_1_infographic1.png" alt="" class="flex-none block w-full aspect-986/369" />
-					<img  src="/images/case01/01_1_infographic2.png" alt="" class="flex-none block w-full aspect-986/62" />
-					<img  src="/images/case01/01_1_infographic3.png" alt="" class="flex-none block w-full aspect-986/237" />
+					<img  src="/images/case01/01_1_infographic1.png" alt="" class="flex-none block w-full aspect-986/369" data-reveal="1" />
+					<img  src="/images/case01/01_1_infographic2.png" alt="" class="flex-none block w-full aspect-986/62" data-reveal="1" />
+					<img  src="/images/case01/01_1_infographic3.png" alt="" class="flex-none block w-full aspect-986/237" data-reveal="1" />
 				</div>
 			</div>
 		</section>
 		<section class="case-section" id="02">
-			<h2 class="sys-text-sm text-accent-foreground">
+			<h2 class="sys-text-sm text-accent-foreground" data-reveal="0">
 				<em class="font-extrabold">02. EXECUTION</em>
 				/ 페이지별 UX 개선과 사업 목표의 연결
 			</h2>
 			<div class="flex flex-col gap-6 mt-10">
-				<h3 class="sys-title-md leading-tight tracking-[-0.02em]">
+				<h3 class="sys-title-md leading-tight tracking-[-0.02em]" data-reveal="0">
 					주요 페이지의 개선 목적과 결과
 				</h3>
-				<h4 class="sys-text-sm">홈·PLP·PDP를 중심으로 고객이 타이어를 찾고 비교하고 구매하는 단계의 역할을 정리했습니다.<br/><em class="font-semibold">각 페이지의 UI와 기능을 상품 탐색, 선택 확신, 구매 전환, 장착 후 관리라는 사업 목표에 맞춰 설계</em>했습니다.</h4>
+				<h4 class="sys-text-sm" data-reveal="0">홈·PLP·PDP를 중심으로 고객이 타이어를 찾고 비교하고 구매하는 단계의 역할을 정리했습니다.<br/><em class="font-semibold">각 페이지의 UI와 기능을 상품 탐색, 선택 확신, 구매 전환, 장착 후 관리라는 사업 목표에 맞춰 설계</em>했습니다.</h4>
 			</div>
-			<div class="mt-30">
+			<div class="mt-30" data-reveal="0">
 				<div class="flex flex-col gap-4">
 					<p class="sys-text-lg">02-1. 구매 시작 경로 재구성</p>
 					<p class="sys-text-md">타이어를 몰라도 시작할 수 있는 첫 화면</p>
@@ -387,7 +406,7 @@
 			</div>
 
 			<div class="w-full rounded-2xl bg-pale py-12 px-8 mt-15 flex gap-6 items-start">
-				<div class="w-80 flex flex-col items-center gap-6">
+				<div class="w-80 flex flex-col items-center gap-6" data-reveal="0">
 					<div class="relative w-full flex justify-center select-none">
 						<span class="inline-flex sys-caption rounded-full bg-ts-n3 text-background py-2 px-6 whitespace-nowrap">개편 전 Home 화면</span>
 						<div
@@ -410,20 +429,22 @@
 					<p class="sys-caption text-ts-n2 text-center mt-7">화면을 좌우로 움직여 비교해 보세요</p>
 				</div>
 				<div class="w-189.25 flex flex-col gap-20 pt-16">
-					<img  src="/images/case01/02_1_desc1.png" alt="" class="flex-none block w-full aspect-757/134" />
-					<img  src="/images/case01/02_1_desc2.png" alt="" class="flex-none block w-full aspect-757/182" />
-					<img  src="/images/case01/02_1_desc3.png" alt="" class="flex-none block w-full aspect-757/226" />
+					<img  src="/images/case01/02_1_desc1.png" alt="" class="flex-none block w-full aspect-757/134" data-reveal="1" />
+					<img  src="/images/case01/02_1_desc2.png" alt="" class="flex-none block w-full aspect-757/182" data-reveal="1" />
+					<img  src="/images/case01/02_1_desc3.png" alt="" class="flex-none block w-full aspect-757/226" data-reveal="1" />
 				</div>
 			</div>
 
 			<div class="mt-30">
-				<div class="flex flex-col gap-4">
-					<p class="sys-text-md">홈에 개편된 구매 탐색 흐름</p>
+				<div data-reveal="0">
+					<div class="flex flex-col gap-4">
+						<p class="sys-text-md">홈에 개편된 구매 탐색 흐름</p>
+					</div>
+					<p class="description-paragraph sys-text-sm mt-6">차량 등록 상태에 맞춘 탐색 시작부터 적합한 상품과 실사용 리뷰를 통한 판단까지,<br/><em class="font-semibold">홈 안에서 이어지는 구매 흐름을 제공했습니다.</em></p>
 				</div>
-				<p class="description-paragraph sys-text-sm mt-6">차량 등록 상태에 맞춘 탐색 시작부터 적합한 상품과 실사용 리뷰를 통한 판단까지,<br/><em class="font-semibold">홈 안에서 이어지는 구매 흐름을 제공했습니다.</em></p>
 
 				<div class="flex items-start gap-15">
-					<div class="screenshot-focusing-detail mt-40">
+					<div class="screenshot-focusing-detail mt-40" data-reveal="0">
 						{#if activeFocusing === 1}
 							<div class="detail-item w-[653px]">
 								<div class="">
@@ -451,7 +472,7 @@
 						{/if}
 					</div>
 
-					<div class="flex-none iphone-frame">
+					<div class="flex-none iphone-frame" data-reveal="0">
 						<div class="screen swiper" use:swiper={{
 							grabCursor: true,
 							direction: "vertical",
@@ -485,20 +506,20 @@
 				</div>
 
 				<div class="mt-20">
-					<div>
+					<div data-reveal="0">
 						<span class="inline-flex bg-attention px-4 py-2 font-semibold sys-caption rounded-full">리뷰 상세 팝업</span>
 						<p class="sys-text-md mt-3">구매 판단 정보로 신뢰할 수 있는 리뷰</p>
 						<p class="sys-caption mt-3">리뷰 상세에서는 실제 장착 여부와 내 차량과의 유사성, 사용 이후의<br/>성능 평가를 순서대로 확인하도록 정보를 구성했습니다.</p>
 					</div>
 
 					<div class="flex items-center justify-start -mt-25 pl-25">
-						<img src="/images/case01/02_1_screenshot_focusing_review.png" alt="" class="block w-[483px] aspect-483/304" />
-						<img src="/images/case01/02_1_screenshot_review.png" alt="" class="block w-[698px] aspect-698/800" />
+						<img src="/images/case01/02_1_screenshot_focusing_review.png" alt="" class="block w-[483px] aspect-483/304" data-reveal="0" />
+						<img src="/images/case01/02_1_screenshot_review.png" alt="" class="block w-[698px] aspect-698/800" data-reveal="1" />
 					</div>
 				</div>
 			</div>
 			
-			<div class="mt-30">
+			<div class="mt-30" data-reveal="0">
 				<div class="flex flex-col gap-4">
 					<p class="sys-text-lg">02-2. 상품 선택 단계 재구성</p>
 					<p class="sys-text-md">상품을 비교하고 구매 확신을 쌓는 PLP·PDP</p>
@@ -506,27 +527,27 @@
 				<p class="description-paragraph sys-text-sm mt-6">기존에는 상품 목록의 ‘바로구매’를 통해 상품 상세를 확인하지 않고 결제로 이동할 수 있었습니다.<br/><em class="font-semibold">PLP에는 탐색과 비교에 필요한 정보만 남기고, 가격·혜택·성능·리뷰 등 구매 판단의 근거는<br/>PDP에서 단계적으로 확인하도록 역할을 재구성했습니다.</em></p>
 			</div>
 
-			<div class="full-width flex justify-center mt-20 backdrop-blur-lg">
+			<div class="full-width flex justify-center mt-20 backdrop-blur-lg" data-reveal="0">
 				<img src="/images/case01/02_2_overview.png" alt="" class="block w-full flex-none" />
 			</div>
 
-			<div class="mt-30">
+			<div class="mt-30" data-reveal="0">
 				<p class="sys-text-md">개편 후 — 탐색에 집중한 상품 목록</p>
 				<p class="description-paragraph sys-text-sm mt-6">차량 조건에 맞는 상품을 먼저 제안하고, 가격대와 필터를 통해 후보를 좁힌 뒤 상품 간 차이를 비교하도록 구성했습니다.<br/><em class="font-semibold">상품 카드에는 목록 탐색에 필요한 정보만 남기고, 구매 판단과 실행은 PDP로 분리했습니다.</em></p>
 			</div>
 
 			<div class="w-full flex gap-40 items-start justify-start mt-14">
-				<img src="/images/case01/02_2_PLP_infographic1.png" alt="" class="block w-[432px] aspect-432/319 flex-none" />
-				<img src="/images/case01/02_2_PLP_infographic2.png" alt="" class="block w-[414px] aspect-414/280 flex-none" />
+				<img src="/images/case01/02_2_PLP_infographic1.png" alt="" class="block w-[432px] aspect-432/319 flex-none" data-reveal="0" />
+				<img src="/images/case01/02_2_PLP_infographic2.png" alt="" class="block w-[414px] aspect-414/280 flex-none" data-reveal="1" />
 			</div>
 
 			<div class="w-full flex flex-col gap-4 mt-20">
-				<img src="/images/case01/02_2_PLP_screenshot1.png" alt="" class="block w-full flex-none rounded-2xl outline-1 outline-border -outline-offset-1 aspect-1402/519" />
-				<img src="/images/case01/02_2_PLP_screenshot2.png" alt="" class="block w-full flex-none rounded-2xl outline-1 outline-border -outline-offset-1 aspect-1402/543" />
-				<img src="/images/case01/02_2_PLP_screenshot3.png" alt="" class="block w-full flex-none rounded-2xl outline-1 outline-border -outline-offset-1 aspect-1402/567" />
+				<img src="/images/case01/02_2_PLP_screenshot1.png" alt="" class="block w-full flex-none rounded-2xl outline-1 outline-border -outline-offset-1 aspect-1402/519" data-reveal="0" />
+				<img src="/images/case01/02_2_PLP_screenshot2.png" alt="" class="block w-full flex-none rounded-2xl outline-1 outline-border -outline-offset-1 aspect-1402/543" data-reveal="0" />
+				<img src="/images/case01/02_2_PLP_screenshot3.png" alt="" class="block w-full flex-none rounded-2xl outline-1 outline-border -outline-offset-1 aspect-1402/567" data-reveal="0" />
 			</div>
 
-			<div class="mt-30">
+			<div class="mt-30" data-reveal="0">
 				<p class="sys-text-md">개편 후 — 구매 판단의 근거를 쌓는 상세 페이지</p>
 				<p class="description-paragraph sys-text-sm mt-6">PLP에서 좁힌 상품을 가격과 혜택, 워런티, 리뷰와 성능 정보로 검증하도록 PDP의 정보 위계를 정리했습니다.<br/><em class="font-semibold">핵심 구매 정보는 먼저 확인하고, 깊은 검토가 필요한 내용은 필요한 만큼 탐색하도록 구성했습니다.</em></p>
 			</div>
@@ -538,7 +559,7 @@
 				touchEventsTarget: "container",
 				observer: true,
 				observeParents: true
-			}}>
+			}} data-reveal="0">
 				<div class="swiper-wrapper">
 					<div class="swiper-slide">
 						<img src="/images/case01/02_2_PDP_screenshot0.png" alt="" class="block flex-none w-[237px] aspect-237/663" />
@@ -558,7 +579,7 @@
 				</div>
 			</div>
 
-			<div class="mt-40">
+			<div class="mt-40" data-reveal="0">
 				<div class="flex flex-col gap-4">
 					<p class="sys-text-lg">02-3. 구매 완료와 사후 관리 연결</p>
 					<p class="sys-text-md">결제에서 마이페이지·워런티로 이어지는 구매 이후의 흐름</p>
@@ -566,7 +587,7 @@
 				<p class="description-paragraph sys-text-sm mt-6">결제 과정에서 확정된 주문·장착 정보를 마이페이지로 이어<br/>차량·혜택·이력과 상품별 워런티까지 하나의 플로우로 관리하도록 연결했습니다.</p>
 			</div>
 			<div class="flex items-start justify-start gap-12 mt-20">
-				<div class="w-[535px] aspect-535/740 bg-[#fafafa] rounded-2xl overflow-hidden outline-1 outline-border -outline-offset-1 flex-none">
+				<div class="w-[535px] aspect-535/740 bg-[#fafafa] rounded-2xl overflow-hidden outline-1 outline-border -outline-offset-1 flex-none" data-reveal="0">
 					<video
 						bind:this={paymentVideoEl}
 						src={paymentSteps[currentPaymentStep].src}
@@ -582,7 +603,7 @@
 					</video>
 				</div>
 
-				<div class="flex flex-col gap-4">
+				<div class="flex flex-col gap-4" data-reveal="1">
 					<span class="self-start inline-flex sys-caption font-semibold rounded-full bg-accent py-1 px-11 text-nowrap">영상 단계</span>
 
 					<div class="timestamp-wrap">
@@ -632,18 +653,18 @@
 		</section>
 
 		<section class="case-section" id="03">
-			<h2 class="sys-text-sm text-accent-foreground">
+			<h2 class="sys-text-sm text-accent-foreground" data-reveal="0">
 				<em class="font-extrabold">03. PROCESS</em>
 				/ 연차별 개선 과제의 선정·실행·연결 방법
 			</h2>
 			<div class="flex flex-col gap-6 mt-10">
-				<h3 class="sys-title-md leading-tight tracking-[-0.02em]">
+				<h3 class="sys-title-md leading-tight tracking-[-0.02em]" data-reveal="0">
 					무엇부터 바꿨고, 다음 개선은 어떻게 연결했는지
 				</h3>
-				<h4 class="sys-text-sm">투자 규모와 실행 여건을 고려해 고객과 사업에 미치는 영향이 큰 구매 여정부터 연차별로 개선 범위를 확장했습니다.<br/><em class="font-semibold">상품 선택에서 구매 이후 관리까지 단계적으로 확장하고, 실제 고객 행동으로 개편 의도의 작동 여부를 확인했습니다.</em></h4>
+				<h4 class="sys-text-sm" data-reveal="0">투자 규모와 실행 여건을 고려해 고객과 사업에 미치는 영향이 큰 구매 여정부터 연차별로 개선 범위를 확장했습니다.<br/><em class="font-semibold">상품 선택에서 구매 이후 관리까지 단계적으로 확장하고, 실제 고객 행동으로 개편 의도의 작동 여부를 확인했습니다.</em></h4>
 			</div>
 
-			<div class="mt-20">
+			<div class="mt-20" data-reveal="0">
 				<div class="flex flex-col gap-4">
 					<p class="sys-text-lg">03-1. 전면 개편이 아닌, 검증 가능한 단위로 개선한 이유</p>
 					<p class="sys-text-md">한 번의 대규모 투자보다, 성과를 확인하며 다음 투자를 연결</p>
@@ -652,26 +673,26 @@
 			</div>
 
 			<div class="mt-20 flex flex-col gap-6">
-				<div class="flex items-center justify-start gap-4 sys-text-sm">
+				<div class="flex items-center justify-start gap-4 sys-text-sm" data-reveal="0">
 					<span class="flex-none w-22 h-9 rounded-sm bg-accent-foreground text-accent inline-flex items-center justify-center font-medium">투자</span>
 					<p>대규모 일괄 예산보다 단계별 타당성 확보</p>
 				</div>
-				<div class="flex items-center justify-start gap-4 sys-text-sm">
+				<div class="flex items-center justify-start gap-4 sys-text-sm" data-reveal="0">
 					<span class="flex-none w-22 h-9 rounded-sm bg-accent-foreground text-accent inline-flex items-center justify-center font-medium">운영</span>
 					<p>서비스 사용성을 유지하며 독립 범위부터 적용</p>
 				</div>
-				<div class="flex items-center justify-start gap-4 sys-text-sm">
+				<div class="flex items-center justify-start gap-4 sys-text-sm" data-reveal="0">
 					<span class="flex-none w-22 h-9 rounded-sm bg-accent-foreground text-accent inline-flex items-center justify-center font-medium">검증</span>
 					<p>변화의 효과를 구간별 행동 지표로 확인</p>
 				</div>
 			</div>
 
-			<div class="full-width flex items-center justify-center text-center py-5 mt-16 bg-foreground/88 text-background">
+			<div class="full-width flex items-center justify-center text-center py-5 mt-16 bg-foreground/88 text-background" data-reveal="0">
 				<p class="text-[28px] font-light leading-tight">개편 범위를 좁힌것이 아니라,<br/><em class="font-semibold">검증 가능한 개편 단위로 나눴습니다.</em></p>
 			</div>
 
 			<div class="flex mt-20">
-				<div class="pr-20">
+				<div class="pr-20" data-reveal="0">
 					<div class="flex items-center gap-3 -mr-16">
 						<span class="rounded-full w-15 h-8 bg-foreground text-background flex items-center justify-center font-bold sys-caption flex-none">1 단계</span>
 						<div class="h-0 w-full border-t-2 border-ts-n2 relative before:content-[''] before:absolute before:left-0 before:top-0 before:-translate-y-[5px] before:size-2 before:rounded-full before:bg-ts-n2 after:content-[''] after:absolute after:-right-[3px] after:top-0 after:-translate-y-[5.5px] after:w-0 after:h-0 after:border-y-[5px] after:border-y-transparent after:border-l-[9px] after:border-l-ts-n2"></div>
@@ -686,7 +707,7 @@
 						<span class="sys-caption text-background bg-ts-n2 rounded-sm px-2 py-0.5">구매 확신</span>
 					</div>
 				</div>
-				<div class="pr-20">
+				<div class="pr-20" data-reveal="0.5">
 					<div class="flex items-center gap-3 -mr-16">
 						<span class="rounded-full w-15 h-8 bg-foreground text-background flex items-center justify-center font-bold sys-caption flex-none">2 단계</span>
 						<div class="h-0 w-full border-t-2 border-ts-n2 border-dashed relative before:content-[''] before:absolute before:left-0 before:top-0 before:-translate-y-[5px] before:size-2 before:rounded-full before:bg-ts-n2 after:content-[''] after:absolute after:-right-[3px] after:top-0 after:-translate-y-[5.5px] after:w-0 after:h-0 after:border-y-[5px] after:border-y-transparent after:border-l-[9px] after:border-l-ts-n2"></div>
@@ -701,7 +722,7 @@
 						<span class="sys-caption text-background bg-ts-n2 rounded-sm px-2 py-0.5">디지털 워런티</span>
 					</div>
 				</div>
-				<div class="pr-20">
+				<div class="pr-20" data-reveal="1">
 					<div class="flex items-center gap-2">
 						<span class="rounded-full w-15 h-8 bg-ts-n3 text-background flex items-center justify-center font-bold sys-caption">3 단계</span>
 						<span class="text-ts-n3 sys-caption font-medium">NEXT</span>
@@ -718,7 +739,7 @@
 				</div>
 			</div>
 
-			<div class="mt-40">
+			<div class="mt-40" data-reveal="0">
 				<div class="flex flex-col gap-4">
 					<p class="sys-text-lg">03-2. 대표 사례로 보는 UX 개선 프로세스</p>
 					<p class="sys-text-md">상품페이지의 검증 결과를 다음 개선 범위로 연결</p>
@@ -727,11 +748,11 @@
 			</div>
 
 			<div class="mt-12 flex gap-20">
-				<div class="w-[431px] flex-none">
+				<div class="w-[431px] flex-none" data-reveal="0">
 					<span class="inline-flex bg-attention px-4 py-2 font-semibold sys-caption rounded-full">개편 전 행동 데이터 · GA360</span>
 					<img src="/images/case01/03_2_infographic.png" alt="" class=" aspect-431/485 mt-6">
 				</div>
-				<div class="">
+				<div class="" data-reveal="1">
 					<span class="inline-flex bg-attention px-4 py-2 font-semibold sys-caption rounded-full">데이터 기반 설계 과정</span>
 					
 					<div class="flex flex-col gap-12 mt-6">
@@ -757,17 +778,17 @@
 				</div>
 			</div>
 
-			<div class="mt-25">
+			<div class="mt-25" data-reveal="0">
 				<p class="sys-text-md">개편 후 행동 검증 - 설계 의도의 활용 여부 확인</p>
 				<p class="description-paragraph sys-text-sm mt-6">개편 후 실제 고객 동선 추적을 통해 추천영역 탐색, 필터 활용과 유사 상품 비교 행동을 확인했습니다</p>
 			</div>
 
 			<div class="mt-12">
 				<div class="flex flex-col w-fit items-center">
-					<span class="inline-flex bg-attention px-4 py-2 font-semibold sys-caption rounded-full ml-0 mr-auto">개편 후 행동 분석 · Hotjar</span>
+					<span class="inline-flex bg-attention px-4 py-2 font-semibold sys-caption rounded-full ml-0 mr-auto" data-reveal="0">개편 후 행동 분석 · Hotjar</span>
 
 					<div class="mt-8 flex w-fit gap-80 pb-10 border-b border-border relative after:content-[''] after:absolute after:-bottom-[13px] after:left-1/2 after:-translate-x-1/2 after:w-0 after:h-0 after:border-x-[7px] after:border-x-transparent after:border-t-[9px] after:border-t-ts-n4">
-						<div class="relative w-80 flex-none">
+						<div class="relative w-80 flex-none" data-reveal="0">
 							<div class="relative w-full aspect-320/682 bg-foreground outline-1 outline-border rounded-3xl overflow-hidden isolate">
 								<img
 									src="/images/case01/03_2_PLP_hotjar_poster.png"
@@ -823,7 +844,7 @@
 						</div>
 						
 
-						<div class="relative w-80 flex-none">
+						<div class="relative w-80 flex-none" data-reveal="1">
 							<div class="relative w-full aspect-320/682 bg-foreground outline-1 outline-border rounded-3xl overflow-hidden isolate">
 								<img
 									src="/images/case01/03_2_PDP_hotjar_poster.png"
@@ -881,11 +902,11 @@
 					</div>
 
 					<div class="w-fit flex flex-col items-center text-center mt-10">
-						<span class="inline-flex bg-attention px-4 py-2 font-semibold sys-caption rounded-full">확인한 변화</span>
+						<span class="inline-flex bg-attention px-4 py-2 font-semibold sys-caption rounded-full" data-reveal="0">확인한 변화</span>
 
-						<p class="sys-text-sm font-medium mt-4">추천·필터·비교 기능의 실제 사용 <span class="sys-caption">(Hotjar 히트맵 및 실제 고객 세션)</span></p>
+						<p class="sys-text-sm font-medium mt-4" data-reveal="0">추천·필터·비교 기능의 실제 사용 <span class="sys-caption">(Hotjar 히트맵 및 실제 고객 세션)</span></p>
 
-						<div class="inline-flex flex-col items-end mt-6">
+						<div class="inline-flex flex-col items-end mt-6" data-reveal="0">
 							<div class="inline-flex items-baseline justify-center gap-2">
 								<span class="sys-text-sm font-medium mr-4">상품 상세 진입률</span>
 								<span class="sys-text-lg font-bold bg-linear-to-b from-[#FFA600] to-[#FF5900] bg-clip-text text-transparent leading-none"><em class="text-[64px] leading-none">2.4</em>배</span>
@@ -894,9 +915,9 @@
 							<p class="sys-caption-sm text-ts-n2 mt-4">데이터 : GA4 (2023.11.20 ~ 12.31 기준 전후 동기 대비)</p>
 						</div>
 
-						<div class="w-[2px] h-14 bg-accent-foreground relative before:content-[''] before:absolute before:left-1/2 before:top-0 before:-translate-x-1/2 before:size-2 before:rounded-full before:bg-accent-foreground after:content-[''] after:absolute after:-bottom-[3px] after:left-1/2 after:-translate-x-1/2 after:w-0 after:h-0 after:border-x-[5px] after:border-x-transparent after:border-t-[9px] after:border-t-accent-foreground my-3"></div>
+						<div class="w-[2px] h-14 bg-accent-foreground relative before:content-[''] before:absolute before:left-1/2 before:top-0 before:-translate-x-1/2 before:size-2 before:rounded-full before:bg-accent-foreground after:content-[''] after:absolute after:-bottom-[3px] after:left-1/2 after:-translate-x-1/2 after:w-0 after:h-0 after:border-x-[5px] after:border-x-transparent after:border-t-[9px] after:border-t-accent-foreground my-3" data-reveal="0"></div>
 
-						<div class="px-12 pt-8 pb-12 bg-pale rounded-lg">
+						<div class="px-12 pt-8 pb-12 bg-pale rounded-lg" data-reveal="0">
 							<p class="font-medium sys-caption text-ts-n2">전체 구매 전환율을 위한 다음 질문</p>
 							<p class="sys-text-lg mt-2">개선된 상품 선택 구간에, 더 많은 고객이 도달할 수 있도록 하려면?</p>
 
@@ -907,36 +928,36 @@
 			</div>
 		</section>
 		<section class="case-section" id="04">
-			<h2 class="sys-text-sm text-accent-foreground">
+			<h2 class="sys-text-sm text-accent-foreground" data-reveal="0">
 				<em class="font-extrabold">04. UX PERSPECTIVE</em>
 				/ 사업을 읽고 UX 방향을 정하는 원칙
 			</h2>
 			<div class="flex flex-col gap-6 mt-10">
-				<h3 class="sys-title-md leading-tight tracking-[-0.02em]">
+				<h3 class="sys-title-md leading-tight tracking-[-0.02em]" data-reveal="0">
 					시장의 맥락을 읽고,<br/>바꿔야 할 경험과 실행의 순서를 정합니다.
 				</h3>
-				<h4 class="sys-text-sm">디자인을 하기 전에 시장과 경쟁 환경, 상품·가격 경쟁력과 장착점의 운영 구조를 함께 살폈습니다.<br/>UX뿐 아니라 정책과 운영환경을 함께 검토하고, 사업에 필요한 변화에 따라 실행 우선순위를 정합니다.</h4>
+				<h4 class="sys-text-sm" data-reveal="0">디자인을 하기 전에 시장과 경쟁 환경, 상품·가격 경쟁력과 장착점의 운영 구조를 함께 살폈습니다.<br/>UX뿐 아니라 정책과 운영환경을 함께 검토하고, 사업에 필요한 변화에 따라 실행 우선순위를 정합니다.</h4>
 			</div>
 
 			<div class="w-full flex items-stretch gap-2 mt-20">
-				<div class="flex-1 min-w-0 px-8 pt-4 pb-20 bg-linear-[165deg] from-[#0E0E0E] to-[#2B3137] rounded-sm">
+				<div class="flex-1 min-w-0 px-8 pt-4 pb-20 bg-linear-[165deg] from-[#0E0E0E] to-[#2B3137] rounded-sm" data-reveal="0.5">
 					<p class="sys-text-md mb-6 text-background">01<br/>사업의 가치를 고객의 경험으로</p>
 					<p class="sys-text-sm font-light text-ts-n4">사업의 방향과 고객의 필요가 만나는 지점에서<br/>UX의 목표를 정합니다.</p>
 					<p class="sys-text-sm font-light text-ts-n4 mt-5">상품과 서비스의 가치가 고객에게 이해되고,<br/>선택과 이용으로 이어지도록 설계합니다.</p>
 				</div>
-				<div class="flex-1 min-w-0 px-8 pt-4 pb-20 bg-linear-[165deg] from-[#0E0E0E] to-[#2B3137] rounded-sm">
+				<div class="flex-1 min-w-0 px-8 pt-4 pb-20 bg-linear-[165deg] from-[#0E0E0E] to-[#2B3137] rounded-sm" data-reveal="0">
 					<p class="sys-text-md mb-6 text-background">02<br/>고객이 이해하고 행동할 수 있게</p>
 					<p class="sys-text-sm font-light text-ts-n4">고객이 구매 여정에 있어 현재 위치와<br/>필요 행동을 쉽게 파악하도록 돕습니다.</p>
 					<p class="sys-text-sm font-light text-ts-n4 mt-5">각 접점의 정보와 기능을 이해하고<br/>행동으로 이어지는 흐름을 설계합니다.</p>
 				</div>
-				<div class="flex-1 min-w-0 px-8 pt-4 pb-20 bg-linear-[165deg] from-[#0E0E0E] to-[#2B3137] rounded-sm">
+				<div class="flex-1 min-w-0 px-8 pt-4 pb-20 bg-linear-[165deg] from-[#0E0E0E] to-[#2B3137] rounded-sm" data-reveal="1">
 					<p class="sys-text-md mb-6 text-background">03<br/>데이터에 근거한 개선 우선순위</p>
 					<p class="sys-text-sm font-light text-ts-n4">지표와 실제 이용 행동을 바탕으로 개선이<br/>필요한 지점을 찾습니다.</p>
 					<p class="sys-text-sm font-light text-ts-n4 mt-5">각 개선이 사업에 미칠 영향을 고려해<br/>실행 우선순위를 정합니다.</p>
 				</div>
 			</div>
 			
-			<div class="full-width flex flex-col items-center justify-center mt-32 text-background text-center h-93 relative">
+			<div class="full-width flex flex-col items-center justify-center mt-32 text-background text-center h-93 relative" data-reveal="0">
 				<img src="/images/case01/closing_bg.png" alt="" class="absolute inset-0 w-full h-full object-cover" />
 				<p class="sys-title-md relative">FROM TOUCHPOINTS TO ONE JOURNEY</p>
 				<p class="sys-text-md relative mt-4">상품을 찾는 순간부터 장착 이후의 관리까지,<br/>고객의 선택이 좋은 경험으로 이어져 기억에 남도록.<br/><br/>사업의 방향에 따라 여러 해에 걸친 접점별 개선을 하나의 고객 여정으로 연결했습니다.</p>

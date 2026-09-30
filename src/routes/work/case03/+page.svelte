@@ -10,6 +10,7 @@
 	import "swiper/css/pagination";
 	import { Button } from "$lib/components/ui/button/index.js";
 	import { CirclePause, CirclePlay, ArrowRight } from '@lucide/svelte';
+	import { scrollReveal } from "$lib/actions/scrollReveal.js";
 
 	const DEFAULT_HEADER_HEIGHT = 144;
 	const DEFAULT_HERO_HEIGHT = 588;
@@ -64,17 +65,35 @@
 		}
 	}
 
-	// Calculate parallax progress (0 to 1) until case-body reaches the top (scrollY = maxScroll)
-	let progress = $derived(maxScroll > 0 ? Math.min(scrollY / maxScroll, 1) : 0);
+	// Calculate parallax progress (0 to 1) until case-body reaches the top
+	let progress = $derived.by(() => {
+		if (typeof window === "undefined" || !caseBodyEl) return 0;
+		const _ = scrollY;
+		const rect = caseBodyEl.getBoundingClientRect();
+		const headerEl = document.querySelector('.global-header');
+		const headerBottom = headerEl ? headerEl.getBoundingClientRect().bottom : 0;
+		
+		const heroScrollTotal = (heroHeight - headerHeight) * (rect.width / 1920);
+		if (heroScrollTotal <= 0) return 0;
+		const currentScrolled = heroScrollTotal - (rect.top - headerBottom);
+		return Math.min(Math.max(currentScrolled / heroScrollTotal, 0), 1);
+	});
 	// Translate the image upwards by up to 100px as the user scrolls
 	let translateY = $derived(progress * -100);
 
 	let bodyScrollProgress = $derived.by(() => {
 		if (typeof window === "undefined" || !caseBodyEl) return 0;
-		const start = caseBodyEl.offsetTop - headerHeight;
-		const totalHeight = caseBodyEl.offsetHeight - window.innerHeight + headerHeight;
+		const _ = scrollY;
+		
+		const rect = caseBodyEl.getBoundingClientRect();
+		const headerEl = document.querySelector('.global-header');
+		const headerBottom = headerEl ? headerEl.getBoundingClientRect().bottom : (headerHeight * (rect.width / 1920));
+		
+		const scrolled = headerBottom - rect.top;
+		const totalHeight = rect.height - (window.innerHeight - headerBottom);
+		
 		if (totalHeight <= 0) return 0;
-		const progressVal = Math.round(((scrollY - start) / totalHeight) * 100);
+		const progressVal = Math.round((scrolled / totalHeight) * 100);
 		return Math.min(Math.max(progressVal, 0), 100);
 	});
 
@@ -254,7 +273,7 @@
 			</nav>
 		</div>
 	</aside>
-	<div class="case-main self-stretch flex-1 min-w-0 flex flex-col gap-50">
+	<div use:scrollReveal class="case-main self-stretch flex-1 min-w-0 flex flex-col gap-50">
 		<section class="case-section" id="01">
 			<h2 class="sys-text-sm text-accent-foreground">
 				<em class="font-extrabold">01. OVERVIEW</em>
