@@ -5,7 +5,7 @@
 	import { page } from '$app/state';
 	import { resolve } from '$app/paths';
 	import { Button } from '$lib/components/ui/button/index.js';
-	import { onNavigate } from '$app/navigation';
+	import { afterNavigate, onNavigate } from '$app/navigation';
 	// import { Menu } from '@lucide/svelte';
 	// import {
 	// 	Sheet,
@@ -28,6 +28,12 @@
 				await navigation.complete;
 			});
 		});
+	});
+
+	afterNavigate(() => {
+		if (typeof window !== 'undefined') {
+			window.dispatchEvent(new CustomEvent('app:after-navigate'));
+		}
 	});
 	// Keep document zoom in sync with client width (min 1280, max 1920)
 	$effect(() => {

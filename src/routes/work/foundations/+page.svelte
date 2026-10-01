@@ -8,6 +8,7 @@
 	import { Button } from "$lib/components/ui/button/index.js";
 	import { CirclePause, CirclePlay } from '@lucide/svelte';
 	import FullPopup from '$lib/components/FullPopup.svelte';
+	import { scrollReveal } from "$lib/actions/scrollReveal.js";
 
 	let activeIndex = $state(1);
 	let currentTheme = $state<'default' | 'amber' | 'blue' | 'green'>('default');
@@ -272,18 +273,75 @@
 					crossFade: true
 				},
 				loop: true,
-				speed: 1000,
+				speed: 800,
 				autoplay: {
-					delay: 3000,
+					delay: 2000,
 					disableOnInteraction: false
 				}
 			});
+		}
+
+		let iphoneVideosObserver: IntersectionObserver | null = null;
+		if (iphoneVideo1El) {
+			iphoneVideosObserver = new IntersectionObserver(
+				(entries) => {
+					entries.forEach((entry) => {
+						if (entry.isIntersecting) {
+							if (iphoneVideo2El && !iphoneVideo2El.paused) {
+								// 이미 2번 비디오가 재생 중이면 유지
+							} else if (iphoneVideo1El) {
+								if (iphoneVideo1El.ended) {
+									iphoneVideo1El.currentTime = 0;
+								}
+								if (iphoneVideo1El.paused && (!iphoneVideo2El || iphoneVideo2El.paused)) {
+									iphoneVideo1El.play().catch(() => {});
+								}
+							}
+						} else {
+							if (iphoneVideo1El && !iphoneVideo1El.paused) {
+								iphoneVideo1El.pause();
+							}
+							if (iphoneVideo2El && !iphoneVideo2El.paused) {
+								iphoneVideo2El.pause();
+							}
+						}
+					});
+				},
+				{ threshold: 0.2 }
+			);
+			iphoneVideosObserver.observe(iphoneVideo1El);
+		}
+
+		let section3VideoObserver: IntersectionObserver | null = null;
+		if (section3VideoEl) {
+			section3VideoObserver = new IntersectionObserver(
+				(entries) => {
+					entries.forEach((entry) => {
+						if (entry.isIntersecting) {
+							if (section3VideoEl) {
+								if (section3VideoEl.ended) {
+									section3VideoEl.currentTime = 0;
+								}
+								section3VideoEl.play().catch(() => {});
+							}
+						} else {
+							if (section3VideoEl && !section3VideoEl.paused) {
+								section3VideoEl.pause();
+							}
+						}
+					});
+				},
+				{ threshold: 0.2 }
+			);
+			section3VideoObserver.observe(section3VideoEl);
 		}
 
 		return () => {
 			window.removeEventListener('scroll', updateScrollState);
 			window.removeEventListener('resize', updateScrollState);
 			if (swiper) swiper.destroy();
+			if (iphoneVideosObserver) iphoneVideosObserver.disconnect();
+			if (section3VideoObserver) section3VideoObserver.disconnect();
 		};
 	});
 
@@ -305,15 +363,15 @@
 	<title>Foundations | SangSquare</title>
 </svelte:head>
 
-<section class="foundations-hero">
+<section class="foundations-hero" use:scrollReveal>
 	<div class="text-container">
-		<h1>Brand & Interactive Design</h1>
-		<p class="text-[160px] font-bold leading-none">Foundations</p>
-		<p class="sys-text-lg">브랜딩과 그래픽에서 웹·앱·전시의 인터랙션까지, 지금의 디자인 관점과 역량의 바탕이 된 작업들입니다.</p>
+		<h1 data-reveal="0">Brand & Interactive Design</h1>
+		<p class="text-[160px] font-bold leading-none" data-reveal="0.5">Foundations</p>
+		<p class="sys-text-lg" data-reveal="1">브랜딩과 그래픽에서 웹·앱·전시의 인터랙션까지, 지금의 디자인 관점과 역량의 바탕이 된 작업들입니다.</p>
 	</div>
 </section>
-<section class="foundations-body flex flex-row items-start justify-start mx-auto px-body-x pt-30 pb-15">
-	<aside class="foundations-sidebar self-stretch flex-none">
+<section class="foundations-body flex flex-row items-start justify-start mx-auto px-body-x pt-30 pb-15" use:scrollReveal>
+	<aside class="foundations-sidebar self-stretch flex-none" data-reveal="0">
 		<!-- [스크롤에 따른 컬러 트랜지션] foundations-lnb에 white클래스 추가/제거 -->
 		<div class="foundations-lnb {isWhiteLnb ? 'white' : ''}">
 			<p class="sys-caption font-medium lnb-title">PROJECT INDEX</p>
@@ -439,18 +497,18 @@
 	</aside>
 	<div class="foundations-main self-stretch flex-1 min-w-0 flex flex-col gap-60">
 		<!-- [스크롤에 따른 컬러 트랜지션] 이부분이 화면 중간쯤 왔을때 body bg-컬러 클래스 text-background 클래스 등 제거(디폴트)로 바뀜 -->
-		<section class="foundations-section" id="01">
+		<section class="foundations-section" id="01" data-reveal="0">
 			<div class="flex gap-20">
-				<div class="w-[260px] flex-none flex flex-col">
+				<div class="w-[260px] flex-none flex flex-col" data-reveal="0">
 					<p class="sys-caption">01 / AB InBev</p>
 					<h2 class="sys-title-lg font-bold">HOPPY</h2>
 					<p class="sys-caption">Branding · UI Design · Illustration</p>
 				</div>
 				<div class="flex-1 flex flex-col">
-					<h3 class="sys-text-lg">AB InBev 임직원을 위한 게임형 맥주 교육 앱</h3>
-					<p class="sys-text-sm mt-4">AB InBev는 양조 부서뿐 아니라 재무·영업·마케팅 등 <em class="font-semibold">모든 임직원이 맥주에 관한 지식을 갖고 브랜드와 카테고리를<br/>설명할 수 있기를 원했습니다. Hoppy는 이를 위해 전문적인 맥주 교육을 짧은 모바일 학습과 퀴즈로 전환한 게임형 교육 앱</em>입니다. <br/>학습을 통해 배지와 Beercoin을 획득하고, 모은 코인을 굿즈로 교환하는 보상 구조로 지속적인 참여를 유도합니다.</p>
+					<h3 class="sys-text-lg" data-reveal="0.5">AB InBev 임직원을 위한 게임형 맥주 교육 앱</h3>
+					<p class="sys-text-sm mt-4" data-reveal="0.5">AB InBev는 양조 부서뿐 아니라 재무·영업·마케팅 등 <em class="font-semibold">모든 임직원이 맥주에 관한 지식을 갖고 브랜드와 카테고리를<br/>설명할 수 있기를 원했습니다. Hoppy는 이를 위해 전문적인 맥주 교육을 짧은 모바일 학습과 퀴즈로 전환한 게임형 교육 앱</em>입니다. <br/>학습을 통해 배지와 Beercoin을 획득하고, 모은 코인을 굿즈로 교환하는 보상 구조로 지속적인 참여를 유도합니다.</p>
 
-					<div class="flex gap-6 mt-10">
+					<div class="flex gap-6 mt-10" data-reveal="0.5">
 						<span class="inline-flex items-center justify-center h-8 rounded-full bg-accent-foreground text-background font-extrabold px-3">My Role</span>
 
 						<p class="leading-[32px] font-medium">브랜딩·그래픽 시스템의 주요 디자인 담당<br/>배지·일러스트레이션 주요 에셋 디자인 및 제작<br/>UI 시스템·가이드 기반 앱 화면 디자인</p>
@@ -459,33 +517,33 @@
 			</div>
 
 			<div class="mt-21">
-				<h4 class="sys-text-md">브랜드·보상 그래픽</h4>
-				<p class="description-paragraph sys-text-sm mt-6">맥주를 소재로 한 일러스트레이션과 배지, Beercoin 그래픽을 학습 콘텐츠와 보상 화면에 적용했습니다.</p>
+				<h4 class="sys-text-md" data-reveal="0">브랜드·보상 그래픽</h4>
+				<p class="description-paragraph sys-text-sm mt-6" data-reveal="0">맥주를 소재로 한 일러스트레이션과 배지, Beercoin 그래픽을 학습 콘텐츠와 보상 화면에 적용했습니다.</p>
 			</div>
 
 			<div class="grid grid-cols-3 gap-2 mt-10">
-				<img src="/images/foundations/01_1_graphic1.png" alt="" class="rounded" />
-				<img src="/images/foundations/01_1_graphic2.png" alt="" class="rounded" />
-				<img src="/images/foundations/01_1_graphic3.png" alt="" class="rounded" />
+				<img src="/images/foundations/01_1_graphic1.png" alt="" class="rounded" data-reveal="0" />
+				<img src="/images/foundations/01_1_graphic2.png" alt="" class="rounded" data-reveal="0.5" />
+				<img src="/images/foundations/01_1_graphic3.png" alt="" class="rounded" data-reveal="1" />
 				<!-- [스크롤에 따른 컬러 트랜지션] 이부분이 화면 중간쯤 왔을때 body bg-[#F0B02F] text-background 로 바뀜 -->
-				<img id="trigger-amber" src="/images/foundations/01_1_graphic4.png" alt="" class="rounded" />
-				<img src="/images/foundations/01_1_graphic5.png" alt="" class="rounded" />
+				<img id="trigger-amber" src="/images/foundations/01_1_graphic4.png" alt="" class="rounded" data-reveal="0" />
+				<img src="/images/foundations/01_1_graphic5.png" alt="" class="rounded" data-reveal="0.5" />
 			</div>
 
 			<div class="mt-30">
-				<h4 class="sys-text-md">퀴즈 참여·보상 획득</h4>
-				<p class="description-paragraph sys-text-sm mt-6">데일리 챌린지로 맥주 지식을 확인하고, 틀린 문제는 정답을 살펴본 뒤 다시 도전할 수 있습니다.<br/>챌린지를 완료하면 배지와 Beercoin을 보상으로 받습니다.</p>
+				<h4 class="sys-text-md" data-reveal="0">퀴즈 참여·보상 획득</h4>
+				<p class="description-paragraph sys-text-sm mt-6" data-reveal="0">데일리 챌린지로 맥주 지식을 확인하고, 틀린 문제는 정답을 살펴본 뒤 다시 도전할 수 있습니다.<br/>챌린지를 완료하면 배지와 Beercoin을 보상으로 받습니다.</p>
 			</div>
-			<div class="full-width flex">
+			<div class="full-width flex" data-reveal="0">
 				<img src="/images/foundations/01_2_graphic.png" alt="" class="w-full" />
 			</div>
 			<div class="flex gap-28 mt-20">
-				<div class="flex-none iphone-frame">
+				<div class="flex-none iphone-frame" data-reveal="0">
 					<div class="screen">
 						<video
 							bind:this={iphoneVideo1El}
 							src="/images/foundations/01_2_video1.mp4"
-							preload="metadata"
+							preload="auto"
 							muted
 							playsinline
 							onplay={() => (isIphone1Playing = true)}
@@ -512,12 +570,12 @@
 					</Button>
 				</div>
 
-				<div class="flex-none iphone-frame">
+				<div class="flex-none iphone-frame" data-reveal="0.5">
 					<div class="screen">
 						<video
 							bind:this={iphoneVideo2El}
 							src="/images/foundations/01_2_video2.mp4"
-							preload="metadata"
+							preload="auto"
 							muted
 							playsinline
 							onplay={() => (isIphone2Playing = true)}
@@ -543,44 +601,44 @@
 					</Button>
 				</div>
 
-				<img src="/images/foundations/01_2_flow.png" alt="" class="flex-none w-[389px] aspect-389/758" />
+				<img src="/images/foundations/01_2_flow.png" alt="" class="flex-none w-[389px] aspect-389/758" data-reveal="1" />
 			</div>
 
 			<div class="mt-20">
-				<h4 class="sys-text-md">Beercoin 사용·굿즈 구매</h4>
-				<p class="description-paragraph sys-text-sm mt-6">학습과 퀴즈로 모은 Beercoin을 티셔츠 등 브랜드 굿즈 구매에 사용할 수 있습니다.<br/>원하는 상품과 옵션을 선택하고, 사용할 코인과 교환 후 잔액을 확인한 뒤 주문을 완료합니다.</p>
+				<h4 class="sys-text-md" data-reveal="0">Beercoin 사용·굿즈 구매</h4>
+				<p class="description-paragraph sys-text-sm mt-6" data-reveal="0">학습과 퀴즈로 모은 Beercoin을 티셔츠 등 브랜드 굿즈 구매에 사용할 수 있습니다.<br/>원하는 상품과 옵션을 선택하고, 사용할 코인과 교환 후 잔액을 확인한 뒤 주문을 완료합니다.</p>
 			</div>
-			<div class="full-width flex">
+			<div class="full-width flex" data-reveal="0">
 				<img src="/images/foundations/01_3_graphic.png" alt="" class="w-full" />
 			</div>
 
 			<div class="mt-10">
-				<h4 class="sys-text-md">브랜드 일러스트레이션·그래픽</h4>
-				<p class="description-paragraph sys-text-sm mt-6">맥주를 소재로 한 캐릭터와 일러스트레이션, 패턴 등 브랜드 그래픽을 디자인했습니다.<br/>굵은 윤곽선과 선명한 색감을 바탕으로 앱, 인쇄물, 굿즈, 공간 등 다양한 매체에서 일관된 스타일로 활용할 수 있도록 구성했습니다.</p>
+				<h4 class="sys-text-md" data-reveal="0">브랜드 일러스트레이션·그래픽</h4>
+				<p class="description-paragraph sys-text-sm mt-6" data-reveal="0">맥주를 소재로 한 캐릭터와 일러스트레이션, 패턴 등 브랜드 그래픽을 디자인했습니다.<br/>굵은 윤곽선과 선명한 색감을 바탕으로 앱, 인쇄물, 굿즈, 공간 등 다양한 매체에서 일관된 스타일로 활용할 수 있도록 구성했습니다.</p>
 			</div>
 
-			<img src="/images/foundations/01_4_graphic.png" alt="" class="w-[782px] aspect-782/471 mt-12 ml-34 mix-blend-multiply" />
+			<img src="/images/foundations/01_4_graphic.png" alt="" class="w-[782px] aspect-782/471 mt-12 ml-34 mix-blend-multiply" data-reveal="0" />
 
 			<div class="grid grid-cols-3 gap-2">
-				<img src="/images/foundations/01_4_tile1.png" alt="" class="rounded" />
-				<img src="/images/foundations/01_4_tile2.png" alt="" class="rounded" />
-				<img src="/images/foundations/01_4_tile3.png" alt="" class="rounded" />
+				<img src="/images/foundations/01_4_tile1.png" alt="" class="rounded" data-reveal="0.5" />
+				<img src="/images/foundations/01_4_tile2.png" alt="" class="rounded" data-reveal="0" />
+				<img src="/images/foundations/01_4_tile3.png" alt="" class="rounded" data-reveal="1" />
 			</div>
 		</section>
 
 		<!-- [스크롤에 따른 컬러 트랜지션] 이부분이 화면 중간쯤 왔을때 body bg-[#00A9E4] text-background 로 바뀜 -->
 		<section class="foundations-section" id="02">
 			<div class="flex gap-20">
-				<div class="w-[260px] flex-none flex flex-col">
+				<div class="w-[260px] flex-none flex flex-col" data-reveal="0">
 					<p class="sys-caption">02 / johnson & johnson</p>
 					<h2 class="sys-title-lg font-bold">ACUVUE</h2>
 					<p class="sys-caption">UI system · Illustration</p>
 				</div>
 				<div class="flex-1 flex flex-col">
-					<h3 class="sys-text-lg">콘택트렌즈 제품과 눈 건강 정보를 위한 웹사이트 리뉴얼</h3>
-					<p class="sys-text-sm mt-4"><em class="font-semibold">콘택트렌즈 제품과 눈 건강, 렌즈 착용·관리 정보를 제공하는 Acuvue.com의 미주 웹사이트 리뉴얼 프로젝트입니다.</em><br/>기존 브랜드 아이덴티티를 유지하면서, 많은 정보를 짧은 단락과 사진·아이콘·일러스트레이션으로 정리해<br/>제품의 특징과 사용 정보를 쉽게 살펴볼 수 있도록 구성했습니다.</p>
+					<h3 class="sys-text-lg" data-reveal="0.5">콘택트렌즈 제품과 눈 건강 정보를 위한 웹사이트 리뉴얼</h3>
+					<p class="sys-text-sm mt-4" data-reveal="0.5"><em class="font-semibold">콘택트렌즈 제품과 눈 건강, 렌즈 착용·관리 정보를 제공하는 Acuvue.com의 미주 웹사이트 리뉴얼 프로젝트입니다.</em><br/>기존 브랜드 아이덴티티를 유지하면서, 많은 정보를 짧은 단락과 사진·아이콘·일러스트레이션으로 정리해<br/>제품의 특징과 사용 정보를 쉽게 살펴볼 수 있도록 구성했습니다.</p>
 
-					<div class="flex gap-6 mt-10">
+					<div class="flex gap-6 mt-10" data-reveal="0.5">
 						<span class="inline-flex items-center justify-center h-8 rounded-full bg-background text-[#00A9E4] font-extrabold px-3">My Role</span>
 
 						<p class="leading-[32px] font-medium">공통 UI 시스템·가이드 기반 주요 화면 및 상품 페이지 디자인<br/>아이콘·정보 일러스트레이션 제작<br/>전체 페이지 중 50% 이상 UI 디자인 담당</p>
@@ -589,9 +647,9 @@
 			</div>
 
 			<div class="flex gap-20 mt-28">
-				<img src="/images/foundations/02_overview_screen.png" alt="" class="rounded-4xl w-[900px] aspect-900/1644 flex-none" />
+				<img src="/images/foundations/02_overview_screen.png" alt="" class="rounded-4xl w-[900px] aspect-900/1644 flex-none" data-reveal="0" />
 
-				<div class="self-start flex-1 min-w-0 overflow-hidden -mr-body-x">
+				<div class="self-start flex-1 min-w-0 overflow-hidden -mr-body-x" data-reveal="1">
 					<img src="/images/foundations/02_overview_system.png" alt="" class="self-start w-[649px] aspect-649/973 flex-none" />
 				</div>
 
@@ -599,37 +657,37 @@
 			</div>
 
 			<div class="mt-34">
-				<h4 class="sys-text-md">커스텀 아이콘·정보 일러스트레이션</h4>
-				<p class="description-paragraph sys-text-sm mt-6">브랜드 서체 Graphik의 기하학적 형태와 선 굵기 규칙을 바탕으로 아이콘을 제작했습니다.<br/>같은 스타일을 눈의 구조와 렌즈 착용·관리 방법을 설명하는 일러스트레이션으로 확장했습니다.</p>
+				<h4 class="sys-text-md" data-reveal="0">커스텀 아이콘·정보 일러스트레이션</h4>
+				<p class="description-paragraph sys-text-sm mt-6" data-reveal="0">브랜드 서체 Graphik의 기하학적 형태와 선 굵기 규칙을 바탕으로 아이콘을 제작했습니다.<br/>같은 스타일을 눈의 구조와 렌즈 착용·관리 방법을 설명하는 일러스트레이션으로 확장했습니다.</p>
 			</div>
 
-			<img src="/images/foundations/02_1_graphic1.png" alt="" class="w-full aspect-1448/453 flex-none mt-10" />
+			<img src="/images/foundations/02_1_graphic1.png" alt="" class="w-full aspect-1448/453 flex-none mt-10" data-reveal="0" />
 
-			<img src="/images/foundations/02_1_graphic2.png" alt="" class="w-[913px] aspect-913/238 flex-none my-16 mx-auto" />
+			<img src="/images/foundations/02_1_graphic2.png" alt="" class="w-[913px] aspect-913/238 flex-none my-16 mx-auto" data-reveal="0" />
 
-			<img src="/images/foundations/02_1_graphic3.png" alt="" class="w-full aspect-1448/555 flex-none" />
+			<img src="/images/foundations/02_1_graphic3.png" alt="" class="w-full aspect-1448/555 flex-none" data-reveal="0" />
 
 			<div class="mt-30">
-				<h4 class="sys-text-md">주요 페이지 UI 디자인</h4>
-				<p class="description-paragraph sys-text-sm mt-6">공통 UI 시스템을 바탕으로 눈 건강 정보와 신제품 소개 페이지를 디자인했습니다.<br/>사진·일러스트레이션·텍스트를 콘텐츠의 성격에 맞게 조합해 각 페이지의 주요 화면을 구성했습니다.</p>
+				<h4 class="sys-text-md" data-reveal="0">주요 페이지 UI 디자인</h4>
+				<p class="description-paragraph sys-text-sm mt-6" data-reveal="0">공통 UI 시스템을 바탕으로 눈 건강 정보와 신제품 소개 페이지를 디자인했습니다.<br/>사진·일러스트레이션·텍스트를 콘텐츠의 성격에 맞게 조합해 각 페이지의 주요 화면을 구성했습니다.</p>
 			</div>
 
 			<div class="flex gap-6 mt-10">
-				<img src="/images/foundations/02_2_graphic1.png" alt="" class="aspect-712/912 flex-1 min-w-0" />
-				<img src="/images/foundations/02_2_graphic2.png" alt="" class="aspect-712/912 flex-1 min-w-0" />
+				<img src="/images/foundations/02_2_graphic1.png" alt="" class="aspect-712/912 flex-1 min-w-0" data-reveal="0" />
+				<img src="/images/foundations/02_2_graphic2.png" alt="" class="aspect-712/912 flex-1 min-w-0" data-reveal="0.5" />
 			</div>
 
 			<div class="mt-30">
-				<h4 class="sys-text-md">상품 목록·상세 페이지</h4>
-				<p class="description-paragraph sys-text-sm mt-6">조건별로 렌즈를 살펴볼 수 있는 상품 목록과 제품의 특징을 소개하는 상세 페이지를 디자인했습니다.<br/>제품 이미지와 주요 정보, 체험 신청·전문가 찾기 안내를 PC와 모바일 화면에 맞춰 구성했습니다.</p>
+				<h4 class="sys-text-md" data-reveal="0">상품 목록·상세 페이지</h4>
+				<p class="description-paragraph sys-text-sm mt-6" data-reveal="0">조건별로 렌즈를 살펴볼 수 있는 상품 목록과 제품의 특징을 소개하는 상세 페이지를 디자인했습니다.<br/>제품 이미지와 주요 정보, 체험 신청·전문가 찾기 안내를 PC와 모바일 화면에 맞춰 구성했습니다.</p>
 			</div>
 
 			<div class="mt-10 pb-90 relative">
-				<img src="/images/foundations/02_3_graphic1.png" alt="" class="w-[920px] aspect-920/767" />
-				<img src="/images/foundations/02_3_graphic2.png" alt="" class="w-[920px] aspect-920/803 absolute right-0 bottom-0 drop-shadow-2xl" />
+				<img src="/images/foundations/02_3_graphic1.png" alt="" class="w-[920px] aspect-920/767" data-reveal="0" />
+				<img src="/images/foundations/02_3_graphic2.png" alt="" class="w-[920px] aspect-920/803 absolute right-0 bottom-0 drop-shadow-2xl" data-reveal="0" />
 			</div>
 
-			<div class="full-width mt-34">
+			<div class="full-width mt-34" data-reveal="0">
 				<img src="/images/foundations/02_closing.png" alt="" class="w-full aspect-1920/858" />
 			</div>
 		</section>
@@ -637,16 +695,16 @@
 		<!-- [스크롤에 따른 컬러 트랜지션] 이부분이 화면 중간쯤 왔을때 body bg-[#37523D] text-background 로 바뀜 -->
 		<section class="foundations-section" id="03">
 			<div class="flex gap-20">
-				<div class="w-[260px] flex-none flex flex-col">
+				<div class="w-[260px] flex-none flex flex-col" data-reveal="0">
 					<p class="sys-caption">03 / WATERisLIFE</p>
 					<h2 class="sys-title-lg font-bold whitespace-nowrap">Hidden Dangers</h2>
 					<p class="sys-caption">UI Design · Character Design · Illustration</p>
 				</div>
 				<div class="flex-1 flex flex-col">
-					<h3 class="sys-text-lg">수질 오염의 위험을 알리는 캠페인 웹사이트 제작</h3>
-					<p class="sys-text-sm mt-4"><em class="font-semibold">Hidden Dangers는 태국 농촌 지역 어린이들에게 수질 오염의 위험을 알리기 위한 WATERisLIFE의 교육 캠페인입니다.</em><br/>물속 오염원을 몬스터로 표현한 VR 게임으로 깨끗한 물의 중요성을 전달하고, 웹사이트를 통해 각 오염원의 이야기와<br/>교육 콘텐츠, 후원 방법을 소개했습니다.</p>
+					<h3 class="sys-text-lg" data-reveal="0.5">수질 오염의 위험을 알리는 캠페인 웹사이트 제작</h3>
+					<p class="sys-text-sm mt-4" data-reveal="0.5"><em class="font-semibold">Hidden Dangers는 태국 농촌 지역 어린이들에게 수질 오염의 위험을 알리기 위한 WATERisLIFE의 교육 캠페인입니다.</em><br/>물속 오염원을 몬스터로 표현한 VR 게임으로 깨끗한 물의 중요성을 전달하고, 웹사이트를 통해 각 오염원의 이야기와<br/>교육 콘텐츠, 후원 방법을 소개했습니다.</p>
 
-					<div class="flex gap-6 mt-10">
+					<div class="flex gap-6 mt-10" data-reveal="0.5">
 						<span class="inline-flex items-center justify-center h-8 rounded-full bg-[#FED70D] text-[#3F5644] font-extrabold px-3">My Role</span>
 
 						<p class="leading-[32px] font-medium">캐릭터 디자인·일러스트레이션 에셋 제작<br/>PC·모바일 캠페인 페이지 UI 디자인</p>
@@ -654,7 +712,7 @@
 				</div>
 			</div>
 
-			<div bind:this={overviewSwiperEl} class="w-full swiper mt-20 rounded-sm">
+			<div bind:this={overviewSwiperEl} class="w-full swiper mt-20 rounded-sm" data-reveal="0">
 				<div class="swiper-wrapper">
 					<div class="swiper-slide">
 						<img src="/images/foundations/03_overview1.png" alt="" class="w-full aspect-1448/640" />
@@ -669,15 +727,15 @@
 			</div>
 
 			<div class="mt-20">
-				<h4 class="sys-text-md">오염원별 몬스터 캐릭터</h4>
-				<p class="description-paragraph sys-text-sm mt-6">박테리아·쓰레기·금속·화학물질을 각각의 몬스터 캐릭터로 시각화했습니다.<br/>어린이를 대상으로 한 교육 콘텐츠에 맞춰 기괴한 형태에 유머를 더하고, 눈에 보이지 않는 오염의 위험을 구체적인 대상으로 표현했습니다.</p>
+				<h4 class="sys-text-md" data-reveal="0">오염원별 몬스터 캐릭터</h4>
+				<p class="description-paragraph sys-text-sm mt-6" data-reveal="0">박테리아·쓰레기·금속·화학물질을 각각의 몬스터 캐릭터로 시각화했습니다.<br/>어린이를 대상으로 한 교육 콘텐츠에 맞춰 기괴한 형태에 유머를 더하고, 눈에 보이지 않는 오염의 위험을 구체적인 대상으로 표현했습니다.</p>
 			</div>
 
-			<img src="/images/foundations/03_1_graphic.png" alt="" class="w-full aspect-1452/340 flex-none mt-8 rounded-sm" />
+			<img src="/images/foundations/03_1_graphic.png" alt="" class="w-full aspect-1452/340 flex-none mt-8 rounded-sm" data-reveal="0" />
 
 			<div class="flex mt-20 gap-10 items-center">
-				<img src="/images/foundations/03_2_screenshot.png" alt="" class="w-[721px] aspect-721/1589 flex-none" />
-				<div class="flex-1 min-w-0 flex flex-col gap-20">
+				<img src="/images/foundations/03_2_screenshot.png" alt="" class="w-[721px] aspect-721/1589 flex-none" data-reveal="0" />
+				<div class="flex-1 min-w-0 flex flex-col gap-20" data-reveal="0">
 					<div class="">
 						<h4 class="sys-text-md">수중 탐색형 페이지 구성</h4>
 						<p class="description-paragraph sys-text-sm mt-6">몬스터를 선택하면 해당 오염원에 대한 이야기로 이어집니다.<br/>수면에서 물속으로 내려가는 스크롤 흐름에 짧은 설명과 캐릭터를 배치해,<br/>강물에 감춰진 위험을 살펴볼 수 있도록 구성했습니다.</p>
@@ -723,18 +781,18 @@
 			</div>
 
 			<div class="mt-30">
-				<h4 class="sys-text-md">03. 웹사이트 탐색 흐름</h4>
-				<p class="description-paragraph sys-text-sm mt-6">몬스터 선택부터 오염원별 이야기, 교육 콘텐츠와 후원 안내까지 이어지는 웹사이트의 전체 탐색 과정입니다.<br/>실사 화면에서 수중 공간으로 전환되는 장면과 스크롤에 따른 콘텐츠의 등장, 주요 화면 간의 연결을 영상으로 담았습니다.</p>
+				<h4 class="sys-text-md" data-reveal="0">03. 웹사이트 탐색 흐름</h4>
+				<p class="description-paragraph sys-text-sm mt-6" data-reveal="0">몬스터 선택부터 오염원별 이야기, 교육 콘텐츠와 후원 안내까지 이어지는 웹사이트의 전체 탐색 과정입니다.<br/>실사 화면에서 수중 공간으로 전환되는 장면과 스크롤에 따른 콘텐츠의 등장, 주요 화면 간의 연결을 영상으로 담았습니다.</p>
 			</div>
 
-			<div class="flex-none laptop-frame mt-20">
+			<div class="flex-none laptop-frame mt-20" data-reveal="0">
 				<div class="screen group">
 					<video
 						bind:this={section3VideoEl}
 						bind:currentTime={section3CurrentTime}
 						bind:duration={section3Duration}
 						src="/images/foundations/03_3_video.mp4"
-						preload="metadata"
+						preload="auto"
 						muted
 						playsinline
 						onplay={() => (isSection3Playing = true)}
@@ -801,12 +859,12 @@
 		<!-- [스크롤에 따른 컬러 트랜지션] 이부분이 화면 중간쯤 왔을때 body bg-컬러 클래스 text-background 클래스 등 제거(디폴트)로 바뀜 -->
 		<section class="foundations-section" id="04">
 			<div class="flex items-center gap-20">
-				<div class="w-[260px] flex-none flex flex-col">
+				<div class="w-[260px] flex-none flex flex-col" data-reveal="0">
 					<p class="sys-caption">04 / Foundations</p>
 					<h2 class="sys-title-lg font-bold leading-[1.1]">SELECTED<br/>WORKS</h2>
 					<p class="sys-caption">Branding · UI Design · Illustration</p>
 				</div>
-				<div class="flex-1 flex flex-col">
+				<div class="flex-1 flex flex-col" data-reveal="0.5">
 					<h3 class="sys-text-lg">아이덴티티, 타이포그래피, 일러스트레이션과 인터랙티브 작업을 선별했습니다.<br/>다양한 매체에서 시각적 표현과 정보 전달을 다뤄온 작업을 소개합니다.</h3>
 				</div>
 			</div>
@@ -816,6 +874,7 @@
 					type="button" 
 					class="foundations-tile-btn w-full text-left"
 					onclick={() => activePopup = '01'}
+					data-reveal="0"
 				>
 					<img src="/images/foundations/04_tile1.png" alt="" class="w-full aspect-704/400" />
 					<div class="cover">
@@ -827,6 +886,7 @@
 					type="button" 
 					class="foundations-tile-btn w-full text-left"
 					onclick={() => activePopup = '02'}
+					data-reveal="0.5"
 				>
 					<img src="/images/foundations/04_tile2.png" alt="" class="w-full aspect-704/400" />
 					<div class="cover">
@@ -838,6 +898,7 @@
 					type="button" 
 					class="foundations-tile-btn w-full text-left"
 					onclick={() => activePopup = '03'}
+					data-reveal="0"
 				>
 					<img src="/images/foundations/04_tile3.png" alt="" class="w-full aspect-704/400" />
 					<div class="cover">
@@ -849,6 +910,7 @@
 					type="button" 
 					class="foundations-tile-btn w-full text-left"
 					onclick={() => activePopup = '04'}
+					data-reveal="0.5"
 				>
 					<img src="/images/foundations/04_tile4.png" alt="" class="w-full aspect-704/400" />
 					<div class="cover">
@@ -860,6 +922,7 @@
 					type="button" 
 					class="foundations-tile-btn col-span-2 w-full text-left"
 					onclick={() => activePopup = '05'}
+					data-reveal="0"
 				>
 					<img src="/images/foundations/04_tile5.png" alt="" class="w-full aspect-1440/400" />
 					<div class="cover">

@@ -282,7 +282,7 @@
 	<title>CASE 01 | SangSquare</title>
 </svelte:head>
 
-<section use:scrollReveal class="case-hero" data-reveal="0">
+<section class="case-hero" use:scrollReveal>
 	<img 
 		src="/images/case03/hero_bg.png" 
 		alt="" 
@@ -290,13 +290,13 @@
 		style="transform: translateY({translateY}px);"
 	/>
 	<div class="text-container">
-		<h1>T’Station.com UX Transformation · 2021 - 2025</h1>
-		<p class="sys-title-lg">타이어는 잘 몰라도, 내 차에 필요한 타이어는 딱 맞게.<br/>구매 전환을 높이기 위해, 탐색부터 관리까지 고객 여정을 개선한 5년.	</p>
+		<h1 data-reveal="0">T’Station.com UX Transformation · 2021 - 2025</h1>
+		<p class="sys-title-lg" data-reveal="0.5">타이어는 잘 몰라도, 내 차에 필요한 타이어는 딱 맞게.<br/>구매 전환을 높이기 위해, 탐색부터 관리까지 고객 여정을 개선한 5년.	</p>
 	</div>
 </section>
 <section bind:this={caseBodyEl} class="case-body flex flex-row items-start justify-start mx-auto px-body-x pt-30 pb-15">
-	<aside class="case-sidebar self-stretch flex-none">
-		<div class="summary-wrapper">
+	<aside class="case-sidebar self-stretch flex-none" use:scrollReveal>
+		<div class="summary-wrapper" data-reveal="0">
 			<ul class="case-summary list-none flex flex-col gap-4 w-full">
 				<li class="flex items-start gap-4 text-muted-foreground">
 					<div class="sys-caption font-extrabold w-20">Project</div>
@@ -331,7 +331,7 @@
 			</ul>
 		</div>
 
-		<div class="case-lnb">
+		<div class="case-lnb" data-reveal="0">
 			<p class="progress flex-none font-thin text-muted-foreground text-[40px]">{bodyScrollProgress}%</p>
 			<nav class="indicator flex-1">
 				{#each sections as section (section.id)}
@@ -940,12 +940,12 @@
 			</div>
 
 			<div class="w-full flex items-stretch gap-2 mt-20">
-				<div class="flex-1 min-w-0 px-8 pt-4 pb-20 bg-linear-[165deg] from-[#0E0E0E] to-[#2B3137] rounded-sm" data-reveal="0.5">
+				<div class="flex-1 min-w-0 px-8 pt-4 pb-20 bg-linear-[165deg] from-[#0E0E0E] to-[#2B3137] rounded-sm" data-reveal="0">
 					<p class="sys-text-md mb-6 text-background">01<br/>사업의 가치를 고객의 경험으로</p>
 					<p class="sys-text-sm font-light text-ts-n4">사업의 방향과 고객의 필요가 만나는 지점에서<br/>UX의 목표를 정합니다.</p>
 					<p class="sys-text-sm font-light text-ts-n4 mt-5">상품과 서비스의 가치가 고객에게 이해되고,<br/>선택과 이용으로 이어지도록 설계합니다.</p>
 				</div>
-				<div class="flex-1 min-w-0 px-8 pt-4 pb-20 bg-linear-[165deg] from-[#0E0E0E] to-[#2B3137] rounded-sm" data-reveal="0">
+				<div class="flex-1 min-w-0 px-8 pt-4 pb-20 bg-linear-[165deg] from-[#0E0E0E] to-[#2B3137] rounded-sm" data-reveal="0.5">
 					<p class="sys-text-md mb-6 text-background">02<br/>고객이 이해하고 행동할 수 있게</p>
 					<p class="sys-text-sm font-light text-ts-n4">고객이 구매 여정에 있어 현재 위치와<br/>필요 행동을 쉽게 파악하도록 돕습니다.</p>
 					<p class="sys-text-sm font-light text-ts-n4 mt-5">각 접점의 정보와 기능을 이해하고<br/>행동으로 이어지는 흐름을 설계합니다.</p>

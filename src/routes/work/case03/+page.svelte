@@ -212,7 +212,7 @@
 	<title>CASE 03 | SangSquare</title>
 </svelte:head>
 
-<section class="case-hero">
+<section class="case-hero" use:scrollReveal>
 	<img 
 		src="/images/case03/hero_bg.png" 
 		alt="" 
@@ -220,13 +220,13 @@
 		style="transform: translateY({translateY}px);"
 	/>
 	<div class="text-container">
-		<h1>T’Station 매장 상담 플랫폼 Renewal</h1>
-		<p class="sys-title-lg">매장 서비스는 같아야 하지만, 고객의 방문 상황은 모두 다르다.<br/>그렇다면 어디까지 표준화하고 어디까지 정비사의 판단에 맡겨야 할까?</p>
+		<h1 data-reveal="0">T’Station 매장 상담 플랫폼 Renewal</h1>
+		<p class="sys-title-lg" data-reveal="0.5">매장 서비스는 같아야 하지만, 고객의 방문 상황은 모두 다르다.<br/>그렇다면 어디까지 표준화하고 어디까지 정비사의 판단에 맡겨야 할까?</p>
 	</div>
 </section>
 <section bind:this={caseBodyEl} class="case-body flex flex-row items-start justify-start mx-auto px-body-x pt-30 pb-15">
-	<aside class="case-sidebar self-stretch flex-none">
-		<div class="summary-wrapper">
+	<aside class="case-sidebar self-stretch flex-none" use:scrollReveal>
+		<div class="summary-wrapper" data-reveal="0">
 			<ul class="case-summary list-none flex flex-col gap-4 w-full">
 				<li class="flex items-start gap-4 text-muted-foreground">
 					<div class="sys-caption font-extrabold w-20">Project</div>
@@ -257,7 +257,7 @@
 			</ul>
 		</div>
 
-		<div class="case-lnb">
+		<div class="case-lnb" data-reveal="0">
 			<p class="progress flex-none font-thin text-muted-foreground text-[40px]">{bodyScrollProgress}%</p>
 			<nav class="indicator flex-1">
 				{#each sections as section (section.id)}
@@ -275,48 +275,51 @@
 	</aside>
 	<div use:scrollReveal class="case-main self-stretch flex-1 min-w-0 flex flex-col gap-50">
 		<section class="case-section" id="01">
-			<h2 class="sys-text-sm text-accent-foreground">
+			<h2 class="sys-text-sm text-accent-foreground" data-reveal="0">
 				<em class="font-extrabold">01. OVERVIEW</em>
 				/ 320개 매장의 상담 경험을 하나로
 			</h2>
 			<div class="flex flex-col gap-6 mt-10">
-				<h3 class="sys-title-md leading-tight tracking-[-0.02em]">
+				<h3 class="sys-title-md leading-tight tracking-[-0.02em]" data-reveal="0">
 					ONE STANDARD SERVICE, EVERY STORE
 				</h3>
-				<h4 class="sys-text-sm"><em class="font-semibold">SMART GUIDE</em>는 티스테이션 매장 직원이 차량 점검 결과와 상품 정보를 고객에게 설명하고,<br/><em class="font-semibold">상품 선택과 구매를 돕는 디지털 상담 플랫폼입니다.</em><br/><br/>이번 리뉴얼을 통해 각 매장이 일관된 서비스를 제공할 수 있도록,<br/>공통의 상담 기준과 이를 현장에서 활용할 수 있는 플랫폼을 안착시키는 것을 목표로 했습니다.</h4>
+				<h4 class="sys-text-sm" data-reveal="0"><em class="font-semibold">SMART GUIDE</em>는 티스테이션 매장 직원이 차량 점검 결과와 상품 정보를 고객에게 설명하고,<br/><em class="font-semibold">상품 선택과 구매를 돕는 디지털 상담 플랫폼입니다.</em><br/><br/>이번 리뉴얼을 통해 각 매장이 일관된 서비스를 제공할 수 있도록,<br/>공통의 상담 기준과 이를 현장에서 활용할 수 있는 플랫폼을 안착시키는 것을 목표로 했습니다.</h4>
 			</div>
 
 			<div class="full-width flex gap-6 mt-40">
 				<img 
 					src="/images/case03/01_slide01.png" 
 					alt="" 
-					class="flex-1 min-w-0 w-full h-auto object-cover" 
+					class="flex-1 min-w-0 w-full h-auto object-cover"
+					data-reveal="0"
 				/>
 				<img 
 					src="/images/case03/01_slide02.png" 
 					alt="" 
-					class="flex-1 min-w-0 w-full h-auto object-cover" 
+					class="flex-1 min-w-0 w-full h-auto object-cover"
+					data-reveal="0.5"
 				/>
 				<img 
 					src="/images/case03/01_slide03.png" 
 					alt="" 
-					class="flex-1 min-w-0 w-full h-auto object-cover" 
+					class="flex-1 min-w-0 w-full h-auto object-cover"
+					data-reveal="1"
 				/>
 			</div>
 		</section>
 		<section class="case-section" id="02">
-			<h2 class="sys-text-sm text-accent-foreground">
+			<h2 class="sys-text-sm text-accent-foreground" data-reveal="0">
 				<em class="font-extrabold">02. CONTEXT & CHALLENGE</em>
 				/ 표준 상담과 현장 업무의 간극
 			</h2>
 			<div class="flex flex-col gap-6 mt-10">
-				<h3 class="sys-title-md leading-tight tracking-[-0.02em]">
+				<h3 class="sys-title-md leading-tight tracking-[-0.02em]" data-reveal="0">
 					현장 업무와 분리된 디지털 상담
 				</h3>
-				<h4 class="sys-text-sm">2019년, 매장 상담의 디지털 표준화를 위해 SMART GUIDE를 도입했습니다.<br/>그러나 태블릿 중심의 환경, 부족한 상담 콘텐츠, 분리된 결제로 현장 활용이 제한되면서 실시간 상담보다 또 하나의 업무에 가까워졌습니다.</h4>
+				<h4 class="sys-text-sm" data-reveal="0">2019년, 매장 상담의 디지털 표준화를 위해 SMART GUIDE를 도입했습니다.<br/>그러나 태블릿 중심의 환경, 부족한 상담 콘텐츠, 분리된 결제로 현장 활용이 제한되면서 실시간 상담보다 또 하나의 업무에 가까워졌습니다.</h4>
 			</div>
 
-			<div class="mt-20 case-mockup1">
+			<div class="mt-20 case-mockup1" data-reveal="0">
 				<div class="swiper screen-swiper" use:swiper={{
 					modules: [Autoplay, EffectFade],
 					effect: "fade",
@@ -325,9 +328,9 @@
 						crossFade: true
 					},
 					loop: true,
-					speed: 1000,
+					speed: 800,
 					autoplay: {
-						delay: 2500,
+						delay: 2000,
 						disableOnInteraction: false
 					}
 				}}>
@@ -348,7 +351,7 @@
 				</div>
 			</div>
 
-			<div class="full-width mt-20">
+			<div class="full-width mt-20" data-reveal="0">
 				<img 
 					src="/images/case03/02_infographic.png" 
 					alt="" 
@@ -357,19 +360,19 @@
 			</div>
 
 			<div class="flex flex-col gap-10 mt-30">
-				<p class="sys-text-lg">
+				<p class="sys-text-lg" data-reveal="0">
 					현장과 시스템 사이 발견된, 세 가지 간극
 				</p>
 				<ol class="ordered-list">
-					<li class="sys-text-md">
+					<li class="sys-text-md" data-reveal="0">
 						<p>시스템이 현장을 따라가지 못했다</p>
 						<p class="description-paragraph sys-text-sm mt-2">고정 해상도를 전제로 구축되어, 매장에서 사용하는 디바이스가 다양해질수록 화면과 사용성이 무너졌습니다.</p>
 					</li>
-					<li class="sys-text-md mt-10">
+					<li class="sys-text-md mt-10" data-reveal="0">
 						<p>상담이 여러 도구와 시스템으로 끊겼다</p>
 						<p class="description-paragraph sys-text-sm mt-2">Smart Guide만으로 상품을 충분히 설명하거나 결제를 진행할 수 없어, 상담 중 티스테이션닷컴과 POS를 반복해서 오가야 했습니다.</p>
 					</li>
-					<li class="sys-text-md mt-10">
+					<li class="sys-text-md mt-10" data-reveal="0">
 						<p>사용률과 실제 사용이 달랐다</p>
 						<p class="description-paragraph sys-text-sm mt-2">현장 업무와 맞지 않는 사용성에도 사용률이 평가 지표로 관리되면서, 일부 매장에서는 낮에 처리한 업무를 영업 종료 후 일괄 입력하는 우회 행동이 발생했습니다.</p>
 					</li>
@@ -378,32 +381,32 @@
 			
 		</section>
 		<section class="case-section" id="03">
-			<h2 class="sys-text-sm text-accent-foreground">
+			<h2 class="sys-text-sm text-accent-foreground" data-reveal="0">
 				<em class="font-extrabold">03. REFRAME & DESIGN STRATEGY</em>
 				/ 표준화의 재정의
 			</h2>
 			<div class="flex flex-col gap-6 mt-10">
-				<h3 class="sys-title-md leading-tight tracking-[-0.02em]">
+				<h3 class="sys-title-md leading-tight tracking-[-0.02em]" data-reveal="0">
 					사용률을 높이는 것이 아니라, 실제 업무 안에서 사용되게 할 것.
 				</h3>
-				<h4 class="sys-text-sm">정비사의 판단과 현장 상황을 고려해, 담당자와 기기가 바뀌어도 동일한 정보와 기준으로<br/>상담부터 결제까지 이어지도록 세 가지 설계 원칙을 정했습니다.</h4>
+				<h4 class="sys-text-sm" data-reveal="0">정비사의 판단과 현장 상황을 고려해, 담당자와 기기가 바뀌어도 동일한 정보와 기준으로<br/>상담부터 결제까지 이어지도록 세 가지 설계 원칙을 정했습니다.</h4>
 			</div>
-			<div class="flex flex-col gap-3 mt-10 py-5 px-6 bg-attention rounded-sm">
+			<div class="flex flex-col gap-3 mt-10 py-5 px-6 bg-attention rounded-sm" data-reveal="0">
 				<p class="sys-text-lg">새롭게 정의한 표준화. Standardization ≠ Same Screen</p>
 				<p class="description-paragraph sys-text-sm">표준화는 모든 직원이 같은 화면을 보는 것이 아니라, 같은 고객 정보와 업무 맥락, 상담 근거가 끊기지 않고 이어지는 것</p>
 			</div>
 			<div class="flex flex-col gap-7 mt-18">
-				<h3 class="sys-title-sm leading-tight tracking-[-0.02em]">
+				<h3 class="sys-title-sm leading-tight tracking-[-0.02em]" data-reveal="0">
 					세 가지 단절을, 3개의 연결 원칙으로
 				</h3>
 				<div class="flex items-stretch justify-between gap-3 w-full">
-					<div class="flex-1 min-w-0 flow-anim-card" data-animation-state={playCardIndex === 0 ? "play" : "pause"}>
+					<div class="flex-1 min-w-0 flow-anim-card" data-reveal="0" data-animation-state={playCardIndex === 0 ? "play" : "pause"}>
 						<img src="/images/case03/03_anim_slide1.png" alt="" />
 						<div class="flex flex-col text-container">
 							<p class="sys-text-md">1. Continue Anywhere</p>
 							<p class="sys-text-sm">현장 어디서나 시작하고 다른 기기에서 이어서 처리한다.</p>
 						</div>
-						<Button onclick={() => togglePlayCard(0)} size="icon-lg" variant="ghost" class="absolute right-3 bottom-3 p-0 rounded-full! hover:text-primary-foreground cursor-pointer">
+						<Button onclick={() => togglePlayCard(0)} size="icon-lg" variant="ghost" class="absolute right-3 bottom-3 p-0 rounded-full! hover:text-primary-foreground cursor-pointer hidden">
 							{#if playCardIndex === 0}
 								<CirclePause class="size-8" />
 							{:else}
@@ -411,13 +414,13 @@
 							{/if}
 						</Button>
 					</div>
-					<div class="flex-1 min-w-0 flow-anim-card" data-animation-state={playCardIndex === 1 ? "play" : "pause"}>
+					<div class="flex-1 min-w-0 flow-anim-card" data-reveal="0.5" data-animation-state={playCardIndex === 1 ? "play" : "pause"}>
 						<img src="/images/case03/03_anim_slide2.png" alt="" />
 						<div class="flex flex-col text-container">
 							<p class="sys-text-md">2. Complete in One Flow</p>
 							<p class="sys-text-sm">상담을 마친 뒤 다른 시스템에서 다시 시작하지 않는다.</p>
 						</div>
-						<Button onclick={() => togglePlayCard(1)} size="icon-lg" variant="ghost" class="absolute right-3 bottom-3 p-0 rounded-full! hover:text-primary-foreground cursor-pointer">
+						<Button onclick={() => togglePlayCard(1)} size="icon-lg" variant="ghost" class="absolute right-3 bottom-3 p-0 rounded-full! hover:text-primary-foreground cursor-pointer hidden">
 							{#if playCardIndex === 1}
 								<CirclePause class="size-8" />
 							{:else}
@@ -425,13 +428,13 @@
 							{/if}
 						</Button>
 					</div>
-					<div class="flex-1 min-w-0 flow-anim-card" data-animation-state={playCardIndex === 2 ? "play" : "pause"}>
+					<div class="flex-1 min-w-0 flow-anim-card" data-reveal="1" data-animation-state={playCardIndex === 2 ? "play" : "pause"}>
 						<img src="/images/case03/03_anim_slide3.png" alt="" />
 						<div class="flex flex-col text-container">
 							<p class="sys-text-md">3. Explain with Evidence</p>
 							<p class="sys-text-sm">직원의 기억과 말에만 의존하지 않고 고객과 같은 근거를 본다.</p>
 						</div>
-						<Button onclick={() => togglePlayCard(2)} size="icon-lg" variant="ghost" class="absolute right-3 bottom-3 p-0 rounded-full! hover:text-primary-foreground cursor-pointer">
+						<Button onclick={() => togglePlayCard(2)} size="icon-lg" variant="ghost" class="absolute right-3 bottom-3 p-0 rounded-full! hover:text-primary-foreground cursor-pointer hidden">
 							{#if playCardIndex === 2}
 								<CirclePause class="size-8" />
 							{:else}
@@ -443,18 +446,18 @@
 			</div>
 		</section>
 		<section class="case-section" id="04">
-			<h2 class="sys-text-sm text-accent-foreground">
+			<h2 class="sys-text-sm text-accent-foreground" data-reveal="0">
 				<em class="font-extrabold">04. EXPERIENCE DESIGN</em>
 				/ 현장 업무의 연결
 			</h2>
 			<div class="flex flex-col gap-6 mt-10">
-				<h3 class="sys-title-md leading-tight tracking-[-0.02em]">
+				<h3 class="sys-title-md leading-tight tracking-[-0.02em]" data-reveal="0">
 					입차부터 결제까지의 통합 상담 경험 구축
 				</h3>
-				<h4 class="sys-text-sm">모바일 입차 정보를 기기와 담당자에 관계없이 상담·작업·결제로 연동하고, 점검 결과와 상품 정보를 직원과 고객이 함께 확인하도록 설계했습니다.</h4>
+				<h4 class="sys-text-sm" data-reveal="0">모바일 입차 정보를 기기와 담당자에 관계없이 상담·작업·결제로 연동하고, 점검 결과와 상품 정보를 직원과 고객이 함께 확인하도록 설계했습니다.</h4>
 			</div>
 			
-			<div class="flex flex-col gap-4 mt-8">
+			<div class="flex flex-col gap-4 mt-8" data-reveal="0">
 				<img src="/images/case03/04_blueprint.png" alt="" class="block w-full" />
 
 				<p class="sys-caption-sm">* AI 마모도는 Smart Guide 리뉴얼 이후 상담 근거를 확장한 Phase 2 기능입니다. (본문 05 EVOLUTION & AI)</p>
@@ -465,12 +468,12 @@
 					<Separator class="my-0" />
 					<div class="w-full pl-50">
 						<div class="flex flex-col gap-4 mt-8">
-							<p class="sys-text-lg">04-1. Continue Anywhere</p>
-							<p class="sys-text-md">현장에서 등록한 입차 정보를 대기실 상담원이 바로 이어받는 흐름</p>
+							<p class="sys-text-lg" data-reveal="0">04-1. Continue Anywhere</p>
+							<p class="sys-text-md" data-reveal="0">현장에서 등록한 입차 정보를 대기실 상담원이 바로 이어받는 흐름</p>
 						</div>
 
 						<div class="flex items-center gap-15 mt-18 pl-10">
-							<div class="flex-none iphone-frame">
+							<div class="flex-none iphone-frame" data-reveal="0">
 								<div
 									class="screen swiper"
 									use:swiper={{
@@ -518,7 +521,7 @@
 								</Button>
 							</div>
 
-							<div class="flex flex-col gap-10">
+							<div class="flex flex-col gap-10" data-reveal="1">
 								<span class="self-start inline-flex sys-text-sm rounded-full bg-foreground text-background py-2 px-4 -mb-6">정비사</span>
 								<p class="sys-text-lg">
 									고객을 처음 맞이한 정비사가 현장에서 시작하는 입차·점검
@@ -541,7 +544,7 @@
 						</div>
 
 						<div class="flex items-start gap-15">
-							<div class="flex flex-col gap-10 pt-70">
+							<div class="flex flex-col gap-10 pt-70" data-reveal="0.5">
 								<span class="self-start inline-flex sys-text-sm rounded-full bg-foreground text-background py-2 px-4 -mb-6">상담 직원</span>
 								<p class="sys-text-lg">
 									고객보다 먼저 상담 화면에 도착하는 입차·점검 정보
@@ -562,7 +565,7 @@
 								</ol>
 							</div>
 							
-							<div class="flex-none ipad-frame">
+							<div class="flex-none ipad-frame" data-reveal="0">
 								<div
 									class="screen swiper"
 									use:swiper={{
@@ -620,12 +623,12 @@
 					<Separator class="my-0" />
 					<div class="w-full pl-50">
 						<div class="flex flex-col gap-4 mt-8">
-							<p class="sys-text-lg">04-2. Complete in One Flow</p>
-							<p class="sys-text-md">작업목록에 담긴 고객의 선택이 재입력 없이 작업과 결제까지 이어지는 흐름</p>
+							<p class="sys-text-lg" data-reveal="0">04-2. Complete in One Flow</p>
+							<p class="sys-text-md" data-reveal="0">작업목록에 담긴 고객의 선택이 재입력 없이 작업과 결제까지 이어지는 흐름</p>
 						</div>
 
 						<div class="flex items-center gap-15 mt-15">
-							<div class="flex flex-col gap-10 w-112">
+							<div class="flex flex-col gap-10 w-112" data-reveal="0">
 								<span class="self-start inline-flex sys-text-sm rounded-full bg-foreground text-background py-2 px-4 -mb-6">정비사 · 상담 직원</span>
 								<p class="sys-text-lg">
 									작업목록부터 완료 내역과 결제까지<br/>연결되는 고객 기록
@@ -645,7 +648,7 @@
 									</li>
 								</ol>
 							</div>
-							<div class="flex-1 -mr-body-x overflow-hidden">
+							<div class="flex-1 -mr-body-x overflow-hidden" data-reveal="0.5">
 								<div class="flex-none iphone-frame">
 									<div class="screen swiper overflow-visible-swiper overflow-visible!" use:swiper>
 										<div class="swiper-wrapper">
@@ -671,14 +674,14 @@
 					<div class="w-full pl-50">
 						<div class="flex mt-8">
 							<div class="flex flex-col gap-4">
-								<p class="sys-text-lg">04-3. Explain with Evidence</p>
-								<p class="sys-text-md">모든 매장에서 같은 정보를 바탕으로 제시하는, 고객이 직접 확인할 수 있는 상담 근거</p>
+								<p class="sys-text-lg" data-reveal="0">04-3. Explain with Evidence</p>
+								<p class="sys-text-md" data-reveal="0">모든 매장에서 같은 정보를 바탕으로 제시하는, 고객이 직접 확인할 수 있는 상담 근거</p>
 							</div>
 						</div>
-						<p class="description-paragraph sys-text-sm mt-8">티스테이션 온라인몰에 축적된 상품에 관한 모든 데이터를 Smart Guide 안에서 함께 확인할 수 있도록 연결했습니다.<br/>직원마다 달랐던 설명을, 모든 매장이 같은 정보를 바탕으로 고객과 비교하고 판단하는 상담으로 바꿨습니다.</p>
+						<p class="description-paragraph sys-text-sm mt-8" data-reveal="0">티스테이션 온라인몰에 축적된 상품에 관한 모든 데이터를 Smart Guide 안에서 함께 확인할 수 있도록 연결했습니다.<br/>직원마다 달랐던 설명을, 모든 매장이 같은 정보를 바탕으로 고객과 비교하고 판단하는 상담으로 바꿨습니다.</p>
 					</div>
 					
-					<div class="swiper explain-swiper mt-20 -mx-body-x! pl-[calc(var(--spacing-body-x)+200px)]! pr-body-x!" use:swiper={{
+					<div class="swiper explain-swiper mt-20 -mx-body-x! pl-[calc(var(--spacing-body-x)+200px)]! pr-body-x!" data-reveal="0" use:swiper={{
 						modules: [Pagination],
 						slidesPerView: "auto",
 						spaceBetween: 16,
@@ -721,19 +724,19 @@
 			</div>
 		</section>
 		<section class="case-section" id="05">
-			<h2 class="sys-text-sm text-accent-foreground">
+			<h2 class="sys-text-sm text-accent-foreground" data-reveal="0">
 				<em class="font-extrabold">05. EVOLUTION & AI</em>
 				/ 상담 근거의 확장
 			</h2>
 			<div class="flex flex-col gap-6 mt-10">
-				<h3 class="sys-title-md leading-tight tracking-[-0.02em]">
+				<h3 class="sys-title-md leading-tight tracking-[-0.02em]" data-reveal="0">
 					정비사의 설명에 사진과 데이터를 더한 상담 근거 — AI 마모도 측정
 				</h3>
-				<h4 class="sys-text-sm">상품 상담은 표준화됐지만, 교체 필요성에 대한 판단과 설명은 여전히 정비사의 눈과 말에 의존했습니다.<br/>타이어 AI 분석과 고객용 리포트를 더해, 고객이 정비 결과를 믿을 수 있도록 이미지 AI 스캔기능으로 상담의 편의성을 확장했습니다.</h4>
+				<h4 class="sys-text-sm" data-reveal="0">상품 상담은 표준화됐지만, 교체 필요성에 대한 판단과 설명은 여전히 정비사의 눈과 말에 의존했습니다.<br/>타이어 AI 분석과 고객용 리포트를 더해, 고객이 정비 결과를 믿을 수 있도록 이미지 AI 스캔기능으로 상담의 편의성을 확장했습니다.</h4>
 			</div>
 			
 			<div class="flex items-start gap-15 mt-25">
-				<div class="flex-none iphone-frame">
+				<div class="flex-none iphone-frame" data-reveal="0">
 					<div class="screen swiper" use:swiper>
 						<div class="swiper-wrapper">
 							<div class="swiper-slide">
@@ -746,7 +749,7 @@
 					</div>
 				</div>
 
-				<div class="flex flex-col pt-6">
+				<div class="flex flex-col pt-6" data-reveal="1">
 					<p class="sys-text-lg">05-1. 육안 판정에서 AI 분석으로</p>
 
 					<p class="sys-text-md mt-16">익숙한 수기 입력은 유지하되, 타이어 촬영으로 결과를 얻는 <br/>AI 측정을 같은 점검 흐름 안에 추가했습니다.</p>
@@ -769,33 +772,33 @@
 				</div>
 			</div>
 
-			<div class="full-width mt-30 py-10 bg-foreground text-background">
+			<div class="full-width mt-30 py-10 bg-foreground text-background" data-reveal="0">
 				<div class="w-fit mx-auto text-center">
 					<div class="flex flex-col gap-4 mt-8">
-						<p class="sys-text-lg">타이어 촬영에서 고객 리포트까지 - AI 스캔 프로세스</p>
-						<p class="sys-text-sm text-border">네 개의 타이어를 차례로 촬영하면, 분석 결과가 고객에게 전달할 상담 리포트로 완성됩니다.</p>
+						<p class="sys-text-lg" data-reveal="0">타이어 촬영에서 고객 리포트까지 - AI 스캔 프로세스</p>
+						<p class="sys-text-sm text-border" data-reveal="0">네 개의 타이어를 차례로 촬영하면, 분석 결과가 고객에게 전달할 상담 리포트로 완성됩니다.</p>
 					</div>
 
 					<div class="flex items-start gap-8 mt-12 text-center">
-						<div class="flex flex-col items-center gap-7 w-[330px]">
+						<div class="flex flex-col items-center gap-7 w-[330px]" data-reveal="0">
 							<div class="relative w-full flex justify-center items-center connect-dash">
 								<span class="relative inline-flex bg-foreground px-3 sys-text-sm font-medium">❶ 마모점검을 위해 AI 분석 선택</span>
 							</div>
 							<img src="/images/case03/05_1_process1.png" alt="" class="block w-full" />
 						</div>
-						<div class="flex flex-col items-center gap-7 w-[330px]">
+						<div class="flex flex-col items-center gap-7 w-[330px]" data-reveal="0.5">
 							<div class="relative w-full flex justify-center items-center connect-dash">
 								<span class="relative inline-flex bg-foreground px-3 sys-text-sm font-medium connect-dash-head">❷ UI 가이드에 따라 타이어 촬영</span>
 							</div>
 							<img src="/images/case03/05_1_process2.png" alt="" class="block w-full" />
 						</div>
-						<div class="flex flex-col items-center gap-7 w-[330px]">
+						<div class="flex flex-col items-center gap-7 w-[330px]" data-reveal="1">
 							<div class="relative w-full flex justify-center items-center connect-dash">
 								<span class="relative inline-flex bg-foreground px-3 sys-text-sm font-medium connect-dash-head">❸ 촬영 종료 후 Summery 제공</span>
 							</div>
 							<img src="/images/case03/05_1_process3.png" alt="" class="block w-full" />
 						</div>
-						<div class="flex flex-col items-center gap-7 w-[330px]">
+						<div class="flex flex-col items-center gap-7 w-[330px]" data-reveal="1.5">
 							<div class="relative w-full flex justify-center items-center">
 								<span class="relative inline-flex bg-foreground px-3 sys-text-sm font-medium connect-dash-head">❹ 잔여 그루브 및 측정 결과, AI 진단</span>
 							</div>
@@ -807,12 +810,12 @@
 
 			<div class="mt-30">
 				<div class="flex flex-col">
-					<p class="sys-text-lg">05-2. 시각적 근거와 고객의 판단 변화</p>
+					<p class="sys-text-lg" data-reveal="0">05-2. 시각적 근거와 고객의 판단 변화</p>
 
-					<p class="sys-text-md mt-4">타이어 상태를 색상과 수치로 함께 확인하면서 교체 필요성을 설명하기 쉬워지고,<br/>고객의 결정에도 도움이 됐다는 현장 반응을 확인했습니다.</p>
-					<p class="description-paragraph sys-text-sm mt-10">20개 매장에서 한 달간 AI 마모도 기능을 파일럿 테스트로 운영했습니다. <br/>사용 빈도가 다른 매장 세 군데를 방문해 측정 과정과 상담 활용 방식을 살펴봤습니다.</p>
+					<p class="sys-text-md mt-4" data-reveal="0">타이어 상태를 색상과 수치로 함께 확인하면서 교체 필요성을 설명하기 쉬워지고,<br/>고객의 결정에도 도움이 됐다는 현장 반응을 확인했습니다.</p>
+					<p class="description-paragraph sys-text-sm mt-10" data-reveal="0">20개 매장에서 한 달간 AI 마모도 기능을 파일럿 테스트로 운영했습니다. <br/>사용 빈도가 다른 매장 세 군데를 방문해 측정 과정과 상담 활용 방식을 살펴봤습니다.</p>
 
-					<div class="flex gap-4 mt-10">
+					<div class="flex gap-4 mt-10" data-reveal="0">
 						<div class="flex flex-col items-center gap-2 w-33 text-center">
 							<span class="w-full h-9 flex items-center justify-center sys-caption font-semibold bg-[#FF7B01] text-accent rounded-lg">20 Stores</span>
 							<p class="sys-caption text-nowrap">파일럿 대상 매장</p>
@@ -831,10 +834,10 @@
 						</div>
 					</div>
 
-					<p class="sys-text-lg mt-18">고객용 AI 마모도 분석 리포트</p>
-					<p class="description-paragraph sys-text-sm mt-6">타이어별 상태와 촬영 사진, 분석 결과를 모바일 리포트로 전달했습니다.<br/>고객은 상담 후에도 자신의 측정 결과와 설명의 근거를 다시 확인할 수 있습니다.</p>
+					<p class="sys-text-lg mt-18" data-reveal="0">고객용 AI 마모도 분석 리포트</p>
+					<p class="description-paragraph sys-text-sm mt-6" data-reveal="0">타이어별 상태와 촬영 사진, 분석 결과를 모바일 리포트로 전달했습니다.<br/>고객은 상담 후에도 자신의 측정 결과와 설명의 근거를 다시 확인할 수 있습니다.</p>
 
-					<div class="flex items-center gap-1 mt-10">
+					<div class="flex items-center gap-1 mt-10" data-reveal="0">
 						<span class="inline-flex items-center h-9 px-6 bg-ts-n4 rounded-full sys-caption font-medium">AI 측정 완료</span>
 						<ArrowRight class="size-6 text-ts-n2" />
 						<span class="inline-flex items-center h-9 px-6 bg-ts-n4 rounded-full sys-caption font-medium">상담 중 함께 확인</span>
@@ -845,7 +848,7 @@
 					</div>
 
 					<div class="flex items-start gap-16 py-4 pl-20 pr-12 mt-10 bg-attention rounded-sm">
-						<div class="screenshot-marker-container w-[205px] flex-none" data-focusing={activeFocusing}>
+						<div class="screenshot-marker-container w-[205px] flex-none" data-focusing={activeFocusing} data-reveal="0">
 							<img src="/images/case03/05_2_screenshot.png" alt="" class="w-full rounded-sm" />
 
 							<button
@@ -891,7 +894,7 @@
 							<div class="focusing-area w-full h-[20.38%] top-[78%] {activeFocusing === 4 || hoveredFocusing === 4 ? 'is-active' : ''}"></div>
 						</div>
 
-						<div class="screenshot-focusing-detail">
+						<div class="screenshot-focusing-detail" data-reveal="1">
 							{#if activeFocusing === 1}
 								<div class="detail-item py-8">
 									<p class="sys-text-sm text-accent-foreground font-medium">1/4 현재 상태를 인지합니다</p>
@@ -968,7 +971,7 @@
 				</div>
 			</div>
 
-			<div class="full-width flex flex-col items-center justify-center mt-5 text-background text-center h-128 relative">
+			<div class="full-width flex flex-col items-center justify-center mt-5 text-background text-center h-128 relative" data-reveal="0">
 				<img src="/images/case03/05_store_feedback_bg.png" alt="" class="absolute inset-0 w-full h-full object-cover" />
 				<p class="sys-title-md relative">“예전에는 ‘이 정도면 조금 더 타도 되지?’라고 하셨던 분들도,<br/>AI 결과가 빨간색으로 나오면 ‘아, 갈아야 되네. 교체해 주세요’라고 바뀌세요.”</p>
 				<p class="sys-text-sm relative mt-4">— T’Station 방배점 점장</p>
@@ -976,14 +979,14 @@
 			
 			<div class="flex items-start gap-10 mt-30">
 				<div class="flex flex-col">
-					<p class="sys-text-lg">05-3. 파일럿 운영 결과와 현장 정착 조건</p>
+					<p class="sys-text-lg" data-reveal="0">05-3. 파일럿 운영 결과와 현장 정착 조건</p>
 
-					<p class="sys-text-md mt-4">간편한 측정 과정은 사용 부담을 낮추고, 결과의 일관성과 신뢰는 반복 사용의 주요 조건으로 나타났습니다.</p>
-					<p class="description-paragraph sys-text-sm mt-6">20개 매장에서 한 달간 AI 마모도 측정 기능을 운영한 결과, 총 130건의 측정이 발생했습니다.<br/>같은 기능이 매장마다 다르게 사용된 이유를 확인하기 위해 서로 다른 사용 빈도를 보인<br/>관양점(21건), 방배점(8건), 한남점(5건)을 방문해 측정 과정과 상담 활용 방식을 살펴봤습니다.</p>
+					<p class="sys-text-md mt-4" data-reveal="0">간편한 측정 과정은 사용 부담을 낮추고, 결과의 일관성과 신뢰는 반복 사용의 주요 조건으로 나타났습니다.</p>
+					<p class="description-paragraph sys-text-sm mt-6" data-reveal="0">20개 매장에서 한 달간 AI 마모도 측정 기능을 운영한 결과, 총 130건의 측정이 발생했습니다.<br/>같은 기능이 매장마다 다르게 사용된 이유를 확인하기 위해 서로 다른 사용 빈도를 보인<br/>관양점(21건), 방배점(8건), 한남점(5건)을 방문해 측정 과정과 상담 활용 방식을 살펴봤습니다.</p>
 
 					<div class="flex gap-8 mt-20">
-						<img src="/images/case03/05_3_infographic.png" alt="" class="w-[641px] max-w-full" />
-						<div class="">
+						<img src="/images/case03/05_3_infographic.png" alt="" class="w-[641px] max-w-full" data-reveal="0" />
+						<div class="" data-reveal="1">
 							<div class="flex flex-col items-start">
 								<span class="inline-flex items-center h-8 px-4 bg-attention rounded-full sys-caption">전체 측정 중 상위 3개 매장 비중</span>
 								<div class="text-[60px] font-semibold bg-linear-to-b from-[#FF4800] to-[#FF9900] bg-clip-text text-transparent">54.6%</div>
@@ -992,7 +995,7 @@
 						</div>
 					</div>
 					<div class="flex items-stretch gap-4 mt-10">
-						<div class="flex flex-col items-start bg-border rounded-sm py-7 px-6 w-152">
+						<div class="flex flex-col items-start bg-border rounded-sm py-7 px-6 w-152" data-reveal="0">
 							<span class="inline-flex items-center h-8 px-4 bg-background rounded-full sys-caption">유효하게 작용한 사용 이유</span>
 							<ul class="list-disc list-outside pl-5 mt-4 space-y-2 sys-text-sm tracking-[-3%]">
 								<li>기존 무상점검 안에서 촬영해 별도의 입력과 교육 부담이 적었습니다.</li>
@@ -1000,7 +1003,7 @@
 								<li>확인된 마모와 편마모 결과를 타이어 교체와 얼라인먼트 상담으로<br/>연결할 수 있었습니다.</li>
 							</ul>
 						</div>
-						<div class="flex flex-col items-start bg-border rounded-sm py-7 px-6 w-152">
+						<div class="flex flex-col items-start bg-border rounded-sm py-7 px-6 w-152" data-reveal="0.5">
 							<span class="inline-flex items-center h-8 px-4 bg-background rounded-full sys-caption">반복 사용을 막은 요인</span>
 							<ul class="list-disc list-outside pl-5 mt-4 space-y-2 sys-text-sm tracking-[-5%]">
 								<li>같은 타이어도 촬영 환경에 따라 결과가 달라지면 분석값을 신뢰하기 어려웠습니다.</li>
@@ -1010,77 +1013,77 @@
 						</div>
 					</div>
 
-					<p class="description-paragraph sys-text-sm mt-8"><em class="font-semibold">사진과 수치를 활용한 상담이 고객의 이해와 교체 판단에 도움이 된다는 현장 반응을 확인했습니다.</em><br/>이러한 가치를 지속적으로 제공하기 위해, 촬영 환경에 따른 결과 편차와 재촬영 부담을 줄이는 것을 후속 개선 방향으로 정했습니다.</p>
+					<p class="description-paragraph sys-text-sm mt-8" data-reveal="0"><em class="font-semibold">사진과 수치를 활용한 상담이 고객의 이해와 교체 판단에 도움이 된다는 현장 반응을 확인했습니다.</em><br/>이러한 가치를 지속적으로 제공하기 위해, 촬영 환경에 따른 결과 편차와 재촬영 부담을 줄이는 것을 후속 개선 방향으로 정했습니다.</p>
 				</div>
 			</div>
 		</section>
 		<section class="case-section" id="06">
-			<h2 class="sys-text-sm text-accent-foreground">
+			<h2 class="sys-text-sm text-accent-foreground" data-reveal="0">
 				<em class="font-extrabold">06. LEARNING</em>
 				/ 표준이 현장에서 작동하는 조건
 			</h2>
 			<div class="flex flex-col gap-6 mt-10">
-				<h3 class="sys-title-md leading-tight tracking-[-0.02em]">
+				<h3 class="sys-title-md leading-tight tracking-[-0.02em]" data-reveal="0">
 					현장 중심의 서비스 표준화 조건
 				</h3>
-				<h4 class="sys-text-sm">리뉴얼과 AI 파일럿을 거치며 약 300개 매장의 상담 표준화를 위한 설계 기준을 정리했습니다.<br/>정보의 연속성, 직원의 사용 동기, 고객과 공유하는 판단 근거를 함께 고려해야 했습니다.</h4>
+				<h4 class="sys-text-sm" data-reveal="0">리뉴얼과 AI 파일럿을 거치며 약 300개 매장의 상담 표준화를 위한 설계 기준을 정리했습니다.<br/>정보의 연속성, 직원의 사용 동기, 고객과 공유하는 판단 근거를 함께 고려해야 했습니다.</h4>
 			</div>
 			<ul class="flex flex-col gap-10 mt-20">
-				<li class="flex flex-col">
+				<li class="flex flex-col" data-reveal="0">
 					<p class="sys-text-md">Learning 01. Flow</p>
-					<div class="flex flex-col gap-3 mt-4 py-5 px-6 bg-attention rounded-sm">
-						<p class="sys-text-lg">담당자와 기기 간 상담 정보의 연속성</p>
-						<p class="description-paragraph sys-text-sm">동일한 절차를 제공해도 장소와 기기가 바뀌면 업무는 끊길 수 있었습니다.<br/>입차·점검부터 상담·작업·결제까지 고객 정보와 진행 상태를 유지하는 것이 일관된 서비스의 기반이었습니다.</p>
+					<div class="flex flex-col gap-3 mt-4 py-5 px-6 bg-attention rounded-sm overflow-hidden">
+						<p class="sys-text-lg" data-reveal="0">담당자와 기기 간 상담 정보의 연속성</p>
+						<p class="description-paragraph sys-text-sm" data-reveal="0">동일한 절차를 제공해도 장소와 기기가 바뀌면 업무는 끊길 수 있었습니다.<br/>입차·점검부터 상담·작업·결제까지 고객 정보와 진행 상태를 유지하는 것이 일관된 서비스의 기반이었습니다.</p>
 					</div>
 				</li>
-				<li class="flex flex-col">
+				<li class="flex flex-col" data-reveal="0">
 					<p class="sys-text-md">Learning 02. Adoption</p>
-					<div class="flex flex-col gap-3 mt-4 py-5 px-6 bg-attention rounded-sm">
-						<p class="sys-text-lg">사용률 목표가 아닌, 업무 안에서 진짜 활용되는 플랫폼</p>
-						<p class="description-paragraph sys-text-sm">사용 실적을 평가하는 것만으로는 사후 기록을 실제 상담 활용으로 바꾸기 어려웠습니다.<br/>입력과 인계 부담을 줄이고 업무를 마치는 데 도움이 될 때, 직원이 플랫폼을 사용할 이유가 생깁니다.</p>
+					<div class="flex flex-col gap-3 mt-4 py-5 px-6 bg-attention rounded-sm overflow-hidden">
+						<p class="sys-text-lg" data-reveal="0">사용률 목표가 아닌, 업무 안에서 진짜 활용되는 플랫폼</p>
+						<p class="description-paragraph sys-text-sm" data-reveal="0">사용 실적을 평가하는 것만으로는 사후 기록을 실제 상담 활용으로 바꾸기 어려웠습니다.<br/>입력과 인계 부담을 줄이고 업무를 마치는 데 도움이 될 때, 직원이 플랫폼을 사용할 이유가 생깁니다.</p>
 					</div>
 				</li>
-				<li class="flex flex-col">
+				<li class="flex flex-col" data-reveal="0">
 					<p class="sys-text-md">Learning 03. Trust</p>
-					<div class="flex flex-col gap-3 mt-4 py-5 px-6 bg-attention rounded-sm">
-						<p class="sys-text-lg">분석 결과의 신뢰성과 상담 활용 가치</p>
-						<p class="description-paragraph sys-text-sm">정비사가 신뢰할 수 있는 AI 결과는 설명 부담을 줄이고, 고객이 교체 필요성을 이해하는 근거가 됐습니다.<br/>결과의 일관성과 이를 실제 상담의 판단으로 연결할 수 있는지가 AI 경험의 중요한 설계 기준이었습니다.</p>
+					<div class="flex flex-col gap-3 mt-4 py-5 px-6 bg-attention rounded-sm overflow-hidden">
+						<p class="sys-text-lg" data-reveal="0">분석 결과의 신뢰성과 상담 활용 가치</p>
+						<p class="description-paragraph sys-text-sm" data-reveal="0">정비사가 신뢰할 수 있는 AI 결과는 설명 부담을 줄이고, 고객이 교체 필요성을 이해하는 근거가 됐습니다.<br/>결과의 일관성과 이를 실제 상담의 판단으로 연결할 수 있는지가 AI 경험의 중요한 설계 기준이었습니다.</p>
 					</div>
 				</li>
 			</ul>
 
 			<div class="flex flex-col mt-40">
-				<p class="sys-text-md">NEXT VALIDATION / 다음으로 확인할 것</p>
+				<p class="sys-text-md" data-reveal="0">NEXT VALIDATION / 다음으로 확인할 것</p>
 				<div class="flex flex-col gap-6 mt-6">
-					<p class="sys-text-lg">정성적으로 확인한 변화 다음, 행동의 변화를 수치로 검증할 것</p>
-					<p class="description-paragraph sys-text-sm">이번 프로젝트에서는 구·신 Smart Guide의 동일 조건 KPI 비교와 고객 직접 조사를 진행하지 못했습니다.<br/>따라서 현장에서 관찰한 반응을 전체 성과로 일반화하지 않고, 다음 단계에서 검증해야 할 지표로 남겼습니다.</p>
+					<p class="sys-text-lg" data-reveal="0">정성적으로 확인한 변화 다음, 행동의 변화를 수치로 검증할 것</p>
+					<p class="description-paragraph sys-text-sm" data-reveal="0">이번 프로젝트에서는 구·신 Smart Guide의 동일 조건 KPI 비교와 고객 직접 조사를 진행하지 못했습니다.<br/>따라서 현장에서 관찰한 반응을 전체 성과로 일반화하지 않고, 다음 단계에서 검증해야 할 지표로 남겼습니다.</p>
 				</div>
 			</div>
 
 			<ul class="flex flex-col mt-16 w-200 sys-text-sm">
-				<li class="flex items-center justify-start border-b py-3 px-5 gap-20 bg-attention">
+				<li class="flex items-center justify-start border-b py-3 px-5 gap-20 bg-attention" data-reveal="0">
 					<span class="flex-none w-20">검증 영역</span>
 					<span class="flex-1 min-w-0">측정 KPI</span>
 				</li>
-				<li class="flex items-center justify-start border-b py-3 px-5 gap-20">
+				<li class="flex items-center justify-start border-b py-3 px-5 gap-20" data-reveal="0">
 					<span class="flex-none w-20">업무 흐름</span>
 					<span class="flex-1 min-w-0">입차부터 결제까지 소요시간, 기기 간 인계 완료율, 결제 전환율</span>
 				</li>
-				<li class="flex items-center justify-start border-b py-3 px-5 gap-20">
+				<li class="flex items-center justify-start border-b py-3 px-5 gap-20" data-reveal="0">
 					<span class="flex-none w-20">현장 지표</span>
 					<span class="flex-1 min-w-0">매장별 스마트 가이드 사용률, 단계별 이탈율, 실시간 입차율</span>
 				</li>
-				<li class="flex items-center justify-start border-b py-3 px-5 gap-20">
+				<li class="flex items-center justify-start border-b py-3 px-5 gap-20" data-reveal="0">
 					<span class="flex-none w-20">고객 경험</span>
 					<span class="flex-1 min-w-0">리포트 열람률, 상담 신뢰도, NPS 응답분석</span>
 				</li>
-				<li class="flex items-center justify-start border-b py-3 px-5 gap-20">
+				<li class="flex items-center justify-start border-b py-3 px-5 gap-20" data-reveal="0">
 					<span class="flex-none w-20">AI 신뢰도</span>
 					<span class="flex-1 min-w-0">측정 완료 세션 시간, 촬영 환경별 평균 절대 오차</span>
 				</li>
 			</ul>
 
-			<div class="full-width flex flex-col items-center justify-center mt-40 text-background text-center h-93 relative bg-black/80">
+			<div class="full-width flex flex-col items-center justify-center mt-40 text-background text-center h-93 relative bg-black/80" data-reveal="0">
 				<img src="/images/case03/closing_bg.png.png" alt="" class="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-80" />
 				<p class="sys-title-md relative">ONE STANDARD SERVICE, EVERY STORE</p>
 				<p class="sys-text-md relative mt-6">더 편한 UI를 만드는것으로 UX가 완성 된다고 생각하지 않았습니다.<br/>매장의 상담과 판매 방식을 다시 들여다보고 직원에게는 상품을 효과적으로 제안할 수 있는 도구를,<br/>고객에게는 스스로 판단할 수 있는 근거를 제공하고자 했습니다.<br/><br/>매장의 판매 기회와 고객의 신뢰가 함께 커질 때, B2B 플랫폼의 UX도 비로소 비즈니스의 성과가 된다고 생각합니다.</p>

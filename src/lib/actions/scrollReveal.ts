@@ -84,7 +84,7 @@ export const DEFAULT_SCROLL_REVEAL_CONFIG: ScrollRevealConfig = {
 	translateY: 100,        // translateY: 100px -> 0
 	initialOpacity: 0,      // opacity: 0 -> 1
 	staggerDelay: 400,      // 딜레이 타임 (ms)
-	duration: 800,          // 전환 지속 시간 (ms)
+	duration: 600,          // 전환 지속 시간 (ms)
 	easing: 'ease',         // 이징 곡선
 	once: true              // 1회 등장
 };
@@ -154,23 +154,30 @@ export function scrollReveal(node: HTMLElement, customOptions?: Partial<ScrollRe
 		}
 	};
 
+	let hasUserScrolled = false;
+
 	const hideItem = (item: RevealItem) => {
-		if (!item.isRevealed) return;
 		item.isRevealed = false;
 		item.el.classList.remove('is-revealed');
 	};
 
-	const checkInitialPositions = () => {
+	const checkPositions = (forceReset = false) => {
 		if (typeof window === 'undefined') return;
 		const triggerLine = window.innerHeight * config.triggerRatio;
 
 		items.forEach((item) => {
-			if (item.isRevealed) return;
 			const rect = item.el.getBoundingClientRect();
-			// 화면 80% 트리거 라인보다 위에 있는 모든 엘리먼트 (현재 뷰포트 내 + 이미 위로 지나친 요소들)
+
 			if (rect.top <= triggerLine) {
+				// 화면 80% 트리거 라인보다 위에 있음 (현재 뷰포트 내 또는 이미 위로 지나친 요소)
 				const isAboveViewport = rect.bottom < 0;
 				revealItem(item, isAboveViewport);
+			} else if (forceReset || !config.once) {
+				// forceReset(페이지 전환 시 스크롤 0 리셋)이거나 once가 false일 때만 숨김/리셋
+				hideItem(item);
+				if (observer) {
+					observer.observe(item.el);
+				}
 			}
 		});
 	};
@@ -193,7 +200,7 @@ export function scrollReveal(node: HTMLElement, customOptions?: Partial<ScrollRe
 					if (entry.isIntersecting || rect.top <= triggerLine) {
 						const isAboveViewport = rect.bottom < 0;
 						revealItem(item, isAboveViewport);
-					} else if (!config.once && rect.top > triggerLine) {
+					} else if (!config.once) {
 						hideItem(item);
 					}
 				});
@@ -211,7 +218,7 @@ export function scrollReveal(node: HTMLElement, customOptions?: Partial<ScrollRe
 			}
 		});
 
-		checkInitialPositions();
+		checkPositions(false);
 	};
 
 	const handleResize = () => {
@@ -219,7 +226,20 @@ export function scrollReveal(node: HTMLElement, customOptions?: Partial<ScrollRe
 	};
 
 	const handleScroll = () => {
-		checkInitialPositions();
+		hasUserScrolled = true;
+		checkPositions(false);
+	};
+
+	const handleAfterNavigate = () => {
+		hasUserScrolled = false;
+		// 페이지 이동 완료 후 스크롤이 (0,0)으로 리셋된 상태에서 위치 재검증 및 강제 리셋
+		requestAnimationFrame(() => {
+			checkPositions(true);
+		});
+	};
+
+	const handlePageShow = () => {
+		checkPositions(true);
 	};
 
 	// DOM 변경 시 자동 갱신
@@ -238,18 +258,20 @@ export function scrollReveal(node: HTMLElement, customOptions?: Partial<ScrollRe
 	parseElements();
 	initObserver();
 
-	// 브라우저 스크롤 복원(새로고침 / 뒤로가기) 대응: 다단계 즉시 체크
+	// 브라우저 스크롤 복원(새로고침 / 뒤로가기) 및 네비게이션 대응
 	const rafId = requestAnimationFrame(() => {
 		parseElements();
 		initObserver();
 	});
 
-	const timer1 = setTimeout(checkInitialPositions, 50);
-	const timer2 = setTimeout(checkInitialPositions, 200);
+	const timer1 = setTimeout(() => { if (!hasUserScrolled) checkPositions(true); }, 50);
+	const timer2 = setTimeout(() => { if (!hasUserScrolled) checkPositions(true); }, 150);
+	const timer3 = setTimeout(() => { if (!hasUserScrolled) checkPositions(true); }, 300);
 
 	window.addEventListener('resize', handleResize, { passive: true });
 	window.addEventListener('scroll', handleScroll, { passive: true });
-	window.addEventListener('pageshow', checkInitialPositions, { passive: true });
+	window.addEventListener('pageshow', handlePageShow, { passive: true });
+	window.addEventListener('app:after-navigate', handleAfterNavigate, { passive: true });
 
 	return {
 		update(newOptions?: Partial<ScrollRevealConfig>) {
@@ -261,9 +283,11 @@ export function scrollReveal(node: HTMLElement, customOptions?: Partial<ScrollRe
 			cancelAnimationFrame(rafId);
 			clearTimeout(timer1);
 			clearTimeout(timer2);
+			clearTimeout(timer3);
 			window.removeEventListener('resize', handleResize);
 			window.removeEventListener('scroll', handleScroll);
-			window.removeEventListener('pageshow', checkInitialPositions);
+			window.removeEventListener('pageshow', handlePageShow);
+			window.removeEventListener('app:after-navigate', handleAfterNavigate);
 			if (mutationObserver) {
 				mutationObserver.disconnect();
 				mutationObserver = null;
