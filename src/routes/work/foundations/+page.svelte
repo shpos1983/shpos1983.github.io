@@ -264,6 +264,21 @@
 		window.addEventListener('scroll', updateScrollState, { passive: true });
 		window.addEventListener('resize', updateScrollState, { passive: true });
 
+		const checkHashAndScroll = () => {
+			if (window.location.hash) {
+				const id = window.location.hash.replace('#', '');
+				scrollToSection(id);
+			}
+		};
+
+		checkHashAndScroll();
+		const hashTimer = setTimeout(checkHashAndScroll, 150);
+
+		const handleHashChange = () => {
+			checkHashAndScroll();
+		};
+		window.addEventListener('hashchange', handleHashChange);
+
 		let swiper: Swiper | null = null;
 		if (overviewSwiperEl) {
 			swiper = new Swiper(overviewSwiperEl, {
@@ -337,6 +352,8 @@
 		}
 
 		return () => {
+			clearTimeout(hashTimer);
+			window.removeEventListener('hashchange', handleHashChange);
 			window.removeEventListener('scroll', updateScrollState);
 			window.removeEventListener('resize', updateScrollState);
 			if (swiper) swiper.destroy();
@@ -1033,13 +1050,18 @@
 		<img src="/images/foundations/04_popup3_works4.png" alt="" class="w-[370px] aspect-370/522" />
 	</div>
 	
-	<div class="flex flex-col gap-10 mt-50">
+	<div class="flex flex-col gap-10 mt-30">
 		<img src="/images/foundations/04_popup3_works5.png" alt="" class="w-full aspect-1200/571" />
 		<img src="/images/foundations/04_popup3_works6.png" alt="" class="w-full aspect-1200/571" />
 	</div>
-	<div class="flex flex-col items-center gap-2 mt-50">
+	<div class="flex flex-wrap items-center gap-4 mt-40">
+		<img src="/images/foundations/04_popup3_works12.png" alt="" class="flex-1 min-w-0 aspect-square" />
+		<img src="/images/foundations/04_popup3_works13.png" alt="" class="flex-1 min-w-0 aspect-square" />
+		<img src="/images/foundations/04_popup3_works14.png" alt="" class="flex-none w-full aspect-1200/600" />
+	</div>
+	<div class="flex flex-col items-center gap-2 mt-40">
 		<img src="/images/foundations/04_popup3_works7.png" alt="" class="w-full aspect-1200/663" />
-		<img src="/images/foundations/04_popup3_works8.png" alt="" class="w-[158px] aspect-158/192 flex-none" />
+		<img src="/images/foundations/04_popup3_works8.png" alt="" class="w-[218px] aspect-218/192 flex-none" />
 		<img src="/images/foundations/04_popup3_works9.png" alt="" class="w-full aspect-1200/853 mt-5" />
 	</div>
 	<p class="sys-text-lg mt-30">MindSphere Campaign</p>

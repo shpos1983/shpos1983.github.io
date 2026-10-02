@@ -8,8 +8,8 @@
 
 <section class="max-w-[1420px] w-[1420px] mx-auto px-none pt-10 pb-15 flex flex-col min-h-[calc(100vh-4rem)]">
 	<div class="">
-		<h1 class="text-[140px] font-bold">My Story</h1>
-		<p class="sys-title-lg mt-3">안녕하세요, 이상훈입니다.<br>브랜딩과 비주얼, UI·UX 디자인을 거쳐 지금은 프로덕트를 만드는 일을 하고 있습니다.</p>
+		<h1 class="text-[100px] font-bold leading-none tracking-tight">My Story</h1>
+		<p class="sys-title-lg mt-14">안녕하세요, 이상훈입니다.<br>브랜딩과 비주얼, UI·UX 디자인을 거쳐 지금은 프로덕트를 만드는 일을 하고 있습니다.</p>
 		<p class="sys-text-lg text-ts-n2 font-light mt-16">지금도 직접 디자인을 다듬는 시간이 좋습니다.<br>동료들과 생각을 나누고, 함께 만든 것이 사람들에게 도움이 되는 순간도 좋아하구요.<br>어떻게 보이는지부터 어떻게 쓰이고, 어떤 성과로 이어지는지까지.<br>이 모든 것을 하나의 과정으로 바라보며 디자인하려 합니다.</p>
 	</div>
 

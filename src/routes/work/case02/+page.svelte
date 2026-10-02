@@ -4,7 +4,7 @@
 	import { Button } from "$lib/components/ui/button/index.js";
 	import Swiper from "swiper";
 	import type { SwiperOptions } from "swiper/types";
-	import { Autoplay, Controller, EffectCreative, EffectFade, Pagination } from "swiper/modules";
+	import { Autoplay, Controller, EffectCreative, EffectFade, Pagination, Mousewheel } from "swiper/modules";
 	import "swiper/css";
 	import "swiper/css/autoplay";
 	import "swiper/css/effect-creative";
@@ -25,8 +25,6 @@
 	let mockupSwiper = $state<Swiper | null>(null);
 	let headerHeight = $state(DEFAULT_HEADER_HEIGHT);
 	let heroHeight = $state(DEFAULT_HERO_HEIGHT);
-
-	let maxScroll = $derived(heroHeight - headerHeight);
 
 	const aiSteps = [
 		{
@@ -142,8 +140,7 @@
 
 	// Calculate parallax progress (0 to 1) until case-body reaches the top
 	let progress = $derived.by(() => {
-		if (typeof window === "undefined" || !caseBodyEl) return 0;
-		const _ = scrollY;
+		if (typeof window === "undefined" || !caseBodyEl || scrollY < 0) return 0;
 		const rect = caseBodyEl.getBoundingClientRect();
 		const headerEl = document.querySelector('.global-header');
 		const headerBottom = headerEl ? headerEl.getBoundingClientRect().bottom : 0;
@@ -157,8 +154,7 @@
 	let translateY = $derived(progress * -100);
 
 	let bodyScrollProgress = $derived.by(() => {
-		if (typeof window === "undefined" || !caseBodyEl) return 0;
-		const _ = scrollY;
+		if (typeof window === "undefined" || !caseBodyEl || scrollY < 0) return 0;
 		
 		const rect = caseBodyEl.getBoundingClientRect();
 		const headerEl = document.querySelector('.global-header');
@@ -422,7 +418,7 @@
 				<h4 class="sys-text-sm" data-reveal="0">이전까지의 UX 개선으로 상품 탐색과 구매 단계는 단순해졌지만,<br/>고객은 차량 호환성·성능·가격·재고·장착점·혜택을 <em class="font-semibold">여러 화면에서 확인하고 직접 판단</em>해야 했습니다.</h4>
 			</div>
 
-			<div class="full-width mt-20" data-reveal="0">
+			<div class="full-width mt-20 backdrop-blur-xs" data-reveal="0">
 				<img 
 					src="/images/case02/02_infographic.png" 
 					alt="" 
@@ -484,7 +480,13 @@
 							direction: "vertical",
 							slidesPerView: "auto",
 							spaceBetween: 8,
-							modules: [Pagination],
+							rewind: true,
+							autoplay: {
+								delay: 3000,
+								disableOnInteraction: false
+							},
+							mousewheel: true,
+							modules: [Pagination, Autoplay, Mousewheel],
 							pagination: {
 								el: ".swiper-pagination.mockup1-pagination",
 								clickable: true
@@ -492,6 +494,17 @@
 							on: {
 								init: (swiper) => {
 									mockupSwiper = swiper;
+									swiper.autoplay.stop();
+									const observer = new IntersectionObserver((entries) => {
+										for (const entry of entries) {
+											if (entry.isIntersecting) {
+												swiper.autoplay.start();
+											} else {
+												swiper.autoplay.stop();
+											}
+										}
+									}, { threshold: 0.3 });
+									observer.observe(swiper.el);
 								},
 								slideChange: (swiper) => {
 									activeFocusing = swiper.activeIndex + 1;
@@ -557,7 +570,7 @@
 				</div>
 			</div>
 
-			<div class="full-width mt-20 py-6 bg-[#f9f9fa]" data-reveal="0">
+			<div class="full-width mt-20 py-6 bg-pale/88 backdrop-blur-xs" data-reveal="0">
 				<p class="sys-text-lg font-light text-center">
 					T’Bot과의 대화가 그럴듯한 도움이 아니라 진짜 상담이 되려면,<br/>
 					<em class="font-semibold">이제 필요한 건 실제 정보의 ‘정확성’.</em>
@@ -592,7 +605,7 @@
 				</div>
 			</div>
 			<p class="description-paragraph sys-text-sm mt-8" data-reveal="0">T’Bot은 대화에 누적된 차량과 선호 조건을 기준으로 <em class="font-semibold">질문의 목적을 판단하고, 필요한 전문 기능을 선택합니다.</em><br/>각 기능이 조회한 정보를 응답 내용과 대조한 뒤, 하나의 답변과 다음 행동으로 구성합니다.</p>
-			<div class="full-width mt-16" data-reveal="0">
+			<div class="full-width mt-16 backdrop-blur-xs" data-reveal="0">
 				<img src="/images/case02/04_2_infographic.png" alt="" class="flex-none block w-full aspect-1920/696" />
 			</div>
 			<p class="sys-text-md mt-10" data-reveal="0">ONE CONVERSATION, MULTIPLE SERVICES.</p>
@@ -621,7 +634,7 @@
 						onplay={() => (isAiVideoPlaying = true)}
 						onpause={() => (isAiVideoPlaying = false)}
 						onended={() => (isAiVideoPlaying = false)}
-						class="w-full h-full object-cover object-center block"
+						class="w-full h-full object-cover object-center block scale-[1.03]"
 					>
 						<track kind="captions" />
 					</video>
@@ -872,7 +885,7 @@
 				<h4 class="sys-text-sm" data-reveal="0">초기 운영 데이터를 기준으로 <em class="font-semibold">응답 속도, 재고 안내 정합성, 구매 단계 추적을 후속 개선</em> 과제로 정의했습니다.</h4>
 			</div>
 
-			<div class="full-width flex items-center justify-center gap-6 mt-10 px-body-x py-8 relative bg-background border-t-1 border-t-attention">
+			<div class="full-width flex items-center justify-center gap-6 mt-10 px-body-x py-8 relative bg-background/88 backdrop-blur-xs border-t-1 border-t-attention">
 				<img src="/images/case02/08_infographic1.png" alt="" class="w-full min-w-0 max-w-[552px] aspect-552/342" data-reveal="0" />
 				<img src="/images/case02/08_infographic2.png" alt="" class="w-full min-w-0 max-w-[552px] aspect-552/342" data-reveal="0.5" />
 				<img src="/images/case02/08_infographic3.png" alt="" class="w-full min-w-0 max-w-[552px] aspect-552/342" data-reveal="1" />

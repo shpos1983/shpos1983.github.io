@@ -24,12 +24,11 @@
 	let headerHeight = $state(DEFAULT_HEADER_HEIGHT);
 	let heroHeight = $state(DEFAULT_HERO_HEIGHT);
 	let playCardIndex = $state<number | null>(null);
+	let stepWidths = $state<number[]>([0, 0, 0, 0]);
 
 	function togglePlayCard(index: number) {
 		playCardIndex = playCardIndex === index ? null : index;
 	}
-
-	let maxScroll = $derived(heroHeight - headerHeight);
 
 	const sections = [
 		{ id: "01", label: "01. OVERVIEW" },
@@ -67,8 +66,7 @@
 
 	// Calculate parallax progress (0 to 1) until case-body reaches the top
 	let progress = $derived.by(() => {
-		if (typeof window === "undefined" || !caseBodyEl) return 0;
-		const _ = scrollY;
+		if (typeof window === "undefined" || !caseBodyEl || scrollY < 0) return 0;
 		const rect = caseBodyEl.getBoundingClientRect();
 		const headerEl = document.querySelector('.global-header');
 		const headerBottom = headerEl ? headerEl.getBoundingClientRect().bottom : 0;
@@ -82,8 +80,7 @@
 	let translateY = $derived(progress * -100);
 
 	let bodyScrollProgress = $derived.by(() => {
-		if (typeof window === "undefined" || !caseBodyEl) return 0;
-		const _ = scrollY;
+		if (typeof window === "undefined" || !caseBodyEl || scrollY < 0) return 0;
 		
 		const rect = caseBodyEl.getBoundingClientRect();
 		const headerEl = document.querySelector('.global-header');
@@ -99,9 +96,11 @@
 
 	let moSwiper = $state<Swiper | null>(null);
 	let isMoPlaying = $state(false);
+	let hasMoAutoPlayed = false;
 
 	let tabSwiper = $state<Swiper | null>(null);
 	let isTabPlaying = $state(false);
+	let hasTabAutoPlayed = false;
 
 	function toggleMoPlay() {
 		if (!moSwiper) return;
@@ -109,7 +108,7 @@
 			moSwiper.autoplay.stop();
 			isMoPlaying = false;
 		} else {
-			if (moSwiper.isEnd) {
+			if (moSwiper.isEnd || moSwiper.activeIndex === moSwiper.slides.length - 1) {
 				moSwiper.slideTo(0);
 			}
 			moSwiper.autoplay.start();
@@ -123,7 +122,7 @@
 			tabSwiper.autoplay.stop();
 			isTabPlaying = false;
 		} else {
-			if (tabSwiper.isEnd) {
+			if (tabSwiper.isEnd || tabSwiper.activeIndex === tabSwiper.slides.length - 1) {
 				tabSwiper.slideTo(0);
 			}
 			tabSwiper.autoplay.start();
@@ -463,7 +462,7 @@
 				<p class="sys-caption-sm">* AI 마모도는 Smart Guide 리뉴얼 이후 상담 근거를 확장한 Phase 2 기능입니다. (본문 05 EVOLUTION & AI)</p>
 			</div>
 
-			<div class="full-width mt-20 bg-background">
+			<div class="full-width mt-20 bg-background/70 backdrop-blur-xs">
 				<div class="w-full px-body-x">
 					<Separator class="my-0" />
 					<div class="w-full pl-50">
@@ -478,15 +477,37 @@
 									class="screen swiper"
 									use:swiper={{
 										modules: [Autoplay],
-										rewind: true,
+										rewind: false,
+										loop: false,
 										speed: 600,
 										autoplay: {
 											delay: 2000,
-											disableOnInteraction: false
+											disableOnInteraction: false,
+											stopOnLastSlide: false
 										},
 										onSwiper: (s) => {
 											moSwiper = s;
 											s.autoplay.stop();
+											const observer = new IntersectionObserver((entries) => {
+												for (const entry of entries) {
+													if (entry.isIntersecting && !hasMoAutoPlayed) {
+														hasMoAutoPlayed = true;
+														s.autoplay.start();
+														isMoPlaying = true;
+														observer.disconnect();
+													}
+												}
+											}, { threshold: 0.3 });
+											observer.observe(s.el);
+										},
+										on: {
+											reachEnd: (s) => {
+												setTimeout(() => {
+													s.slideTo(0);
+													s.autoplay.stop();
+													isMoPlaying = false;
+												}, 2000);
+											}
 										}
 									}}
 								>
@@ -570,15 +591,37 @@
 									class="screen swiper"
 									use:swiper={{
 										modules: [Autoplay],
-										rewind: true,
+										rewind: false,
+										loop: false,
 										speed: 600,
 										autoplay: {
 											delay: 2000,
-											disableOnInteraction: false
+											disableOnInteraction: false,
+											stopOnLastSlide: false
 										},
 										onSwiper: (s) => {
 											tabSwiper = s;
 											s.autoplay.stop();
+											const observer = new IntersectionObserver((entries) => {
+												for (const entry of entries) {
+													if (entry.isIntersecting && !hasTabAutoPlayed) {
+														hasTabAutoPlayed = true;
+														s.autoplay.start();
+														isTabPlaying = true;
+														observer.disconnect();
+													}
+												}
+											}, { threshold: 0.3 });
+											observer.observe(s.el);
+										},
+										on: {
+											reachEnd: (s) => {
+												setTimeout(() => {
+													s.slideTo(0);
+													s.autoplay.stop();
+													isTabPlaying = false;
+												}, 2000);
+											}
 										}
 									}}
 								>
@@ -648,9 +691,33 @@
 									</li>
 								</ol>
 							</div>
-							<div class="flex-1 -mr-body-x overflow-hidden" data-reveal="0.5">
+							<div class="flex-1 -mr-body-x overflow-hidden rounded-l-[60px]" data-reveal="0.5">
 								<div class="flex-none iphone-frame">
-									<div class="screen swiper overflow-visible-swiper overflow-visible!" use:swiper>
+									<div
+										class="screen swiper overflow-visible-swiper overflow-visible!"
+										use:swiper={{
+											modules: [Autoplay],
+											rewind: true,
+											speed: 600,
+											autoplay: {
+												delay: 2000,
+												disableOnInteraction: false
+											},
+											onSwiper: (s) => {
+												s.autoplay.stop();
+												const observer = new IntersectionObserver((entries) => {
+													for (const entry of entries) {
+														if (entry.isIntersecting) {
+															s.autoplay.start();
+														} else {
+															s.autoplay.stop();
+														}
+													}
+												}, { threshold: 0.3 });
+												observer.observe(s.el);
+											}
+										}}
+									>
 										<div class="swiper-wrapper">
 											<div class="swiper-slide">
 												<img src="/images/case03/04_2_screenshot_mo1.png" alt="" class="block w-full" />
@@ -737,7 +804,32 @@
 			
 			<div class="flex items-start gap-15 mt-25">
 				<div class="flex-none iphone-frame" data-reveal="0">
-					<div class="screen swiper" use:swiper>
+					<div
+						class="screen swiper"
+						use:swiper={{
+							modules: [Autoplay, EffectFade],
+							effect: "fade",
+							loop: true,
+							speed: 1000,
+							autoplay: {
+								delay: 2400,
+								disableOnInteraction: false
+							},
+							onSwiper: (s) => {
+								s.autoplay.stop();
+								const observer = new IntersectionObserver((entries) => {
+									for (const entry of entries) {
+										if (entry.isIntersecting) {
+											s.autoplay.start();
+										} else {
+											s.autoplay.stop();
+										}
+									}
+								}, { threshold: 0.3 });
+								observer.observe(s.el);
+							}
+						}}
+					>
 						<div class="swiper-wrapper">
 							<div class="swiper-slide">
 								<img src="/images/case03/05_1_screenshot_mo1.png" alt="" class="block w-full" />
@@ -772,7 +864,7 @@
 				</div>
 			</div>
 
-			<div class="full-width mt-30 py-10 bg-foreground text-background" data-reveal="0">
+			<div class="full-width mt-30 py-10 bg-foreground/88 backdrop-blur-xs text-background" data-reveal="0">
 				<div class="w-fit mx-auto text-center">
 					<div class="flex flex-col gap-4 mt-8">
 						<p class="sys-text-lg" data-reveal="0">타이어 촬영에서 고객 리포트까지 - AI 스캔 프로세스</p>
@@ -781,26 +873,52 @@
 
 					<div class="flex items-start gap-8 mt-12 text-center">
 						<div class="flex flex-col items-center gap-7 w-[330px]" data-reveal="0">
-							<div class="relative w-full flex justify-center items-center connect-dash">
-								<span class="relative inline-flex bg-foreground px-3 sys-text-sm font-medium">❶ 마모점검을 위해 AI 분석 선택</span>
+							<div class="relative w-full flex justify-center items-center">
+								<span bind:clientWidth={stepWidths[0]} class="relative inline-flex px-3 sys-text-sm font-medium">
+									❶ 마모점검을 위해 AI 분석 선택
+									{#if stepWidths[0] && stepWidths[1]}
+										<span 
+											class="absolute left-full top-1/2 -translate-y-1/2 border-t border-dashed border-white pointer-events-none"
+											style="width: {362 - (stepWidths[0] + stepWidths[1]) / 2}px;"
+										></span>
+									{/if}
+								</span>
 							</div>
 							<img src="/images/case03/05_1_process1.png" alt="" class="block w-full" />
 						</div>
 						<div class="flex flex-col items-center gap-7 w-[330px]" data-reveal="0.5">
-							<div class="relative w-full flex justify-center items-center connect-dash">
-								<span class="relative inline-flex bg-foreground px-3 sys-text-sm font-medium connect-dash-head">❷ UI 가이드에 따라 타이어 촬영</span>
+							<div class="relative w-full flex justify-center items-center">
+								<span bind:clientWidth={stepWidths[1]} class="relative inline-flex px-3 sys-text-sm font-medium connect-dash-head">
+									❷ UI 가이드에 따라 타이어 촬영
+									{#if stepWidths[1] && stepWidths[2]}
+										<span 
+											class="absolute left-full top-1/2 -translate-y-1/2 border-t border-dashed border-white pointer-events-none"
+											style="width: {362 - (stepWidths[1] + stepWidths[2]) / 2}px;"
+										></span>
+									{/if}
+								</span>
 							</div>
 							<img src="/images/case03/05_1_process2.png" alt="" class="block w-full" />
 						</div>
 						<div class="flex flex-col items-center gap-7 w-[330px]" data-reveal="1">
-							<div class="relative w-full flex justify-center items-center connect-dash">
-								<span class="relative inline-flex bg-foreground px-3 sys-text-sm font-medium connect-dash-head">❸ 촬영 종료 후 Summery 제공</span>
+							<div class="relative w-full flex justify-center items-center">
+								<span bind:clientWidth={stepWidths[2]} class="relative inline-flex px-3 sys-text-sm font-medium connect-dash-head">
+									❸ 촬영 종료 후 Summery 제공
+									{#if stepWidths[2] && stepWidths[3]}
+										<span 
+											class="absolute left-full top-1/2 -translate-y-1/2 border-t border-dashed border-white pointer-events-none"
+											style="width: {362 - (stepWidths[2] + stepWidths[3]) / 2}px;"
+										></span>
+									{/if}
+								</span>
 							</div>
 							<img src="/images/case03/05_1_process3.png" alt="" class="block w-full" />
 						</div>
 						<div class="flex flex-col items-center gap-7 w-[330px]" data-reveal="1.5">
 							<div class="relative w-full flex justify-center items-center">
-								<span class="relative inline-flex bg-foreground px-3 sys-text-sm font-medium connect-dash-head">❹ 잔여 그루브 및 측정 결과, AI 진단</span>
+								<span bind:clientWidth={stepWidths[3]} class="relative inline-flex px-3 sys-text-sm font-medium connect-dash-head">
+									❹ 잔여 그루브 및 측정 결과, AI 진단
+								</span>
 							</div>
 							<img src="/images/case03/05_1_process4.png" alt="" class="block w-full" />
 						</div>
@@ -1139,18 +1257,6 @@
 		width: 100%;
 		padding: 12px 16px;
 		display: none;
-	}
-
-	.connect-dash:before {
-		content: '';
-		display: block;
-		width: 100%;
-		height: 0;
-		border-top: 1px dashed #fff;
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translateY(-50%);
 	}
 
 	.connect-dash-head {

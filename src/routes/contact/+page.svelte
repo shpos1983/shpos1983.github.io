@@ -10,11 +10,11 @@
 
 <section class="max-w-[1420px] w-[1420px] mx-auto px-none pt-10 pb-15 flex flex-col min-h-[calc(100vh-4rem)]">
 	<div class="">
-		<h1 class="text-[100px] font-bold">Sang Hun Lee</h1>
-		<div class="mt-6">
+		<h1 class="text-[100px] font-bold leading-none tracking-tight">Sanghun Lee</h1>
+		<div class="mt-10">
 			<p class="sys-text-sm">Always up for a good conversation.</p>
 			<div class="flex gap-4 mt-4">
-				<a href="https://kr.linkedin.com/" target="_blank" class="flex-none block size-12 p-none rounded-full cursor-pointer group">
+				<a href="https://www.linkedin.com/in/sanghun-lee-2847a3a5/" target="_blank" class="flex-none block size-12 p-none rounded-full cursor-pointer group">
 					<img src="/images/contact/icon_social1.svg" alt="" class="w-full h-full object-cover group-hover:hidden" />
 					<img src="/images/contact/icon_social1_hover.svg" alt="" class="w-full h-full object-cover hidden group-hover:block" />
 				</a>
@@ -63,16 +63,35 @@
 			<Separator class="w-full" />
 		</div>
 	</div>
-	<div class="flex mt-30">
+	<div class="flex mt-32">
 		<div class="flex-none w-[564px]">
 			<h2 class="sys-title-lg">Skill</h2>
 		</div>
-		<div class="flex-1 min-w-0 flex gap-6">
-			<img src="/images/contact/icon_skill_pr.svg" alt="" class="size-14" />
-			<img src="/images/contact/icon_skill_ai.svg" alt="" class="size-14" />
-			<img src="/images/contact/icon_skill_ps.svg" alt="" class="size-14" />
-			<img src="/images/contact/icon_skill_id.svg" alt="" class="size-14" />
-			<img src="/images/contact/icon_skill_lr.svg" alt="" class="size-14" />
+		<div class="flex-1 min-w-0 w-full">
+			<p class="sys-caption">Expertise</p>
+			<div class="w-151 flex flex-wrap gap-x-1 gap-y-2 mt-4">
+				<span class="inline-flex items-center justify-center px-8 h-[46px] sys-caption rounded-full bg-ts-n4">UX Strategy</span>
+				<span class="inline-flex items-center justify-center px-8 h-[46px] sys-caption rounded-full bg-ts-n4">Service Design</span>
+				<span class="inline-flex items-center justify-center px-8 h-[46px] sys-caption rounded-full bg-ts-n4">User Research</span>
+				<span class="inline-flex items-center justify-center px-8 h-[46px] sys-caption rounded-full bg-ts-n4">Information Architecture</span>
+				<span class="inline-flex items-center justify-center px-8 h-[46px] sys-caption rounded-full bg-ts-n4">Interaction Design</span>
+				<span class="inline-flex items-center justify-center px-8 h-[46px] sys-caption rounded-full bg-ts-n4">Conversation Design</span>
+				<span class="inline-flex items-center justify-center px-8 h-[46px] sys-caption rounded-full bg-ts-n4">Visual Design</span>
+				<span class="inline-flex items-center justify-center px-8 h-[46px] sys-caption rounded-full bg-ts-n4">Design Systems</span>
+				<span class="inline-flex items-center justify-center px-8 h-[46px] sys-caption rounded-full bg-ts-n4">Prototyping</span>
+				<span class="inline-flex items-center justify-center px-8 h-[46px] sys-caption rounded-full bg-ts-n4">HTML · CSS</span>
+			</div>
+
+			<p class="sys-caption mt-20">Tools</p>
+			<div class="w-full flex gap-6 mt-4">
+				<img src="/images/contact/icon_skill_figma.svg" alt="" class="size-14" />
+				<img src="/images/contact/icon_skill_gem.svg" alt="" class="size-14" />
+				<img src="/images/contact/icon_skill_ps.svg" alt="" class="size-14" />
+				<img src="/images/contact/icon_skill_ai.svg" alt="" class="size-14" />
+				<img src="/images/contact/icon_skill_pr.svg" alt="" class="size-14" />
+				<img src="/images/contact/icon_skill_id.svg" alt="" class="size-14" />
+				<img src="/images/contact/icon_skill_lr.svg" alt="" class="size-14" />
+			</div>
 		</div>
 	</div>
 </section>

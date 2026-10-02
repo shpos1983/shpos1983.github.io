@@ -3,7 +3,7 @@
 	import { Separator } from "$lib/components/ui/separator/index.js";
 	import Swiper from "swiper";
 	import type { SwiperOptions } from "swiper/types";
-	import { Pagination } from "swiper/modules";
+	import { Pagination, Autoplay, Mousewheel } from "swiper/modules";
 	import "swiper/css";
 	import "swiper/css/autoplay";
 	import "swiper/css/pagination";
@@ -77,6 +77,52 @@
 	let plpVideoEl = $state<HTMLVideoElement | null>(null);
 	let isPlpVideoActive = $state(false);
 	let isPlpPlaying = $state(false);
+	let hasHotjarAutoPlayed = false;
+
+	function startHotjarSequence() {
+		isPlpVideoActive = true;
+		setTimeout(() => {
+			if (plpVideoEl) {
+				plpVideoEl.currentTime = 0;
+				plpVideoEl.play().catch(() => {});
+			}
+		}, 50);
+	}
+
+	function handlePlpVideoEnded() {
+		closePlpVideo();
+		isPdpVideoActive = true;
+		setTimeout(() => {
+			if (pdpVideoEl) {
+				pdpVideoEl.currentTime = 0;
+				pdpVideoEl.play().catch(() => {});
+			}
+		}, 100);
+	}
+
+	function handlePdpVideoEnded() {
+		closePdpVideo();
+	}
+
+	function hotjarSequence(node: HTMLElement) {
+		const observer = new IntersectionObserver((entries) => {
+			for (const entry of entries) {
+				if (entry.isIntersecting && !hasHotjarAutoPlayed) {
+					hasHotjarAutoPlayed = true;
+					startHotjarSequence();
+					observer.disconnect();
+				}
+			}
+		}, { threshold: 0.3 });
+
+		observer.observe(node);
+
+		return {
+			destroy() {
+				observer.disconnect();
+			}
+		};
+	}
 
 	function togglePlpVideo() {
 		if (!isPlpVideoActive) {
@@ -138,8 +184,6 @@
 		isPdpPlaying = false;
 	}
 
-	let maxScroll = $derived(heroHeight - headerHeight);
-
 	const sections = [
 		{ id: "01", label: "01. OVERVIEW" },
 		{ id: "02", label: "02. EXECUTION" },
@@ -174,8 +218,7 @@
 
 	// Calculate parallax progress (0 to 1) until case-body reaches the top
 	let progress = $derived.by(() => {
-		if (typeof window === "undefined" || !caseBodyEl) return 0;
-		const _ = scrollY;
+		if (typeof window === "undefined" || !caseBodyEl || scrollY < 0) return 0;
 		const rect = caseBodyEl.getBoundingClientRect();
 		const headerEl = document.querySelector('.global-header');
 		const headerBottom = headerEl ? headerEl.getBoundingClientRect().bottom : 0;
@@ -189,8 +232,7 @@
 	let translateY = $derived(progress * -100);
 
 	let bodyScrollProgress = $derived.by(() => {
-		if (typeof window === "undefined" || !caseBodyEl) return 0;
-		const _ = scrollY;
+		if (typeof window === "undefined" || !caseBodyEl || scrollY < 0) return 0;
 		
 		const rect = caseBodyEl.getBoundingClientRect();
 		const headerEl = document.querySelector('.global-header');
@@ -362,7 +404,7 @@
 
 			<img  src="/images/case01/01_infographic.png" alt="" class="flex-none block w-[1104px] aspect-1104/412 mt-20" data-reveal="0" />
 
-			<div class="full-width flex justify-center gap-20 mt-20 pt-15 border-t border-muted bg-background">
+			<div class="full-width flex justify-center gap-20 mt-20 pt-15 border-t border-muted bg-background/88 backdrop-blur-xs">
 				<div class="w-92">
 					<p class="sys-text-lg" data-reveal="0">연간 개선 흐름과 성과</p>
 					<p class="sys-text-md mt-4" data-reveal="0">주요 구매 접점을 개선해 온 기간 동안<br/>판매량과 구매전환율이 함께 성장했습니다.</p>
@@ -478,12 +520,31 @@
 							direction: "vertical",
 							slidesPerView: "auto",
 							spaceBetween: 0,
-							modules: [Pagination],
+							rewind: true,
+							autoplay: {
+								delay: 3000,
+								disableOnInteraction: false
+							},
+							mousewheel: true,
+							modules: [Pagination, Autoplay, Mousewheel],
 							pagination: {
 								el: ".swiper-pagination.mockup1-pagination",
 								clickable: true
 							},
 							on: {
+								init: (s) => {
+									s.autoplay.stop();
+									const observer = new IntersectionObserver((entries) => {
+										for (const entry of entries) {
+											if (entry.isIntersecting) {
+												s.autoplay.start();
+											} else {
+												s.autoplay.stop();
+											}
+										}
+									}, { threshold: 0.3 });
+									observer.observe(s.el);
+								},
 								slideChange: (swiper) => {
 									activeFocusing = swiper.activeIndex + 1;
 								}
@@ -527,7 +588,7 @@
 				<p class="description-paragraph sys-text-sm mt-6">기존에는 상품 목록의 ‘바로구매’를 통해 상품 상세를 확인하지 않고 결제로 이동할 수 있었습니다.<br/><em class="font-semibold">PLP에는 탐색과 비교에 필요한 정보만 남기고, 가격·혜택·성능·리뷰 등 구매 판단의 근거는<br/>PDP에서 단계적으로 확인하도록 역할을 재구성했습니다.</em></p>
 			</div>
 
-			<div class="full-width flex justify-center mt-20 backdrop-blur-lg" data-reveal="0">
+			<div class="full-width flex justify-center mt-20 backdrop-blur-xs" data-reveal="0">
 				<img src="/images/case01/02_2_overview.png" alt="" class="block w-full flex-none" />
 			</div>
 
@@ -552,7 +613,7 @@
 				<p class="description-paragraph sys-text-sm mt-6">PLP에서 좁힌 상품을 가격과 혜택, 워런티, 리뷰와 성능 정보로 검증하도록 PDP의 정보 위계를 정리했습니다.<br/><em class="font-semibold">핵심 구매 정보는 먼저 확인하고, 깊은 검토가 필요한 내용은 필요한 만큼 탐색하도록 구성했습니다.</em></p>
 			</div>
 
-			<div class="swiper pdp-swiper full-width mt-20 py-10! bg-pale pl-[calc(var(--spacing-sidebar)+var(--spacing-body-x)+var(--spacing-case-gap)-333px)]! pr-body-x select-none [&_img]:select-none" use:swiper={{
+			<div class="swiper pdp-swiper full-width mt-20 py-10! bg-pale/88 backdrop-blur-xs pl-[calc(var(--spacing-sidebar)+var(--spacing-body-x)+var(--spacing-case-gap)-333px)]! pr-body-x select-none [&_img]:select-none" use:swiper={{
 				slidesPerView: "auto",
 				spaceBetween: 96,
 				grabCursor: true,
@@ -687,7 +748,7 @@
 				</div>
 			</div>
 
-			<div class="full-width flex items-center justify-center text-center py-5 mt-16 bg-foreground/88 text-background" data-reveal="0">
+			<div class="full-width flex items-center justify-center text-center py-5 mt-16 bg-foreground/88 text-background backdrop-blur-xs" data-reveal="0">
 				<p class="text-[28px] font-light leading-tight">개편 범위를 좁힌것이 아니라,<br/><em class="font-semibold">검증 가능한 개편 단위로 나눴습니다.</em></p>
 			</div>
 
@@ -787,7 +848,7 @@
 				<div class="flex flex-col w-fit items-center">
 					<span class="inline-flex bg-attention px-4 py-2 font-semibold sys-caption rounded-full ml-0 mr-auto" data-reveal="0">개편 후 행동 분석 · Hotjar</span>
 
-					<div class="mt-8 flex w-fit gap-80 pb-10 border-b border-border relative after:content-[''] after:absolute after:-bottom-[13px] after:left-1/2 after:-translate-x-1/2 after:w-0 after:h-0 after:border-x-[7px] after:border-x-transparent after:border-t-[9px] after:border-t-ts-n4">
+					<div use:hotjarSequence class="mt-8 flex w-fit gap-80 pb-10 border-b border-border relative after:content-[''] after:absolute after:-bottom-[13px] after:left-1/2 after:-translate-x-1/2 after:w-0 after:h-0 after:border-x-[7px] after:border-x-transparent after:border-t-[9px] after:border-t-ts-n4">
 						<div class="relative w-80 flex-none" data-reveal="0">
 							<div class="relative w-full aspect-320/682 bg-foreground outline-1 outline-border rounded-3xl overflow-hidden isolate">
 								<img
@@ -803,7 +864,7 @@
 									playsinline
 									onplay={() => (isPlpPlaying = true)}
 									onpause={() => (isPlpPlaying = false)}
-									onended={() => (isPlpPlaying = false)}
+									onended={handlePlpVideoEnded}
 									class="absolute inset-0 w-full h-full object-contain object-center {isPlpVideoActive ? 'block' : 'hidden'}"
 								>
 									<track kind="captions" />
@@ -859,7 +920,7 @@
 									playsinline
 									onplay={() => (isPdpPlaying = true)}
 									onpause={() => (isPdpPlaying = false)}
-									onended={() => (isPdpPlaying = false)}
+									onended={handlePdpVideoEnded}
 									class="absolute inset-0 w-full h-full object-contain object-center {isPdpVideoActive ? 'block' : 'hidden'}"
 								>
 									<track kind="captions" />
