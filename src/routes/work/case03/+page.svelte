@@ -350,7 +350,7 @@
 				</div>
 			</div>
 
-			<div class="full-width mt-20" data-reveal="0">
+			<div class="full-width mt-20 backdrop-blur-sm" data-reveal="0">
 				<img 
 					src="/images/case03/02_infographic.png" 
 					alt="" 
