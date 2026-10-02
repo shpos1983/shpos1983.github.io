@@ -354,7 +354,7 @@
 				<img 
 					src="/images/case03/02_infographic.png" 
 					alt="" 
-					class="block w-full h-auto" 
+					class="block w-full h-auto aspect-1920/419" 
 				/>
 			</div>
 
