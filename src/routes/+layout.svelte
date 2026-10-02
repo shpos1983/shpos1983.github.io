@@ -62,7 +62,7 @@
 
 <svelte:head>
 	<link rel="icon" href={favicon} />
-	<title>SangSquare</title>
+	<title>SENSE & STRATEGY</title>
 </svelte:head>
 
 <svelte:window bind:scrollY={y} />
@@ -72,7 +72,7 @@
 		<div class="container max-w-full mx-auto px-body-x h-header flex items-center justify-between">
 			<Button href={resolve('/')} variant="ghost" class="p-0  hover:bg-transparent! h-auto flex items-center justify-start relative">
 				<div class="flex items-center transition-opacity ease-linear duration-400 {y <= 0 ? 'opacity-100' : 'opacity-0 absolute pointer-events-none'}">
-					<img src={logo} alt="SangSquare" class="size-14 transition-all" />
+					<img src={logo} alt="SENSE & STRATEGY" class="size-14 transition-all" />
 				</div>
 				<div class="flex items-center transition-opacity ease-linear duration-400 {y > 0 ? 'opacity-100' : 'opacity-0 absolute pointer-events-none'}">
 					<p class="font-extrabold text-lg whitespace-nowrap text-foreground">SENSE & STRATEGY</p>

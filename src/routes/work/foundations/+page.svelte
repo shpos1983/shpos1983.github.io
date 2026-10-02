@@ -377,7 +377,7 @@
 </script>
 
 <svelte:head>
-	<title>Foundations | SangSquare</title>
+	<title>Foundations | SENSE & STRATEGY</title>
 </svelte:head>
 
 <section class="foundations-hero" use:scrollReveal>

@@ -270,7 +270,7 @@
 <svelte:window bind:scrollY />
 
 <svelte:head>
-	<title>CASE 02 | SangSquare</title>
+	<title>CASE 02 | SENSE & STRATEGY</title>
 </svelte:head>
 
 <section class="case-hero" use:scrollReveal>

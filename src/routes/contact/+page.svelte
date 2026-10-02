@@ -4,7 +4,7 @@
 </script>
 
 <svelte:head>
-	<title>Contact | SangSquare</title>
+	<title>Contact | SENSE & STRATEGY</title>
 </svelte:head>
 
 

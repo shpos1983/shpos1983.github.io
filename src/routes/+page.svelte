@@ -6,7 +6,7 @@
 </script>
 
 <svelte:head>
-	<title>Work | SangSquare</title>
+	<title>Work | SENSE & STRATEGY</title>
 </svelte:head>
 
 <section class="container max-w-full mx-auto pl-14 pt-22 pb-12">

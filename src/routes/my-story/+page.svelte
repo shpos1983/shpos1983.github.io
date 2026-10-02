@@ -3,7 +3,7 @@
 </script>
 
 <svelte:head>
-	<title>My Story | SangSquare</title>
+	<title>My Story | SENSE & STRATEGY</title>
 </svelte:head>
 
 <section class="max-w-[1420px] w-[1420px] mx-auto px-none pt-10 pb-15 flex flex-col min-h-[calc(100vh-4rem)]">
