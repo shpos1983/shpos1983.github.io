@@ -132,43 +132,43 @@
 			<div class="marquee-wrapper flex w-fit select-none">
 				<div class="w-[520px] min-w-65 flex-none">
 					<!-- foundations페이지 이동 후 섹션 id="01"로 스크롤포지셔닝 -->
-					<a href="{resolve('/work/foundations')}#01" class="group/item block aspect-520/380 h-auto w-full bg-border rounded-none overflow-hidden">
+					<a href="{resolve('/work/foundations')}" class="group/item block aspect-520/380 h-auto w-full bg-attention rounded-none overflow-hidden">
 						<img src="/images/foundations/thumb1.png" alt="" class="object-cover object-center w-full h-full group-hover/item:scale-104 transition-all duration-500"/>
 					</a>
 				</div>
 				<div class="w-[520px] min-w-65 flex-none">
 					<!-- foundations페이지 이동 후 섹션 id="02"로 스크롤포지셔닝 -->
-					<a href="{resolve('/work/foundations')}#02" class="group/item block aspect-520/380 h-auto w-full bg-border rounded-none overflow-hidden">
+					<a href="{resolve('/work/foundations')}#02" class="group/item block aspect-520/380 h-auto w-full bg-attention rounded-none overflow-hidden">
 						<img src="/images/foundations/thumb2.png" alt="" class="object-cover object-center w-full h-full group-hover/item:scale-104 transition-all duration-500"/>
 					</a>
 				</div>
 				<div class="w-[520px] min-w-65 flex-none">
 					<!-- foundations페이지 이동 후 섹션 id="03"로 스크롤포지셔닝 -->
-					<a href="{resolve('/work/foundations')}#03" class="group/item block aspect-520/380 h-auto w-full bg-border rounded-none overflow-hidden">
+					<a href="{resolve('/work/foundations')}#03" class="group/item block aspect-520/380 h-auto w-full bg-attention rounded-none overflow-hidden">
 						<img src="/images/foundations/thumb3.png" alt="" class="object-cover object-center w-full h-full group-hover/item:scale-104 transition-all duration-500"/>
 					</a>
 				</div>
 				<div class="w-[520px] min-w-65 flex-none">
 					<!-- foundations페이지 이동 후 섹션 id="04"로 스크롤포지셔닝 -->
-					<a href="{resolve('/work/foundations')}#04" class="group/item block aspect-520/380 h-auto w-full bg-border rounded-none overflow-hidden">
+					<a href="{resolve('/work/foundations')}#04" class="group/item block aspect-520/380 h-auto w-full bg-attention rounded-none overflow-hidden">
 						<img src="/images/foundations/thumb4.png" alt="" class="object-cover object-center w-full h-full group-hover/item:scale-104 transition-all duration-500"/>
 					</a>
 				</div>
 				<div class="w-[520px] min-w-65 flex-none">
 					<!-- foundations페이지 이동 후 섹션 id="04"로 스크롤포지셔닝 -->
-					<a href="{resolve('/work/foundations')}#04" class="group/item block aspect-520/380 h-auto w-full bg-border rounded-none overflow-hidden">
+					<a href="{resolve('/work/foundations')}#04" class="group/item block aspect-520/380 h-auto w-full bg-attention rounded-none overflow-hidden">
 						<img src="/images/foundations/thumb5.png" alt="" class="object-cover object-center w-full h-full group-hover/item:scale-104 transition-all duration-500"/>
 					</a>
 				</div>
 				<div class="w-[520px] min-w-65 flex-none">
 					<!-- foundations페이지 이동 후 섹션 id="04"로 스크롤포지셔닝 -->
-					<a href="{resolve('/work/foundations')}#04" class="group/item block aspect-520/380 h-auto w-full bg-border rounded-none overflow-hidden">
+					<a href="{resolve('/work/foundations')}#04" class="group/item block aspect-520/380 h-auto w-full bg-attention rounded-none overflow-hidden">
 						<img src="/images/foundations/thumb6.png" alt="" class="object-cover object-center w-full h-full group-hover/item:scale-104 transition-all duration-500"/>
 					</a>
 				</div>
 				<div class="w-[520px] min-w-65 flex-none">
 					<!-- foundations페이지 이동 후 섹션 id="04"로 스크롤포지셔닝 -->
-					<a href="{resolve('/work/foundations')}#04" class="group/item block aspect-520/380 h-auto w-full bg-border rounded-none overflow-hidden">
+					<a href="{resolve('/work/foundations')}#04" class="group/item block aspect-520/380 h-auto w-full bg-attention rounded-none overflow-hidden">
 						<img src="/images/foundations/thumb7.png" alt="" class="object-cover object-center w-full h-full group-hover/item:scale-104 transition-all duration-500"/>
 					</a>
 				</div>

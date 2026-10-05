@@ -326,7 +326,7 @@
 
 <section class="case-hero" use:scrollReveal>
 	<img 
-		src="/images/case03/hero_bg.png" 
+		src="/images/case01/hero_bg.png" 
 		alt="" 
 		class="bg-image" 
 		style="transform: translateY({translateY}px);"
@@ -613,29 +613,31 @@
 				<p class="description-paragraph sys-text-sm mt-6">PLP에서 좁힌 상품을 가격과 혜택, 워런티, 리뷰와 성능 정보로 검증하도록 PDP의 정보 위계를 정리했습니다.<br/><em class="font-semibold">핵심 구매 정보는 먼저 확인하고, 깊은 검토가 필요한 내용은 필요한 만큼 탐색하도록 구성했습니다.</em></p>
 			</div>
 
-			<div class="swiper pdp-swiper full-width mt-20 py-10! bg-pale/88 backdrop-blur-xs pl-[calc(var(--spacing-sidebar)+var(--spacing-body-x)+var(--spacing-case-gap)-333px)]! pr-body-x select-none [&_img]:select-none" use:swiper={{
-				slidesPerView: "auto",
-				spaceBetween: 96,
-				grabCursor: true,
-				touchEventsTarget: "container",
-				observer: true,
-				observeParents: true
-			}} data-reveal="0">
-				<div class="swiper-wrapper">
-					<div class="swiper-slide">
-						<img src="/images/case01/02_2_PDP_screenshot0.png" alt="" class="block flex-none w-[237px] aspect-237/663" />
-					</div>
-					<div class="swiper-slide">
-						<img src="/images/case01/02_2_PDP_screenshot1.png" alt="" class="block flex-none w-[372px] aspect-372/663" />
-					</div>
-					<div class="swiper-slide">
-						<img src="/images/case01/02_2_PDP_screenshot2.png" alt="" class="block flex-none w-[704px] aspect-704/663" />
-					</div>
-					<div class="swiper-slide">
-						<img src="/images/case01/02_2_PDP_screenshot3.png" alt="" class="block flex-none w-[372px] aspect-372/663" />
-					</div>
-					<div class="swiper-slide">
-						<img src="/images/case01/02_2_PDP_screenshot4.png" alt="" class="block flex-none w-[676px] aspect-676/663" />
+			<span class="inline-flex items-center rounded-full bg-foreground text-background sys-caption font-medium px-6 h-[38px] mt-20" data-reveal="0">개편 후 PDP 화면</span>
+
+			<div class="overflow-hidden full-width mt-4 py-10! bg-pale/88 backdrop-blur-xs pl-[calc(var(--spacing-sidebar)+var(--spacing-body-x)+var(--spacing-case-gap))]! pr-body-x" data-reveal="0">
+				<div class="swiper pdp-swiper select-none [&_img]:select-none" use:swiper={{
+					slidesPerView: "auto",
+					spaceBetween: 96,
+					grabCursor: true,
+					touchEventsTarget: "container",
+					observer: true,
+					observeParents: true
+				}}>
+					<div class="swiper-wrapper">
+						<div class="swiper-slide">
+							<img src="/images/case01/02_2_PDP_screenshot0.png" alt="" class="block flex-none w-[237px] aspect-237/663 absolute top-0 -left-[96px] translate-x-[-100%]" />
+							<img src="/images/case01/02_2_PDP_screenshot1.png" alt="" class="block flex-none w-[372px] aspect-372/663" />
+						</div>
+						<div class="swiper-slide">
+							<img src="/images/case01/02_2_PDP_screenshot2.png" alt="" class="block flex-none w-[704px] aspect-704/663" />
+						</div>
+						<div class="swiper-slide">
+							<img src="/images/case01/02_2_PDP_screenshot3.png" alt="" class="block flex-none w-[372px] aspect-372/663" />
+						</div>
+						<div class="swiper-slide">
+							<img src="/images/case01/02_2_PDP_screenshot4.png" alt="" class="block flex-none w-[676px] aspect-676/663" />
+						</div>
 					</div>
 				</div>
 			</div>
@@ -1030,8 +1032,11 @@
 
 <style>
 	.pdp-swiper {
-		overflow: hidden;
+		width: 1144px;
+		overflow: visible;
 		position: relative;
+		margin-left: 0;
+		margin-right: 0;
 	}
 
 	.pdp-swiper :global(.swiper-wrapper) {

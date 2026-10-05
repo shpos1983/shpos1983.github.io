@@ -214,10 +214,164 @@
 		{ id: '04', theme: 'default' }
 	];
 
-	function scrollToSection(id: string) {
+	function getHeaderHeight(): number {
+		if (typeof window === 'undefined') return 144;
+		const header = document.querySelector<HTMLElement>('.global-header');
+		return header ? header.getBoundingClientRect().height : 144;
+	}
+
+	function getTargetScrollY(el: HTMLElement): number {
+		const headerHeight = getHeaderHeight();
+		const rect = el.getBoundingClientRect();
+		return Math.max(0, window.scrollY + rect.top - headerHeight);
+	}
+
+	let activeLandingId: string | null = null;
+	let isProgrammaticScrolling = false;
+	let programmaticScrollTimeout: ReturnType<typeof setTimeout> | null = null;
+	let stabilizerCleanup: (() => void) | null = null;
+
+	function stopStabilizer() {
+		if (stabilizerCleanup) {
+			stabilizerCleanup();
+			stabilizerCleanup = null;
+		}
+		activeLandingId = null;
+	}
+
+	function startStabilizer(id: string, isInitialLanding = false) {
+		stopStabilizer();
+		activeLandingId = id;
+
+		let userCancelled = false;
+		let timeoutId: ReturnType<typeof setTimeout> | null = null;
+		let rafId: number | null = null;
+		let resizeObserver: ResizeObserver | null = null;
+
+		const onUserInteraction = () => {
+			userCancelled = true;
+			stopStabilizer();
+		};
+
+		const userInteractionEvents = ['wheel', 'touchmove', 'pointerdown', 'keydown'];
+		userInteractionEvents.forEach((ev) => {
+			window.addEventListener(ev, onUserInteraction, { passive: true, capture: true });
+		});
+
+		const align = (smooth = false) => {
+			if (userCancelled || !activeLandingId) return;
+			const targetEl = document.getElementById(activeLandingId);
+			if (!targetEl) return;
+
+			const targetY = getTargetScrollY(targetEl);
+			const currentDiff = targetEl.getBoundingClientRect().top - getHeaderHeight();
+
+			// 오차가 1.5px 초과일 때만 보정 실행
+			if (Math.abs(currentDiff) > 1.5) {
+				window.scrollTo({
+					top: targetY,
+					behavior: smooth ? 'smooth' : 'auto'
+				});
+			}
+			updateScrollState();
+		};
+
+		// 1. 즉시 정렬 실행 (랜딩 시에는 'auto'로 즉각 점프하여 불필요한 시각적 덜컹거림 방지)
+		align(!isInitialLanding);
+
+		// 2. DOM 리사이즈 감지 (이미지 로딩, 폰트 로딩, Swiper 초기화 등으로 높이가 변할 때마다 재보정)
+		const mainContainer = document.querySelector<HTMLElement>('.foundations-main') || document.body;
+		if (typeof ResizeObserver !== 'undefined' && mainContainer) {
+			resizeObserver = new ResizeObserver(() => {
+				if (!userCancelled) {
+					align(false);
+				}
+			});
+			resizeObserver.observe(mainContainer);
+		}
+
+		// 3. 페이지 내 모든 미완료 이미지 로드 완료 시점 감지
+		const images = Array.from(document.querySelectorAll<HTMLImageElement>('.foundations-main img, .foundations-body img'));
+		const onImgLoad = () => {
+			if (!userCancelled) {
+				align(false);
+			}
+		};
+
+		images.forEach((img) => {
+			if (!img.complete) {
+				img.addEventListener('load', onImgLoad, { once: true });
+				img.addEventListener('error', onImgLoad, { once: true });
+			}
+		});
+
+		// 4. 웹 폰트 준비 시점 감지
+		if (document.fonts) {
+			document.fonts.ready.then(() => {
+				if (!userCancelled) align(false);
+			}).catch(() => {});
+		}
+
+		// 5. 초기 프레임 rAF 루프 (초기 렌더링 프레임의 subpixel/view-transition 보정)
+		let frameCount = 0;
+		const maxFrames = 30; // 약 500ms
+		const checkFrames = () => {
+			if (userCancelled || !activeLandingId) return;
+			align(false);
+			frameCount++;
+			if (frameCount < maxFrames) {
+				rafId = requestAnimationFrame(checkFrames);
+			}
+		};
+		rafId = requestAnimationFrame(checkFrames);
+
+		// 6. 안전 타임아웃 (최대 2.5초 후 스태빌라이저 해제)
+		timeoutId = setTimeout(() => {
+			stopStabilizer();
+		}, 2500);
+
+		stabilizerCleanup = () => {
+			if (timeoutId) clearTimeout(timeoutId);
+			if (rafId) cancelAnimationFrame(rafId);
+			if (resizeObserver) resizeObserver.disconnect();
+			userInteractionEvents.forEach((ev) => {
+				window.removeEventListener(ev, onUserInteraction, { capture: true });
+			});
+			images.forEach((img) => {
+				img.removeEventListener('load', onImgLoad);
+				img.removeEventListener('error', onImgLoad);
+			});
+		};
+	}
+
+	function scrollToSection(id: string, smooth = true) {
 		const el = document.getElementById(id);
-		if (el) {
-			el.scrollIntoView({ behavior: 'smooth' });
+		if (!el) return;
+
+		// LNB 상태 즉시 반영
+		const sec = sections.find((s) => s.id === id);
+		if (sec) activeIndex = sec.index;
+
+		if (smooth) {
+			isProgrammaticScrolling = true;
+			if (programmaticScrollTimeout) clearTimeout(programmaticScrollTimeout);
+
+			const targetY = getTargetScrollY(el);
+			window.scrollTo({ top: targetY, behavior: 'smooth' });
+
+			programmaticScrollTimeout = setTimeout(() => {
+				isProgrammaticScrolling = false;
+				updateScrollState();
+			}, 700);
+
+			startStabilizer(id, false);
+		} else {
+			startStabilizer(id, true);
+		}
+
+		// URL 해시 업데이트
+		if (typeof history !== 'undefined' && history.replaceState) {
+			history.replaceState(null, '', `#${id}`);
 		}
 	}
 
@@ -237,7 +391,9 @@
 		}
 		currentTheme = newTheme;
 
-		// 2. LNB 섹션 트래킹 (스크롤 포지션으로만 활성화)
+		// 2. LNB 섹션 트래킹 (스크롤 포지션으로만 활성화, 프로그래밍 스크롤 중에는 선택 유지)
+		if (isProgrammaticScrolling) return;
+
 		const isAtBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 50;
 		if (isAtBottom) {
 			activeIndex = 4;
@@ -264,20 +420,31 @@
 		window.addEventListener('scroll', updateScrollState, { passive: true });
 		window.addEventListener('resize', updateScrollState, { passive: true });
 
-		const checkHashAndScroll = () => {
-			if (window.location.hash) {
+		const handleHashLanding = (smooth = false) => {
+			if (typeof window !== 'undefined' && window.location.hash) {
 				const id = window.location.hash.replace('#', '');
-				scrollToSection(id);
+				if (id) {
+					requestAnimationFrame(() => {
+						scrollToSection(id, smooth);
+					});
+				}
 			}
 		};
 
-		checkHashAndScroll();
-		const hashTimer = setTimeout(checkHashAndScroll, 150);
+		// 초기 마운트 시 해시 랜딩
+		handleHashLanding(false);
 
+		// 해시 변경(뒤로가기/앞으로가기) 감지 시 스무스 이동
 		const handleHashChange = () => {
-			checkHashAndScroll();
+			handleHashLanding(true);
 		};
 		window.addEventListener('hashchange', handleHashChange);
+
+		// SvelteKit 뷰 트랜지션 / 페이지 네비게이션 완료 시점 재보정
+		const handleAfterNavigate = () => {
+			handleHashLanding(false);
+		};
+		window.addEventListener('app:after-navigate', handleAfterNavigate);
 
 		let swiper: Swiper | null = null;
 		if (overviewSwiperEl) {
@@ -352,8 +519,10 @@
 		}
 
 		return () => {
-			clearTimeout(hashTimer);
+			stopStabilizer();
+			if (programmaticScrollTimeout) clearTimeout(programmaticScrollTimeout);
 			window.removeEventListener('hashchange', handleHashChange);
+			window.removeEventListener('app:after-navigate', handleAfterNavigate);
 			window.removeEventListener('scroll', updateScrollState);
 			window.removeEventListener('resize', updateScrollState);
 			if (swiper) swiper.destroy();
@@ -539,12 +708,12 @@
 			</div>
 
 			<div class="grid grid-cols-3 gap-2 mt-10">
-				<img src="/images/foundations/01_1_graphic1.png" alt="" class="rounded" data-reveal="0" />
-				<img src="/images/foundations/01_1_graphic2.png" alt="" class="rounded" data-reveal="0.5" />
-				<img src="/images/foundations/01_1_graphic3.png" alt="" class="rounded" data-reveal="1" />
+				<img src="/images/foundations/01_1_graphic1.png" alt="" class="rounded w-full aspect-954/848 object-cover" data-reveal="0" />
+				<img src="/images/foundations/01_1_graphic2.png" alt="" class="rounded w-full aspect-954/848 object-cover" data-reveal="0.5" />
+				<img src="/images/foundations/01_1_graphic3.png" alt="" class="rounded w-full aspect-954/848 object-cover" data-reveal="1" />
 				<!-- [스크롤에 따른 컬러 트랜지션] 이부분이 화면 중간쯤 왔을때 body bg-[#F0B02F] text-background 로 바뀜 -->
-				<img id="trigger-amber" src="/images/foundations/01_1_graphic4.png" alt="" class="rounded" data-reveal="0" />
-				<img src="/images/foundations/01_1_graphic5.png" alt="" class="rounded" data-reveal="0.5" />
+				<img id="trigger-amber" src="/images/foundations/01_1_graphic4.png" alt="" class="rounded w-full aspect-954/848 object-cover" data-reveal="0" />
+				<img src="/images/foundations/01_1_graphic5.png" alt="" class="rounded w-full aspect-954/848 object-cover" data-reveal="0.5" />
 			</div>
 
 			<div class="mt-30">
@@ -552,7 +721,7 @@
 				<p class="description-paragraph sys-text-sm mt-6" data-reveal="0">데일리 챌린지로 맥주 지식을 확인하고, 틀린 문제는 정답을 살펴본 뒤 다시 도전할 수 있습니다.<br/>챌린지를 완료하면 배지와 Beercoin을 보상으로 받습니다.</p>
 			</div>
 			<div class="full-width flex" data-reveal="0">
-				<img src="/images/foundations/01_2_graphic.png" alt="" class="w-full" />
+				<img src="/images/foundations/01_2_graphic.png" alt="" class="w-full aspect-3840/972" />
 			</div>
 			<div class="flex gap-28 mt-20">
 				<div class="flex-none iphone-frame" data-reveal="0">
@@ -626,7 +795,7 @@
 				<p class="description-paragraph sys-text-sm mt-6" data-reveal="0">학습과 퀴즈로 모은 Beercoin을 티셔츠 등 브랜드 굿즈 구매에 사용할 수 있습니다.<br/>원하는 상품과 옵션을 선택하고, 사용할 코인과 교환 후 잔액을 확인한 뒤 주문을 완료합니다.</p>
 			</div>
 			<div class="full-width flex" data-reveal="0">
-				<img src="/images/foundations/01_3_graphic.png" alt="" class="w-full" />
+				<img src="/images/foundations/01_3_graphic.png" alt="" class="w-full aspect-3840/972" />
 			</div>
 
 			<div class="mt-10">
@@ -637,9 +806,9 @@
 			<img src="/images/foundations/01_4_graphic.png" alt="" class="w-[782px] aspect-782/471 mt-12 ml-34 mix-blend-multiply" data-reveal="0" />
 
 			<div class="grid grid-cols-3 gap-2">
-				<img src="/images/foundations/01_4_tile1.png" alt="" class="rounded" data-reveal="0.5" />
-				<img src="/images/foundations/01_4_tile2.png" alt="" class="rounded" data-reveal="0" />
-				<img src="/images/foundations/01_4_tile3.png" alt="" class="rounded" data-reveal="1" />
+				<img src="/images/foundations/01_4_tile1.png" alt="" class="rounded w-full aspect-954/736 object-cover" data-reveal="0.5" />
+				<img src="/images/foundations/01_4_tile2.png" alt="" class="rounded w-full aspect-954/736 object-cover" data-reveal="0" />
+				<img src="/images/foundations/01_4_tile3.png" alt="" class="rounded w-full aspect-954/736 object-cover" data-reveal="1" />
 			</div>
 		</section>
 
@@ -776,13 +945,13 @@
 						<span class="inline-flex items-center justify-center h-8 rounded-full bg-background text-foreground px-3 mb-6">02 교육 콘텐츠 제공 안내</span>
 
 						<div class="grid grid-cols-2 gap-2">
-							<img src="/images/foundations/03_2_tile1.png" alt="" class="" />
+							<img src="/images/foundations/03_2_tile1.png" alt="" class="w-full aspect-644/360 object-cover rounded" />
 							<div class="flex flex-col items-start justify-center pl-4">
 								<p class="sys-text-sm font-medium">식수 빨대와 VR 게임 설명</p>
 								<p class="sys-caption mt-2">정수용 빨대의 원리와 VR 체험, 360° 영상을 안내합니다.<br/>학교에서도 콘텐츠를 활용해 수질 오염과 정수·위생의<br/>중요성을 배울 수 있도록 연결합니다.</p>
 							</div>
-							<img src="/images/foundations/03_2_tile2.png" alt="" class="" />
-							<img src="/images/foundations/03_2_tile3.png" alt="" class="" />
+							<img src="/images/foundations/03_2_tile2.png" alt="" class="w-full aspect-644/360 object-cover rounded" />
+							<img src="/images/foundations/03_2_tile3.png" alt="" class="w-full aspect-644/360 object-cover rounded" />
 						</div>
 					</div>
 
