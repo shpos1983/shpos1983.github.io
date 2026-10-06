@@ -36,11 +36,11 @@
 						</li>
 						<li class="flex items-start gap-4 text-primary">
 							<div class="sys-caption font-extrabold text-ts-n3 w-12">Impact</div>
-							<div class="sys-caption flex-1"><em class="font-bold text-primary">208% 판매성장, 2배의 구매전환율 성장</em></div>
+							<div class="sys-caption flex-1"><em class="font-bold text-primary">260% 판매성장, 2배의 구매전환율 성장</em></div>
 						</li>
 						<li class="flex items-start gap-4 text-primary">
 							<div class="sys-caption font-extrabold text-ts-n3 w-12">Role</div>
-							<div class="sys-caption flex-1"><em class="text-primary">UX Lead</em> / PO / UI / QA</div>
+							<div class="sys-caption flex-1">UX Lead / PO / UI / QA</div>
 						</li>
 						<li class="flex items-start gap-4 text-primary">
 							<div class="sys-caption font-extrabold text-ts-n3 w-12">Period</div>
@@ -69,15 +69,15 @@
 						</li>
 						<li class="flex items-start gap-4 text-primary">
 							<div class="sys-caption font-extrabold text-ts-n3 w-12">Impact</div>
-							<div class="sys-caption flex-1"><em class="font-bold text-primary">고객센터 FAQ 40% 감소, 30% 구매전환 증가</em></div>
+							<div class="sys-caption flex-1"><em class="font-bold text-primary">오픈 6주간 3,242명 이용 · 전체 주문 중 T’Bot 전용 쿠폰 사용 13.1%</em></div>
 						</li>
 						<li class="flex items-start gap-4 text-primary">
 							<div class="sys-caption font-extrabold text-ts-n3 w-12">Role</div>
-							<div class="sys-caption flex-1"><em class="text-primary">UX Lead</em> / PO / UI / QA</div>
+							<div class="sys-caption flex-1">UX Lead / PO / UI / QA</div>
 						</li>
 						<li class="flex items-start gap-4 text-primary">
 							<div class="sys-caption font-extrabold text-ts-n3 w-12">Period</div>
-							<div class="sys-caption flex-1">‘26. JANuary - JULy</div>
+							<div class="sys-caption flex-1">‘26. JANUARY - JULY</div>
 						</li>
 					</ul>
 				</div>
@@ -106,11 +106,11 @@
 						</li>
 						<li class="flex items-start gap-4 text-primary">
 							<div class="sys-caption font-extrabold text-ts-n3 w-12">Role</div>
-							<div class="sys-caption flex-1"><em class="text-primary">UX Lead</em> / PO / UI / QA</div>
+							<div class="sys-caption flex-1">UX Lead / PO / UI / QA</div>
 						</li>
 						<li class="flex items-start gap-4 text-primary">
 							<div class="sys-caption font-extrabold text-ts-n3 w-12">Period</div>
-							<div class="sys-caption flex-1">‘25 October - ‘26. May</div>
+							<div class="sys-caption flex-1">‘25. OCTOBER - ‘26. MAY</div>
 						</li>
 					</ul>
 				</div>
@@ -126,7 +126,7 @@
 		<h1 class="sys-text-sm text-accent-foreground font-extrabold tracking-tight mb-8">FOUNDATIONS</h1>
 		<div class="flex flex-col gap-4">
 			<h2 class="sys-title-sm leading-tight tracking-[-0.02em]">COMPLEX EXPERIENCES, MADE SIMPLE</h2>
-			<h3 class="sys-text-sm text-ts-n1">사람들은 제품(Product)보다 먼저 브랜드를 경험한다.<br/>다양한 산업의 복잡한 정보를 쉽고 직관적인 경험으로 바꾸며 다져온 디자인의 출발점.</h3>
+			<h3 class="sys-text-sm text-ts-n1">브랜딩과 그래픽에서 웹·앱·전시의 인터랙션까지.<br/>다양한 매체에서 시각적 표현과 정보 전달을 다루며 쌓아온, 지금의 디자인을 뒷받침하는 기반</h3>
 		</div>
 		<div class="-ml-body-x mt-14 overflow-hidden" use:marquee={{ animationSpeed: 1.6, animationDirection: 'left', dragSensitivity: 1.2 }}>
 			<div class="marquee-wrapper flex w-fit select-none">
