@@ -125,7 +125,7 @@
 	<div class="mb-15">
 		<h1 class="sys-text-sm text-accent-foreground font-extrabold tracking-tight mb-8">FOUNDATIONS</h1>
 		<div class="flex flex-col gap-4">
-			<h2 class="sys-title-sm leading-tight tracking-[-0.02em]">COMPLEX EXPERIENCES, MADE SIMPLE</h2>
+			<h2 class="sys-title-sm leading-tight tracking-[-0.02em]"><a href={resolve('/work/foundations')} class="case-title-link">COMPLEX EXPERIENCES, MADE SIMPLE</a></h2>
 			<h3 class="sys-text-sm text-ts-n1">브랜딩과 그래픽에서 웹·앱·전시의 인터랙션까지.<br/>다양한 매체에서 시각적 표현과 정보 전달을 다루며 쌓아온, 지금의 디자인을 뒷받침하는 기반</h3>
 		</div>
 		<div class="-ml-body-x mt-14 overflow-hidden" use:marquee={{ animationSpeed: 1.6, animationDirection: 'left', dragSensitivity: 1.2 }}>
