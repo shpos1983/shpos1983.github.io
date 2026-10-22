@@ -557,7 +557,7 @@
 	</div>
 </section>
 <section class="foundations-body flex flex-row items-start justify-start mx-auto px-body-x pt-30 pb-15" use:scrollReveal>
-	<aside class="foundations-sidebar self-stretch flex-none" data-reveal="0">
+	<aside class="foundations-sidebar self-stretch flex-none">
 		<!-- [스크롤에 따른 컬러 트랜지션] foundations-lnb에 white클래스 추가/제거 -->
 		<div class="foundations-lnb {isWhiteLnb ? 'white' : ''}">
 			<p class="sys-caption font-medium lnb-title">PROJECT INDEX</p>
@@ -683,18 +683,18 @@
 	</aside>
 	<div class="foundations-main self-stretch flex-1 min-w-0 flex flex-col gap-60">
 		<!-- [스크롤에 따른 컬러 트랜지션] 이부분이 화면 중간쯤 왔을때 body bg-컬러 클래스 text-background 클래스 등 제거(디폴트)로 바뀜 -->
-		<section class="foundations-section" id="01" data-reveal="0">
+		<section class="foundations-section" id="01">
 			<div class="flex gap-20">
-				<div class="w-[260px] flex-none flex flex-col" data-reveal="0">
+				<div class="w-[260px] flex-none flex flex-col">
 					<p class="sys-caption">01 / AB InBev</p>
 					<h2 class="sys-title-lg font-bold">HOPPY</h2>
 					<p class="sys-caption">Branding · UI Design · Illustration</p>
 				</div>
 				<div class="flex-1 flex flex-col">
-					<h3 class="sys-text-lg" data-reveal="0.5">AB InBev 임직원을 위한 게임형 맥주 교육 앱</h3>
-					<p class="sys-text-sm mt-4" data-reveal="0.5">AB InBev는 양조 부서뿐 아니라 재무·영업·마케팅 등 <em class="font-semibold">모든 임직원이 맥주에 관한 지식을 갖고 브랜드와 카테고리를<br/>설명할 수 있기를 원했습니다. Hoppy는 이를 위해 전문적인 맥주 교육을 짧은 모바일 학습과 퀴즈로 전환한 게임형 교육 앱</em>입니다. <br/>학습을 통해 배지와 Beercoin을 획득하고, 모은 코인을 굿즈로 교환하는 보상 구조로 지속적인 참여를 유도합니다.</p>
+					<h3 class="sys-text-lg">AB InBev 임직원을 위한 게임형 맥주 교육 앱</h3>
+					<p class="sys-text-sm mt-4">AB InBev는 양조 부서뿐 아니라 재무·영업·마케팅 등 <em class="font-semibold">모든 임직원이 맥주에 관한 지식을 갖고 브랜드와 카테고리를<br/>설명할 수 있기를 원했습니다. Hoppy는 이를 위해 전문적인 맥주 교육을 짧은 모바일 학습과 퀴즈로 전환한 게임형 교육 앱</em>입니다. <br/>학습을 통해 배지와 Beercoin을 획득하고, 모은 코인을 굿즈로 교환하는 보상 구조로 지속적인 참여를 유도합니다.</p>
 
-					<div class="flex gap-6 mt-10" data-reveal="0.5">
+					<div class="flex gap-6 mt-10">
 						<span class="inline-flex items-center justify-center h-8 rounded-full bg-accent-foreground text-background font-extrabold px-3">My Role</span>
 
 						<p class="leading-[32px] font-medium">브랜딩·그래픽 시스템의 주요 디자인 담당<br/>배지·일러스트레이션 주요 에셋 디자인 및 제작<br/>UI 시스템·가이드 기반 앱 화면 디자인</p>

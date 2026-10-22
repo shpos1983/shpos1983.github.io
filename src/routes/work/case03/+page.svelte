@@ -225,7 +225,7 @@
 </section>
 <section bind:this={caseBodyEl} class="case-body flex flex-row items-start justify-start mx-auto px-body-x pt-30 pb-15">
 	<aside class="case-sidebar self-stretch flex-none" use:scrollReveal>
-		<div class="summary-wrapper" data-reveal="0">
+		<div class="summary-wrapper">
 			<ul class="case-summary list-none flex flex-col gap-4 w-full">
 				<li class="flex items-start gap-4 text-muted-foreground">
 					<div class="sys-caption font-extrabold w-20">Project</div>
@@ -274,15 +274,15 @@
 	</aside>
 	<div use:scrollReveal class="case-main self-stretch flex-1 min-w-0 flex flex-col gap-50">
 		<section class="case-section" id="01">
-			<h2 class="sys-text-sm text-accent-foreground" data-reveal="0">
+			<h2 class="sys-text-sm text-accent-foreground">
 				<em class="font-extrabold">01. OVERVIEW</em>
 				/ 320개 매장의 상담 경험을 하나로
 			</h2>
 			<div class="flex flex-col gap-6 mt-10">
-				<h3 class="sys-title-md leading-tight tracking-[-0.02em]" data-reveal="0">
+				<h3 class="sys-title-md leading-tight tracking-[-0.02em]">
 					ONE STANDARD SERVICE, EVERY STORE
 				</h3>
-				<h4 class="sys-text-sm" data-reveal="0"><em class="font-semibold">SMART GUIDE</em>는 티스테이션 매장 직원이 차량 점검 결과와 상품 정보를 고객에게 설명하고,<br/><em class="font-semibold">상품 선택과 구매를 돕는 디지털 상담 플랫폼입니다.</em><br/><br/>이번 리뉴얼을 통해 각 매장이 일관된 서비스를 제공할 수 있도록,<br/>공통의 상담 기준과 이를 현장에서 활용할 수 있는 플랫폼을 안착시키는 것을 목표로 했습니다.</h4>
+				<h4 class="sys-text-sm"><em class="font-semibold">SMART GUIDE</em>는 티스테이션 매장 직원이 차량 점검 결과와 상품 정보를 고객에게 설명하고,<br/><em class="font-semibold">상품 선택과 구매를 돕는 디지털 상담 플랫폼입니다.</em><br/><br/>이번 리뉴얼을 통해 각 매장이 일관된 서비스를 제공할 수 있도록,<br/>공통의 상담 기준과 이를 현장에서 활용할 수 있는 플랫폼을 안착시키는 것을 목표로 했습니다.</h4>
 			</div>
 
 			<div class="full-width flex gap-6 mt-40">

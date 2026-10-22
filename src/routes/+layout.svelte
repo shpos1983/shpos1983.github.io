@@ -5,7 +5,9 @@
 	import { page } from '$app/state';
 	import { resolve } from '$app/paths';
 	import { Button } from '$lib/components/ui/button/index.js';
+	import { Separator } from "$lib/components/ui/separator/index.js";
 	import { afterNavigate, onNavigate } from '$app/navigation';
+	import { MoveRight, MoveLeft } from '@lucide/svelte';
 	// import { Menu } from '@lucide/svelte';
 	// import {
 	// 	Sheet,
@@ -58,6 +60,46 @@
 			window.removeEventListener('resize', updateZoom);
 		};
 	});
+	// Prev/Next navigation config for case studies and foundations
+	interface NavItem {
+		href: string;
+		title: string;
+	}
+
+	interface NavInfo {
+		prev: NavItem | null;
+		next: NavItem | null;
+	}
+
+	const navInfo = $derived.by((): NavInfo | null => {
+		const currentPath = page.url.pathname.replace(/\/$/, '');
+
+		if (currentPath === resolve('/work/case01').replace(/\/$/, '')) {
+			return {
+				prev: { href: resolve('/'), title: 'Home' },
+				next: { href: resolve('/work/case02'), title: 'T’Station.com AI Commerce Launch' }
+			};
+		}
+		if (currentPath === resolve('/work/case02').replace(/\/$/, '')) {
+			return {
+				prev: { href: resolve('/work/case01'), title: 'T’Station.com UX Renewal & growth' },
+				next: { href: resolve('/work/case03'), title: 'T’Station Smart Guide' }
+			};
+		}
+		if (currentPath === resolve('/work/case03').replace(/\/$/, '')) {
+			return {
+				prev: { href: resolve('/work/case02'), title: 'T’Station.com AI Commerce Launch' },
+				next: { href: resolve('/work/foundations'), title: 'Brand, Interface & Interaction Design' }
+			};
+		}
+		if (currentPath === resolve('/work/foundations').replace(/\/$/, '')) {
+			return {
+				prev: { href: resolve('/work/case03'), title: 'T’Station Smart Guide' },
+				next: null
+			};
+		}
+		return null;
+	});
 </script>
 
 <svelte:head>
@@ -91,6 +133,36 @@
 	</main>
 
 	<footer class="py-6">
-		<p class="text-base font-extralight text-center"><em class="font-medium">2026 Sanghun.Lee</em> © all right reserved</p>
+		{#if navInfo}
+			<div class="container max-w-full">
+				<div class="flex justify-between items-start max-w-full mx-auto px-body-x">
+					<!-- prev -->
+					{#if navInfo.prev}
+						<a href={navInfo.prev.href} class="group flex flex-col items-start gap-2">
+							<div class="flex items-center gap-2">
+								<MoveLeft class="transition-transform group-hover:-translate-x-1" />
+								<span class="sys-text-sm text-accent-foreground">PREV.</span>
+							</div>
+							<p class="sys-text-md">{navInfo.prev.title}</p>
+						</a>
+					{:else}
+						<div></div>
+					{/if}
+
+					<!-- next -->
+					{#if navInfo.next}
+						<a href={navInfo.next.href} class="group flex flex-col items-end gap-2 text-right">
+							<div class="flex items-center gap-2">
+								<span class="sys-text-sm text-accent-foreground">NEXT</span>
+								<MoveRight class="transition-transform group-hover:translate-x-1" />
+							</div>
+							<p class="sys-text-md">{navInfo.next.title}</p>
+						</a>
+					{/if}
+				</div>
+				<Separator class="my-4" />
+			</div>
+		{/if}
+		<p class="text-base font-extralight text-center">© <em class="font-medium">Sanghun Lee</em> 2026</p>
 	</footer>
 </div>

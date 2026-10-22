@@ -287,7 +287,7 @@
 </section>
 <section bind:this={caseBodyEl} class="case-body flex flex-row items-start justify-start mx-auto px-body-x pt-30 pb-15">
 	<aside class="case-sidebar self-stretch flex-none" use:scrollReveal>
-		<div class="summary-wrapper" data-reveal="0">
+		<div class="summary-wrapper">
 			<ul class="case-summary list-none flex flex-col gap-4 w-full">
 				<li class="flex items-start gap-4 text-muted-foreground">
 					<div class="sys-caption font-extrabold w-20">Project</div>
@@ -340,15 +340,15 @@
 	</aside>
 	<div use:scrollReveal class="case-main self-stretch flex-1 min-w-0 flex flex-col gap-50">
 		<section class="case-section" id="01">
-			<h2 class="sys-text-sm text-accent-foreground" data-reveal="0">
+			<h2 class="sys-text-sm text-accent-foreground">
 				<em class="font-extrabold">01. OVERVIEW</em>
 				/ 복잡한 타이어 구매를 하나의 대화로
 			</h2>
 			<div class="flex flex-col gap-6 mt-10">
-				<h3 class="sys-title-md leading-tight tracking-[-0.02em]" data-reveal="0">
+				<h3 class="sys-title-md leading-tight tracking-[-0.02em]">
 					질문에서 구매까지.
 				</h3>
-				<h4 class="sys-text-sm" data-reveal="0">고객이 여러 화면을 이동하며 직접 판단하던 타이어 구매 과정을,<br/>구매 조건 확인과 상품 추천부터 매장·일정·주문서 작성까지 이어지는 <em class="font-semibold">하나의 대화형 경험으로 UX의 한계를 넘고자 하였습니다.</em></h4>
+				<h4 class="sys-text-sm">고객이 여러 화면을 이동하며 직접 판단하던 타이어 구매 과정을,<br/>구매 조건 확인과 상품 추천부터 매장·일정·주문서 작성까지 이어지는 <em class="font-semibold">하나의 대화형 경험으로 UX의 한계를 넘고자 하였습니다.</em></h4>
 			</div>
 
 			<div class="flex flex-col gap-10 mt-16">

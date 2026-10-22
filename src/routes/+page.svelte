@@ -27,24 +27,24 @@
 				<div class="w-[680px] self-stretch flex-none flex flex-col justify-between gap-10">
 					<div class="flex flex-col gap-4">
 						<h2 class="sys-title-sm leading-tight tracking-[-0.02em]"><a href={resolve('/work/case01')} class="case-title-link">T’Station.com UX Renewal & growth</a></h2>
-						<h3 class="sys-text-sm text-ts-n1">타이어는 중요하지만, 대부분의 고객은 타이어를 잘 모른다.<br/>그 간극을 이해하고, 데이터로 검증하며 더 나은 구매 경험을 만들어간 과정.</h3>
+						<h3 class="sys-text-sm text-ts-n1">대부분의 타이어를 잘 모르는 고객을 위해<br/>그 간극을 이해하고, 데이터로 검증하며 더 나은 구매 경험을 만들어간 과정.</h3>
 					</div>
 					<ul class="list-none flex flex-col gap-4 w-full">
 						<li class="flex items-start gap-4 text-primary">
 							<div class="sys-caption font-extrabold text-ts-n3 w-12">Focus</div>
-							<div class="sys-caption flex-1">B2C 플랫폼, UX</div>
+							<div class="sys-caption flex-1">B2C 커머스 · 구매 여정 개선</div>
 						</li>
 						<li class="flex items-start gap-4 text-primary">
 							<div class="sys-caption font-extrabold text-ts-n3 w-12">Impact</div>
-							<div class="sys-caption flex-1"><em class="font-bold text-primary">260% 판매성장, 2배의 구매전환율 성장</em></div>
+							<div class="sys-caption flex-1"><em class="font-bold text-primary">B2C 판매량 약 2.6배 · 구매전환율 약 2배</em></div>
 						</li>
 						<li class="flex items-start gap-4 text-primary">
 							<div class="sys-caption font-extrabold text-ts-n3 w-12">Role</div>
-							<div class="sys-caption flex-1">UX Lead / PO / UI / QA</div>
+							<div class="sys-caption flex-1">UX/UI Lead · UX 기획 · UI 디자인 · QA</div>
 						</li>
 						<li class="flex items-start gap-4 text-primary">
 							<div class="sys-caption font-extrabold text-ts-n3 w-12">Period</div>
-							<div class="sys-caption flex-1">‘21 - ‘25</div>
+							<div class="sys-caption flex-1">2021 - 2025</div>
 						</li>
 					</ul>
 				</div>
@@ -65,19 +65,19 @@
 					<ul class="list-none flex flex-col gap-4 w-full">
 						<li class="flex items-start gap-4 text-primary">
 							<div class="sys-caption font-extrabold text-ts-n3 w-12">Focus</div>
-							<div class="sys-caption flex-1">AI, UX</div>
+							<div class="sys-caption flex-1">AI 커머스 · 대화형 구매 경험</div>
 						</li>
 						<li class="flex items-start gap-4 text-primary">
 							<div class="sys-caption font-extrabold text-ts-n3 w-12">Impact</div>
-							<div class="sys-caption flex-1"><em class="font-bold text-primary">오픈 6주간 3,242명 이용 · 전체 주문 중 T’Bot 전용 쿠폰 사용 13.1%</em></div>
+							<div class="sys-caption flex-1"><em class="font-bold text-primary">출시 6주간 3,242명 이용 · 전체 주문 중 T’Bot 사용 주문 13.1%</em></div>
 						</li>
 						<li class="flex items-start gap-4 text-primary">
 							<div class="sys-caption font-extrabold text-ts-n3 w-12">Role</div>
-							<div class="sys-caption flex-1">UX Lead / PO / UI / QA</div>
+							<div class="sys-caption flex-1">UX Lead · 서비스 기획 · 대화·선택 UI 설계 · QA</div>
 						</li>
 						<li class="flex items-start gap-4 text-primary">
 							<div class="sys-caption font-extrabold text-ts-n3 w-12">Period</div>
-							<div class="sys-caption flex-1">‘26. JANUARY - JULY</div>
+							<div class="sys-caption flex-1">2026.01 - 2026.07</div>
 						</li>
 					</ul>
 				</div>
@@ -98,19 +98,19 @@
 					<ul class="list-none flex flex-col gap-4 w-full">
 						<li class="flex items-start gap-4 text-primary">
 							<div class="sys-caption font-extrabold text-ts-n3 w-12">Focus</div>
-							<div class="sys-caption flex-1">B2B 고객 상담 플랫폼, UX</div>
+							<div class="sys-caption flex-1">B2B 매장 업무·상담 플랫폼 구축</div>
 						</li>
 						<li class="flex items-start gap-4 text-primary">
 							<div class="sys-caption font-extrabold text-ts-n3 w-12">Impact</div>
-							<div class="sys-caption flex-1"><em class="font-bold text-primary">AI, 상담 패러다임의 변화</em></div>
+							<div class="sys-caption flex-1"><em class="font-bold text-primary">AI 마모도 분석 파일럿 · 상담과정의 재구성</em></div>
 						</li>
 						<li class="flex items-start gap-4 text-primary">
 							<div class="sys-caption font-extrabold text-ts-n3 w-12">Role</div>
-							<div class="sys-caption flex-1">UX Lead / PO / UI / QA</div>
+							<div class="sys-caption flex-1">UX Lead · 업무 흐름 설계 · 기기별 UI 디자인</div>
 						</li>
 						<li class="flex items-start gap-4 text-primary">
 							<div class="sys-caption font-extrabold text-ts-n3 w-12">Period</div>
-							<div class="sys-caption flex-1">‘25. OCTOBER - ‘26. MAY</div>
+							<div class="sys-caption flex-1">2025.10 - 2026.05</div>
 						</li>
 					</ul>
 				</div>
@@ -125,8 +125,8 @@
 	<div class="mb-15">
 		<h1 class="sys-text-sm text-accent-foreground font-extrabold tracking-tight mb-8">FOUNDATIONS</h1>
 		<div class="flex flex-col gap-4">
-			<h2 class="sys-title-sm leading-tight tracking-[-0.02em]"><a href={resolve('/work/foundations')} class="case-title-link">COMPLEX EXPERIENCES, MADE SIMPLE</a></h2>
-			<h3 class="sys-text-sm text-ts-n1">브랜딩과 그래픽에서 웹·앱·전시의 인터랙션까지.<br/>다양한 매체에서 시각적 표현과 정보 전달을 다루며 쌓아온, 지금의 디자인을 뒷받침하는 기반</h3>
+			<h2 class="sys-title-sm leading-tight tracking-[-0.02em]"><a href={resolve('/work/foundations')} class="case-title-link">Brand, Interface & Interaction Design</a></h2>
+			<h3 class="sys-text-sm text-ts-n1">브랜드의 시각 언어를 웹·앱·캠페인으로 확장하고, 정보를 화면과 인터랙션으로 구체화한 작업입니다.<br/>다양한 산업과 매체에서 쌓아온 시각·인터랙션 디자인의 기반을 담았습니다.</h3>
 		</div>
 		<div class="-ml-body-x mt-14 overflow-hidden" use:marquee={{ animationSpeed: 1.6, animationDirection: 'left', dragSensitivity: 1.2 }}>
 			<div class="marquee-wrapper flex w-fit select-none">

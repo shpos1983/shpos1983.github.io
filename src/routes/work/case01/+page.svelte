@@ -338,7 +338,7 @@
 </section>
 <section bind:this={caseBodyEl} class="case-body flex flex-row items-start justify-start mx-auto px-body-x pt-30 pb-15">
 	<aside class="case-sidebar self-stretch flex-none" use:scrollReveal>
-		<div class="summary-wrapper" data-reveal="0">
+		<div class="summary-wrapper">
 			<ul class="case-summary list-none flex flex-col gap-4 w-full">
 				<li class="flex items-start gap-4 text-muted-foreground">
 					<div class="sys-caption font-extrabold w-20">Project</div>
@@ -391,15 +391,15 @@
 	</aside>
 	<div use:scrollReveal class="case-main self-stretch flex-1 min-w-0 flex flex-col gap-50">
 		<section class="case-section" id="01">
-			<h2 class="sys-text-sm text-accent-foreground" data-reveal="0">
+			<h2 class="sys-text-sm text-accent-foreground">
 				<em class="font-extrabold">01. OVERVIEW</em>
 				/ 서비스의 방향 설정과 성장
 			</h2>
 			<div class="flex flex-col gap-6 mt-10">
-				<h3 class="sys-title-md leading-tight tracking-[-0.02em]" data-reveal="0">
+				<h3 class="sys-title-md leading-tight tracking-[-0.02em]">
 					타이어 유통플랫폼을 향한 단계적 전환
 				</h3>
-				<h4 class="sys-text-sm" data-reveal="0">T’Station.com이 지향할 역할을 자사 제품 판매를 넘어, 다양한 브랜드의 비교·선택과 장착·사후 관리를 연결하는 유통플랫폼으로 정의했습니다.<br/><em class="font-semibold">이 방향에 맞춰 2022-2025년 주요 구매 접점을 단계적으로 개선했으며, 같은 기간 판매량과 구매 전환율도 함께 성장했습니다.</em></h4>
+				<h4 class="sys-text-sm">T’Station.com이 지향할 역할을 자사 제품 판매를 넘어, 다양한 브랜드의 비교·선택과 장착·사후 관리를 연결하는 유통플랫폼으로 정의했습니다.<br/><em class="font-semibold">이 방향에 맞춰 2022-2025년 주요 구매 접점을 단계적으로 개선했으며, 같은 기간 판매량과 구매 전환율도 함께 성장했습니다.</em></h4>
 			</div>
 
 			<img  src="/images/case01/01_infographic.png" alt="" class="flex-none block w-[1104px] aspect-1104/412 mt-20" data-reveal="0" />
